@@ -230,3 +230,11 @@ export interface StepParams {
   slots: TaggedToolSlot[];
   resources: ResourceIndex;
 }
+
+export interface JSONExportButtonProps {
+  sequence: TaggedSequence
+}
+
+export interface JSONExportButtonState {
+  
+}

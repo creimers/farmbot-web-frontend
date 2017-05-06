@@ -5,6 +5,7 @@ import { execSequence } from "../devices/actions";
 import { editCurrentSequence } from "./actions";
 import { renderCeleryNode, splice, move } from "./step_tiles/index";
 import { ColorPicker } from "./color_picker";
+import { JSONExportButton } from './json_export_button';
 import { t } from "i18next";
 import { BlurableInput, Row, Col, SaveBtn, ToolTip } from "../ui";
 import { DropArea } from "../draggable/drop_area";
@@ -83,6 +84,7 @@ export class SequenceEditorMiddleActive extends React.Component<ActiveMiddleProp
       <button className="yellow" onClick={copy(dispatch, sequence)}>
         {t("Copy")}
       </button>
+      <JSONExportButton sequence={sequence} />
       <Row>
         <Col xs={11}>
           <BlurableInput value={sequence.body.name}

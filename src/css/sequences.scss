@@ -16,3 +16,28 @@
         max-width: 35rem;
     }
 }
+
+.json-export {
+  margin: -3.2rem 0 2rem 1rem;
+  display: inline-block;
+  font-size: 1rem;
+  float: right;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  padding: .2rem .8rem;
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  color: #f4f4f4;
+  transition: all 0.1s ease-in-out !important;
+  box-shadow: 0 2px 0px 0px #833d60;
+}
+
+.json-export:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+.json-export:hover, .json-export:focus {
+  color: #f4f4f4;
+}
