@@ -12,10 +12,8 @@ export let METHOD_MAP: Dictionary<DataChangeType> = {
 };
 export let METHODS = ["post", "put", "patch", "delete"];
 export let RESOURCES: ResourceName[] = [
-  "images", "plants", "regimens", "peripherals", "tool_bays",
-  "logs", "sequences", "farm_events", "tool_slots", "tools", "points", "users",
-  "device"
-];
+  "images", "plants", "regimens", "peripherals", "logs", "sequences",
+  "farm_events", "tool_slots", "tools", "points", "users", "device"];
 
 // PROBLEM:       The bot doesn't know if the user has changed any of the data.
 // GOOD SOLUTION: Create a push notification system on the API.

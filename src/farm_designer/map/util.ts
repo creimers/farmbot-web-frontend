@@ -1,3 +1,5 @@
+import { CropLiveSearchResult } from "../interfaces";
+
 const SNAP = 10;
 const SCALE_FACTOR = 9.8;
 
@@ -11,24 +13,34 @@ export function round(num: number) {
   return (Math.round(num / SNAP) * SNAP);
 }
 
-export function translateScreenToGarden(mouseX: number,
-  mouseY: number,
-  boxX: number,
-  boxY: number) {
-  console.log(mouseX, mouseY, boxX, boxY);
+export interface ScreenToGardenParams {
+  pageX: number;
+  pageY: number;
+  box: ClientRect;
+  OFEntry: CropLiveSearchResult;
+  zoomLvl: number;
+}
 
-  /** The offset of 50px is made for the setDragImage to make it in the
-   * center of the mouse for accuracy which is why this is being done.
-   * Once we get more dynamic with the values (different size plants),
-   * we can tweak this accordingly.
-   */
-  let newMouseX = mouseX - 25;
-  let newMouseY = mouseY - 25;
-  /* */
+export function translateScreenToGarden(params: ScreenToGardenParams) {
+  let { pageX, pageY, box, OFEntry, zoomLvl } = params;
 
-  let rawX = newMouseX - boxX;
-  let rawY = newMouseY - boxY;
+  // let theDiff = (OFEntry.crop.height && (OFEntry.crop.height / 4));
+  let rawX = (pageX - 320)// + (theDiff || 0);
+  let rawY = (pageY - 110)// + (theDiff || 0);
 
-  return { x: rawX, y: rawY };
+  let count = 0;
+
+  if (zoomLvl < 1) {
+    for (zoomLvl; zoomLvl < 1; zoomLvl + 0.1) {
+      zoomLvl = Math.max(Math.ceil((zoomLvl += 0.1) * 10) / 10);
+      count++;
+    }
+  }
+
+  console.log("count", count)
+  console.log("raw", rawX, rawY)
+  console.log("page", pageX, pageY)
+
+  return { x: (rawX + (count * 110)), y: rawY };
 }
 

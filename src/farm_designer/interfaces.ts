@@ -11,6 +11,13 @@ import {
 } from "../resources/tagged_resources";
 import { TightlyCoupledFarmEventDropDown } from "./farm_events/map_state_to_props_add_edit";
 
+export interface State {
+  zoomLvl: number;
+  showPlants: boolean;
+  showPoints: boolean;
+  showSpread: boolean;
+}
+
 export interface Props {
   dispatch: Function;
   selectedPlant: TaggedPlant | undefined;
@@ -145,6 +152,7 @@ export interface FarmEventProps {
 export interface GardenMapProps {
   showPlants: boolean | undefined;
   showPoints: boolean | undefined;
+  showSpread: boolean | undefined;
   dispatch: Function;
   designer: DesignerState;
   points: TaggedPoint[];
@@ -160,6 +168,7 @@ export interface GardenMapState {
 }
 
 export interface GardenPlantProps {
+  showSpread: boolean | undefined;
   plant: Readonly<TaggedPlant>;
   selected: boolean;
   dragging: boolean;

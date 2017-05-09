@@ -6,11 +6,14 @@ interface RadiusCircleProps {
   r: number;
   /** Should it be shown or not? */
   selected: boolean;
+  className?: string;
 }
 
-export function SpreadCircle({ x, y, r, selected }: RadiusCircleProps) {
+export function SpreadCircle(props: RadiusCircleProps) {
+  let { x, y, r, selected } = props;
+  let cn = props.className;
   return <circle
-    className={"plant-indicator is-chosen-" + !!selected}
+    className={"plant-indicator is-chosen-" + !!selected + " " + (cn ? cn : "")}
     cx={x}
     cy={y}
     r={selected ? r : 0}

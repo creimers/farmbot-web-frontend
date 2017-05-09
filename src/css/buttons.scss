@@ -188,8 +188,21 @@ button {
     position: fixed;
     left: 0;
     right: 0;
+    &:active {
+        box-shadow: none !important;
+        transform: translateY(2px);
+    }
+    &:hover {
+        background: darken($green, 5%) !important;
+    }
     i {
         line-height: 5rem;
+    }
+    &.magenta {
+        box-shadow: 0 3px 0px 0px darken($magenta, 10%);
+        &:hover {
+            background: darken($magenta, 5%) !important;
+        }
     }
 }
 

@@ -27,7 +27,7 @@ export class FallbackImg extends React.Component<Props, State> {
     (next.src !== this.props.src) && this.setState({ needsFallback: false });
   }
 
-  fallback = () => <img src={this.props.fallback} />;
+  fallback = () => <img src={this.props.fallback} style={{ maxWidth: "100%" }} />;
 
   dontFallback = () => {
     let imgProps = defensiveClone(this.props);

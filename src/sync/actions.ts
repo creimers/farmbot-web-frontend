@@ -2,7 +2,7 @@ import { Log } from "../interfaces";
 import { API } from "../api";
 import * as axios from "axios";
 import { Sequence } from "../sequences/interfaces";
-import { Tool, ToolBay, ToolSlot } from "../tools/interfaces";
+import { Tool, ToolSlot } from "../tools/interfaces";
 import { Regimen } from "../regimens/interfaces";
 import { Peripheral } from "../controls/peripherals/interfaces";
 import { FarmEvent, Plant, Point, Crop } from "../farm_designer/interfaces";
@@ -53,7 +53,6 @@ export function fetchDeprecatedSyncData(dispatch: Function) {
   fetch<Point[]>("points", API.current.pointsPath);
   fetch<Regimen[]>("regimens", API.current.regimensPath);
   fetch<Sequence[]>("sequences", API.current.sequencesPath);
-  fetch<ToolBay[]>("tool_bays", API.current.toolBaysPath);
   fetch<Tool[]>("tools", API.current.toolsPath);
   fetch<ToolSlot[]>("tool_slots", API.current.toolSlotsPath);
 }

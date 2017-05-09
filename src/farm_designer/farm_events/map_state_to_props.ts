@@ -74,7 +74,6 @@ export function mapStateToProps(state: Everything): FarmEventProps {
       let mmdd = m.format(FORMAT);
       let items = farmEventByMMDD[mmdd];
       if (!items) {
-        debugger;
         throw new Error("No");
       }
       return {

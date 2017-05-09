@@ -25,13 +25,11 @@ export class Tools extends React.Component<Props, Partial<ToolsState>> {
             toggle={this.toggleBays}
             dispatch={this.props.dispatch}
             getToolByToolSlotUUID={this.props.getToolByToolSlotUUID}
-            toolBays={this.props.toolBays}
             getToolSlots={this.props.getToolSlots}
           />}
           {isEditingBays && <ToolBayForm
             toggle={this.toggleBays}
             dispatch={this.props.dispatch}
-            toolBays={this.props.toolBays}
             toolSlots={this.props.toolSlots}
             getToolSlots={this.props.getToolSlots}
             getChosenToolOption={this.props.getChosenToolOption}

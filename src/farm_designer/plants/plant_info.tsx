@@ -26,7 +26,7 @@ export class PlantInfo extends PlantInfoBase {
           </Link>
         </p>
       </div>
-      <PlantPanel info={info} onDestroy={this.destroy} />
+      <PlantPanel info={info} />
     </div>;
   }
 

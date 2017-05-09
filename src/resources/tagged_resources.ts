@@ -1,5 +1,5 @@
 import { Sequence } from "../sequences/interfaces";
-import { Tool, ToolSlot, ToolBay } from "../tools/interfaces";
+import { Tool, ToolSlot } from "../tools/interfaces";
 import { Regimen } from "../regimens/interfaces";
 import { Plant, FarmEvent, Point, Crop } from "../farm_designer/interfaces";
 import { Image } from "../images/index";
@@ -21,7 +21,6 @@ export type ResourceName =
   | "points"
   | "regimens"
   | "sequences"
-  | "tool_bays"
   | "tool_slots"
   | "tools"
   | "users";
@@ -56,7 +55,6 @@ export type TaggedResource =
   | TaggedRegimen
   | TaggedSequence
   | TaggedTool
-  | TaggedToolBay
   | TaggedToolSlot
   | TaggedUser;
 
@@ -71,7 +69,6 @@ export type TaggedImage = Resource<"images", Image>;
 export type TaggedLog = Resource<"logs", Log>;
 export type TaggedPeripheral = Resource<"peripherals", Peripheral>;
 export type TaggedPoint = Resource<"points", Point>;
-export type TaggedToolBay = Resource<"tool_bays", ToolBay>;
 export type TaggedUser = Resource<"users", User>;
 export type TaggedDevice = Resource<"device", DeviceAccountSettings>;
 
@@ -110,8 +107,6 @@ export let isTaggedTool =
   (x: object): x is TaggedTool => is("tools")(x);
 export let isTaggedToolSlot =
   (x: object): x is TaggedToolSlot => is("tool_slots")(x);
-export let isTaggedToolBay =
-  (x: object): x is TaggedToolBay => is("tool_bays")(x);
 export let isTaggedPlant =
   (x: object): x is TaggedPlant => is("plants")(x);
 export let isTaggedCrop =

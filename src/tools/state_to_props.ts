@@ -5,7 +5,6 @@ import { NULL_CHOICE } from "../ui/fb_select";
 import {
   selectAllToolSlots,
   selectAllTools,
-  selectAllToolBays,
   currentToolInSlot,
   findSlotWhere
 } from "../resources/selectors";
@@ -18,7 +17,6 @@ import { edit } from "../api/crud";
 import { DropDownItem } from "../ui/index";
 
 export function mapStateToProps(props: Everything): Props {
-  let toolBays = selectAllToolBays(props.resources.index);
   let toolSlots = selectAllToolSlots(props.resources.index);
   let tools = selectAllTools(props.resources.index);
 
@@ -65,7 +63,6 @@ export function mapStateToProps(props: Everything): Props {
     }
 
   return {
-    toolBays,
     toolSlots,
     tools,
     getToolSlots,

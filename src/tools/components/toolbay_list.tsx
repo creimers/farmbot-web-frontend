@@ -12,35 +12,33 @@ export class ToolBayList extends React.Component<ToolBayListProps, {}> {
     let { getToolSlots, getToolByToolSlotUUID } = this.props;
 
     return <div>
-      {this.props.toolBays.map(bay => {
-        return <Widget key={bay.body.id}>
-          <WidgetHeader helpText={ToolTips.TOOLBAY_LIST} title={"ToolBay 1"}>
-            <button
-              className="gray" onClick={toggle}>
-              {t("Edit")}
-            </button>
-          </WidgetHeader>
-          <WidgetBody>
-            <ToolBayHeader />
-            {getToolSlots().map(
-              (slot: TaggedToolSlot, index: number) => {
-                let tool = getToolByToolSlotUUID(slot.uuid);
-                let name = (tool && tool.body.name) || "None";
-                return <Row key={slot.body.id}>
-                  <Col xs={2}>
-                    <label>{index + 1}</label>
-                  </Col>
-                  <Col xs={2}>{slot.body.x}</Col>
-                  <Col xs={2}>{slot.body.y}</Col>
-                  <Col xs={2}>{slot.body.z}</Col>
-                  <Col xs={4}>
-                    {name}
-                  </Col>
-                </Row>;
-              })}
-          </WidgetBody>
-        </Widget>;
-      })}
+      <Widget>
+        <WidgetHeader helpText={ToolTips.TOOLBAY_LIST} title={"ToolBay 1"}>
+          <button
+            className="gray" onClick={toggle}>
+            {t("Edit")}
+          </button>
+        </WidgetHeader>
+        <WidgetBody>
+          <ToolBayHeader />
+          {getToolSlots().map(
+            (slot: TaggedToolSlot, index: number) => {
+              let tool = getToolByToolSlotUUID(slot.uuid);
+              let name = (tool && tool.body.name) || "None";
+              return <Row key={slot.body.id}>
+                <Col xs={2}>
+                  <label>{index + 1}</label>
+                </Col>
+                <Col xs={2}>{slot.body.x}</Col>
+                <Col xs={2}>{slot.body.y}</Col>
+                <Col xs={2}>{slot.body.z}</Col>
+                <Col xs={4}>
+                  {name}
+                </Col>
+              </Row>;
+            })}
+        </WidgetBody>
+      </Widget>;
     </div>;
   }
 };

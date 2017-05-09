@@ -13,7 +13,6 @@ import {
   TaggedSequence,
   isTaggedSequence,
   isTaggedRegimen,
-  TaggedToolBay,
   isTaggedTool,
   isTaggedToolSlot,
   isTaggedResource,
@@ -111,10 +110,6 @@ export let findFarmEvent = find("farm_events") as Finder<TaggedFarmEvent>;
 
 export function selectCurrentToolSlot(index: ResourceIndex, uuid: string) {
   return index.references[uuid];
-}
-
-export function selectAllToolBays(index: ResourceIndex) {
-  return findAll(index, "tool_bays") as TaggedToolBay[];
 }
 
 export function selectAllImages(index: ResourceIndex) {

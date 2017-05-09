@@ -228,9 +228,9 @@
 .plant-link-wrapper {
     &.is-chosen-true.is-editing-true {
         cursor: -webkit-grab !important;
-    }
-    &:active {
-        cursor: -webkit-grabbing !important;
+        &:active {
+            cursor: -webkit-grabbing !important;
+        }
     }
     image {
         transform: scale(1, 1);

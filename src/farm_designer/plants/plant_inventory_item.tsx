@@ -44,7 +44,7 @@ export function PlantInventoryItem(props: TaggedPlant) {
     OFS && cachedIcon(OFS)
       .then(i => {
         if (i === img.getAttribute("src")) { return; }
-        img.setAttribute("src", i)
+        img.setAttribute("src", i);
       });
   }
 

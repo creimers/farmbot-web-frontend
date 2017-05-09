@@ -3,28 +3,33 @@ import { GardenMap } from "./map/garden_map";
 import { connect } from "react-redux";
 import { Link } from "react-router";
 import { t } from "i18next";
-import { Props } from "./interfaces";
+import { Props, State } from "./interfaces";
 import { mapStateToProps } from "./state_to_props";
 import { history } from "../history";
 import { Plants } from "./plants/plant_inventory";
 import { isMobile } from "../util";
 
-interface State {
-  zoomLevel: number;
-  showPlants: boolean;
-  showPoints: boolean;
-}
+// The toggle-able options in the legend
+type ShowOptions =
+  | "showPlants"
+  | "showPoints"
+  | "showSpread";
 
 @connect(mapStateToProps)
 export class FarmDesigner extends React.Component<Props, Partial<State>> {
   constructor() {
     super();
-    this.state = { zoomLevel: 0.6, showPlants: true, showPoints: true };
+    this.state = {
+      zoomLvl: 0.6,
+      showPlants: true,
+      showPoints: true,
+      showSpread: false
+    };
   }
 
   zoom = (zoomNumber: number) => {
-    let zl = this.state.zoomLevel;
-    zl && this.setState({ zoomLevel: zl + zoomNumber });
+    let zl = this.state.zoomLvl;
+    zl && this.setState({ zoomLvl: zl + zoomNumber });
   }
 
   childComponent() {
@@ -33,14 +38,10 @@ export class FarmDesigner extends React.Component<Props, Partial<State>> {
     return this.props.children || fallback;
   }
 
-  toggleAll = () => this.setState({
-    showPlants: !this.state.showPlants,
-    showPoints: !this.state.showPoints
-  });
-
-  togglePlants = () => this.setState({ showPlants: !this.state.showPlants });
-
-  togglePoints = () => this.setState({ showPoints: !this.state.showPoints });
+  toggle = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+    let name = "show" + _.capitalize(e.currentTarget.name);
+    this.setState({ [name]: !this.state[name as ShowOptions] });
+  }
 
   render() {
     // Kinda nasty, similar to the old q="NoTab" we used to determine no panels.
@@ -52,13 +53,14 @@ export class FarmDesigner extends React.Component<Props, Partial<State>> {
       document.body.classList.remove("designer-tab");
     }
 
-    let { zoomLevel, showPlants, showPoints } = this.state;
+    let { zoomLvl, showPlants, showPoints, showSpread } = this.state;
 
-    let plusBtnColor = (zoomLevel && zoomLevel <= 0.9) ? "" : "disabled";
-    let minusBtnColor = (zoomLevel && zoomLevel >= 0.4) ? "" : "disabled";
+    let plusBtnColor = (zoomLvl && zoomLvl <= 0.9) ? "" : "disabled";
+    let minusBtnColor = (zoomLvl && zoomLvl >= 0.4) ? "" : "disabled";
 
     let plantsBtnColor = showPlants ? "green" : "red";
     let pointsBtnColor = showPoints ? "green" : "red";
+    let spreadBtnColor = showSpread ? "green" : "red";
 
     return <div className="farm-designer">
 
@@ -77,7 +79,8 @@ export class FarmDesigner extends React.Component<Props, Partial<State>> {
               <span>{t("Plants?")}</span>
               <button
                 className={"toggle-button " + plantsBtnColor}
-                onClick={this.togglePlants}
+                onClick={(e) => this.toggle(e)}
+                name={"plants"}
               />
             </label>
           </fieldset>
@@ -86,7 +89,18 @@ export class FarmDesigner extends React.Component<Props, Partial<State>> {
               <span>{t("Points?")}</span>
               <button
                 className={"toggle-button " + pointsBtnColor}
-                onClick={this.togglePoints}
+                onClick={(e) => this.toggle(e)}
+                name={"points"}
+              />
+            </label>
+          </fieldset>
+          <fieldset>
+            <label>
+              <span>{t("Spread?")}</span>
+              <button
+                className={"toggle-button " + spreadBtnColor}
+                onClick={(e) => this.toggle(e)}
+                name={"spread"}
               />
             </label>
           </fieldset>
@@ -110,10 +124,11 @@ export class FarmDesigner extends React.Component<Props, Partial<State>> {
         {this.childComponent()}
       </div>
 
-      <div className="farm-designer-map" style={{ zoom: this.state.zoomLevel }}>
+      <div className="farm-designer-map" style={{ zoom: this.state.zoomLvl }}>
         <GardenMap
           showPoints={showPoints}
           showPlants={showPlants}
+          showSpread={showSpread}
           selectedPlant={this.props.selectedPlant}
           crops={this.props.crops}
           dispatch={this.props.dispatch}

@@ -106,7 +106,6 @@ export function urlFor(tag: ResourceName) {
     regimens: API.current.regimensPath,
     peripherals: API.current.peripheralsPath,
     points: API.current.pointsPath,
-    tool_bays: API.current.toolBaysPath,
     users: API.current.usersPath,
     device: API.current.devicePath,
     images: API.current.imagesPath,
