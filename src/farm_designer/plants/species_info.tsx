@@ -6,20 +6,16 @@ import { DATA_URI, DEFAULT_ICON } from "../../open_farm/index";
 import { SpeciesInfoProps, DraggableEvent } from "../interfaces";
 import { history } from "../../history";
 import { connect } from "react-redux";
-import { Everything } from "../../interfaces";
 import { findBySlug } from "../search_selectors";
+import { Everything } from "../../interfaces";
+import { OpenFarm } from "../openfarm";
+import { OFSearch } from "../util";
 
-function mapStateToProps(props: Everything): SpeciesInfoProps {
+export function mapStateToProps(props: Everything): any {
   return {
-    cropSearchResults: props
-      .resources
-      .consumers
-      .farm_designer
-      .cropSearchResults || []
-  };
+    OFSearch
+  }
 }
-
-const OPENFARM_URL = "https://openfarm.cc/crops/";
 
 @connect(mapStateToProps)
 export class SpeciesInfo extends React.Component<SpeciesInfoProps, {}> {
@@ -51,7 +47,8 @@ export class SpeciesInfo extends React.Component<SpeciesInfoProps, {}> {
         style={{ background: backgroundURL }}>
         <p className="panel-title">
           <BackArrow /> {result.crop.name}
-          <a className="right-button mobile-only"
+          <a
+            className="right-button mobile-only"
             onClick={() => history.push(basePath + species + "/add")}>
             {t("Add to map")}
           </a>
@@ -76,7 +73,7 @@ export class SpeciesInfo extends React.Component<SpeciesInfoProps, {}> {
           {t("Edit on")}&nbsp;
         </span>
         <a
-          href={OPENFARM_URL + result.crop.slug}
+          href={OpenFarm.cropUrl + result.crop.slug}
           target="_blank">
           OpenFarm
         </a>

@@ -9,29 +9,52 @@ interface PlantPanelProps {
 }
 
 export function PlantPanel({ info, onDestroy }: PlantPanelProps) {
-  let destroy = () => onDestroy && onDestroy(info.uuid);
+  let { name, slug, plantedAt, daysOld, x, y, uuid } = info;
+  let destroy = () => onDestroy && onDestroy(uuid);
   return <div className="panel-content">
-    <label>{t("Plant Info")}</label>
+    <label>
+      {t("Plant Info")}
+    </label>
     <ul>
       <li>
-        <b>{t("Full Name")}: </b>
-        <span>{_.startCase(info.name)}</span>
+        <b>
+          {t("Full Name")}:&nbsp;
+        </b>
+        <span>
+          {_.startCase(name)}
+        </span>
       </li>
       <li>
-        <b>{t("Plant Type")}: </b>
-        <span>{_.startCase(info.slug)}</span>
+        <b>
+          {t("Plant Type")}:&nbsp;
+        </b>
+        <span>
+          {_.startCase(slug)}
+        </span>
       </li>
       <li>
-        <b>{t("Started")}: </b>
-        <span>{info.plantedAt}</span>
+        <b>
+          {t("Started")}:&nbsp;
+        </b>
+        <span>
+          {plantedAt}
+        </span>
       </li>
       <li>
-        <b>{t("Age")}: </b>
-        <span>{info.daysOld} {t("days old")}</span>
+        <b>
+          {t("Age")}:&nbsp;
+        </b>
+        <span>
+          {daysOld} {t("days old")}
+        </span>
       </li>
       <li>
-        <b>{t("Location")}: </b>
-        <span>({info.x}, {info.y})</span>
+        <b>
+          {t("Location")}:&nbsp;
+        </b>
+        <span>
+          ({x}, {y})
+          </span>
       </li>
     </ul>
     <div>
@@ -39,7 +62,8 @@ export function PlantPanel({ info, onDestroy }: PlantPanelProps) {
         {t("Delete this plant")}
       </label>
     </div>
-    <button className="red"
+    <button
+      className="red"
       hidden={!onDestroy}
       onClick={destroy}>
       {t("Delete")}

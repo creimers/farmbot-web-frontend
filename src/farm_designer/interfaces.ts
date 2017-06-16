@@ -183,10 +183,6 @@ export interface GardenPointProps {
 
 export type PlantOptions = Partial<PlantPointer>;
 
-export interface SpeciesInfoProps {
-  cropSearchResults: CropLiveSearchResult[];
-}
-
 export interface EditPlantInfoProps {
   push(url: string): void;
   dispatch: Function;
@@ -212,4 +208,20 @@ export interface HoveredPlantPayl {
   /* Use UUID here to prevent denormalization? */
   plantUUID: string | undefined;
   icon: string;
+}
+
+export interface SpeciesCatalogProps {
+  cropSearchQuery: string;
+  dispatch: Function;
+  cropSearchResults: CropLiveSearchResult[];
+  OFSearch: (e: React.FormEvent<HTMLInputElement>) =>
+    (dispatch: Function) => void;
+}
+
+export interface SpeciesInfoProps {
+  cropSearchQuery: string;
+  dispatch: Function;
+  designer: DesignerState;
+  cropSearchResults: CropLiveSearchResult[];
+  OFSearch: (query: string) => (dispatch: Function) => void;
 }
