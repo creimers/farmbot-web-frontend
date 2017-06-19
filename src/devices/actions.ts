@@ -203,21 +203,22 @@ export function MCUFactoryReset() {
 }
 
 export function botConfigChange(key: configKey, value: number) {
-  const noun = "Setting toggle";
+  let noun = "Setting toggle";
+
   return devices
     .current
     .updateMcu({ [key]: value })
-    .then(commandOK(noun), commandErr(noun));
+    .then(_.noop, commandErr(noun));
 };
 
 export function settingToggle(name: configKey, bot: BotState) {
-  const noun = "Setting toggle";
+  let noun = "Setting toggle";
   return devices
     .current
     .updateMcu({
       [name]: ((bot.hardware.mcu_params)[name] === 0) ? ON : OFF
     })
-    .then(commandOK(noun), commandErr(noun));
+    .then(_.noop, commandErr(noun));
 };
 
 export function moveRelative(props: MoveRelProps) {
