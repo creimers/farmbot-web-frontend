@@ -1,11 +1,11 @@
 import * as React from "react";
-import { StepDragger, NULL_DRAGGER_ID } from "../../draggable/step_dragger";
 import { SequenceBodyItem as Step } from "farmbot";
+import { error } from "farmbot-toastr";
+import { StepDragger, NULL_DRAGGER_ID } from "../../draggable/step_dragger";
 import { pushStep } from "../actions";
 import { StepButtonParams } from "../interfaces";
 import { Col } from "../../ui/index";
 import { TaggedSequence } from "../../resources/tagged_resources";
-import { error } from "../../ui/logger";
 
 let click = (dispatch: Function, step: Step, seq: TaggedSequence | undefined) =>
   (event: React.FormEvent<HTMLButtonElement>) => {

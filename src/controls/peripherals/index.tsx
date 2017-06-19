@@ -1,10 +1,11 @@
 import * as React from "react";
+import { t } from "i18next";
+import { error } from "farmbot-toastr";
 import { PeripheralList } from "./peripheral_list";
 import { PeripheralForm } from "./peripheral_form";
-import { Widget, WidgetBody, WidgetHeader, error, SaveBtn } from "../../ui";
+import { Widget, WidgetBody, WidgetHeader, SaveBtn } from "../../ui";
 import { PeripheralsProps } from "../../devices/interfaces";
 import { PeripheralState } from "./interfaces";
-import { t } from "i18next";
 import { TaggedPeripheral } from "../../resources/tagged_resources";
 import { saveAll, init } from "../../api/crud";
 import { ToolTips } from "../../constants";

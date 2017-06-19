@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Widget, WidgetHeader, WidgetBody, success, error } from "../ui/index";
+import { t } from "i18next";
+import { success, error } from "farmbot-toastr";
+import { Widget, WidgetHeader, WidgetBody } from "../ui/index";
 import { ImageFlipper } from "../images/index";
 import { PhotosProps } from "./interfaces";
 import { devices } from "../device";
-import { t } from "i18next";
 import { ToolTips } from "../constants";
 import { selectImage } from "../images/actions";
 

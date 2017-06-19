@@ -4,7 +4,7 @@ import {
   McuParamName,
   ConfigurationName
 } from "farmbot";
-import { AuthState, User } from "../auth/interfaces";
+import { AuthState } from "../auth/interfaces";
 import {
   TaggedImage,
   TaggedPeripheral,

@@ -1,13 +1,12 @@
+import { isNaN, isNumber } from "lodash";
+import { t } from "i18next";
+import { error, warning } from "farmbot-toastr";
 import { ReduxAction, Thunk } from "../../redux/interfaces";
 import { ToggleDayParams } from "./interfaces";
 import { assertUuid, findSequence, findRegimen } from "../../resources/selectors";
 import { groupRegimenItemsByWeek } from "./group_regimen_items_by_week";
-import { error } from "../../ui/index";
-import { t } from "i18next";
 import { defensiveClone } from "../../util";
 import { overwrite } from "../../api/crud";
-import { warning } from "../../ui";
-import { isNaN, isNumber } from "lodash";
 
 export function pushWeek() {
   return {

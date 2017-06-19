@@ -1,11 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as _ from "lodash";
+import { init, error } from "farmbot-toastr";
 import { NavBar } from "./nav";
 import { Everything, Log } from "./interfaces";
-import { init, error } from "./ui";
 import { Spinner } from "./spinner";
-import { AuthState } from "./auth/interfaces";
 import { BotState } from "./devices/interfaces";
 import { ResourceName, TaggedUser } from "./resources/tagged_resources";
 import { selectAllLogs, maybeFetchUser } from "./resources/selectors";
@@ -19,13 +18,13 @@ init();
 
 /**
  * If the sync object takes more than 10s to load, the user will be granted
- * access into the app, but still warned.
+ * access into the app, but still warned.
  */
 const TIMEOUT_MESSAGE = `App could not be fully loaded, we recommend you try 
 refreshing the page.`;
 
 interface AppProps {
-  dispatch: Function;
+  dispatch: Function;
   loaded: ResourceName[];
   logs: Log[];
   user: TaggedUser | undefined;
@@ -43,7 +42,7 @@ function mapStateToProps(props: Everything): AppProps {
       .reverse()
       .value(),
     loaded: props.resources.loaded
-  };
+  };
 }
 
 /**
@@ -65,26 +64,26 @@ export default class App extends React.Component<AppProps, {}> {
     _.intersection(this.props.loaded, MUST_LOAD).length);
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      if (!this.isLoaded) {
-        this.props.dispatch({ type: "SYNC_TIMEOUT_EXCEEDED" });
-        error(TIMEOUT_MESSAGE, "Warning");
-      }
-    }, 10000);
-  }
+  componentDidMount() {
+    setTimeout(() => {
+      if (!this.isLoaded) {
+        this.props.dispatch({ type: "SYNC_TIMEOUT_EXCEEDED" });
+        error(TIMEOUT_MESSAGE, "Warning");
+      }
+    }, 10000);
+  }
 
-  render() {
-    let syncLoaded = this.isLoaded;
+  render() {
+    let syncLoaded = this.isLoaded;
     return <div className="app">
-      <NavBar
-        user={this.props.user}
-        bot={this.props.bot}
+      <NavBar
+        user={this.props.user}
+        bot={this.props.bot}
         dispatch={this.props.dispatch}
-        logs={this.props.logs} />
-      {!syncLoaded && <Spinner radius={33} strokeWidth={6} />}
-      {syncLoaded && this.props.children}
-    </div>;
-  }
-
+        logs={this.props.logs}
+      />
+        {!syncLoaded && <Spinner radius={33} strokeWidth={6} />}
+        {syncLoaded && this.props.children}
+    </div>;
+  }
 }

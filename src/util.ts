@@ -1,12 +1,12 @@
-import * as _ from "lodash";
-import { Color, UnsafeError } from "./interfaces";
-import { box } from "boxed_value";
-import { Dictionary } from "farmbot/dist";
-import { error } from "./ui/index";
-import { TaggedResource } from "./resources/tagged_resources";
 import * as React from "react";
 import { render } from "react-dom";
 import { t } from "i18next";
+import * as _ from "lodash";
+import { Dictionary } from "farmbot";
+import { error } from "farmbot-toastr";
+import { Color, UnsafeError } from "./interfaces";
+import { box } from "boxed_value";
+import { TaggedResource } from "./resources/tagged_resources";
 
 // http://stackoverflow.com/a/901144/1064917
 // Grab a query string param by name, because react-router-redux doesn't

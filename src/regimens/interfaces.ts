@@ -38,6 +38,8 @@ export interface RegimenItemCalendarRow {
   name: string;
   hhmm: string;
   color: string;
+  /** Numeric field that can be used for sorting purposes. */
+  sortKey: number;
   day: number;
   dispatch: Function;
 }

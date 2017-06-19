@@ -1,11 +1,10 @@
 import * as Axios from "axios";
+import { t } from "i18next";
+import { success, error } from "farmbot-toastr";
 import { Thunk, GetState } from "../redux/interfaces";
 import { API } from "../api";
-import { success, error } from "../ui";
-import { t } from "i18next";
 import { Progress, ProgressCallback } from "../util";
 import { GenericPointer } from "../interfaces";
-import { Pair } from "farmbot/dist";
 import { devices } from "../device";
 const QUERY = { meta: { created_by: "plant-detection" } };
 

@@ -4,7 +4,6 @@ export * from "./column";
 export * from "./custom_fb_select";
 export * from "./help";
 export * from "./page";
-export * from "./logger";
 export * from "./markdown";
 export * from "./row";
 export * from "./saucer";

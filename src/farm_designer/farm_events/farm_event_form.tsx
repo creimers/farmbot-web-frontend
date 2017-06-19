@@ -2,6 +2,7 @@ import * as React from "react";
 import * as moment from "moment";
 import * as _ from "lodash";
 import { t } from "i18next";
+import { success, error, warning } from "farmbot-toastr";
 import { TaggedFarmEvent } from "../../resources/tagged_resources";
 import {
   TimeUnit,
@@ -18,10 +19,7 @@ import {
   BlurableInput,
   Col,
   Row,
-  success,
-  SaveBtn,
-  error,
-  warning
+  SaveBtn
 } from "../../ui/index";
 import { FBSelect } from "../../ui/new_fb_select";
 import {

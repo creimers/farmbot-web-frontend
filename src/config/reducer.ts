@@ -1,6 +1,7 @@
 import { generateReducer } from "../redux/generate_reducer";
 import { ChangeApiHost, ChangeApiPort, ConfigState } from "./interfaces";
 import { API } from "../api";
+import { Actions } from "../constants";
 
 let initialState: ConfigState = {
   host: location.hostname,
@@ -10,12 +11,12 @@ let initialState: ConfigState = {
 };
 
 export let configReducer = generateReducer<ConfigState>(initialState)
-  .add<ChangeApiPort>("CHANGE_API_PORT", function (s, a) {
-    s.port = a.payload.port.replace(/\D/g, "");
+  .add<ChangeApiPort>(Actions.CHANGE_API_PORT, (s, { payload }) => {
+    s.port = payload.port.replace(/\D/g, "");
     return s;
   })
-  .add<ChangeApiHost>("CHANGE_API_HOST", function (s, a) {
-    s.host = a.payload.host;
+  .add<ChangeApiHost>(Actions.CHANGE_API_HOST, (s, { payload }) => {
+    s.host = payload.host;
     return s;
   });
 

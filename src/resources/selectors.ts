@@ -1,3 +1,4 @@
+import { error } from "farmbot-toastr";
 import { ResourceIndex, SlotWithTool } from "./interfaces";
 import { joinKindAndId } from "./reducer";
 import {
@@ -23,11 +24,9 @@ import {
   TaggedSequence,
   TaggedTool,
   TaggedToolSlotPointer,
-  PointerType,
   TaggedUser
 } from "./tagged_resources";
 import { CowardlyDictionary, betterCompact, sortResourcesById } from "../util";
-import { error } from "../ui/logger";
 type StringMap = CowardlyDictionary<string>;
 
 export let findId = (index: ResourceIndex, kind: ResourceName, id: number) => {

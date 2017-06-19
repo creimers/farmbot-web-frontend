@@ -10,6 +10,7 @@ import {
 import { cloneDeep } from "lodash";
 import { TaggedResource } from "../resources/tagged_resources";
 import { localStorageNumFetch } from "../util";
+import { Actions } from "../constants";
 
 export const BOT_ORIGIN_QUADRANT = "bot_origin_quadrant";
 export const ZOOM_LEVEL = "zoom_level";
@@ -33,36 +34,36 @@ export let initialState: DesignerState = {
 };
 
 export let designer = generateReducer<DesignerState>(initialState)
-  .add<string>("SEARCH_QUERY_CHANGE", (s, { payload }) => {
+  .add<string>(Actions.SEARCH_QUERY_CHANGE, (s, { payload }) => {
     let state = cloneDeep(s);
     state.cropSearchQuery = payload;
     return state;
   })
-  .add<string | undefined>("SELECT_PLANT", (s, { payload }) => {
+  .add<string | undefined>(Actions.SELECT_PLANT, (s, { payload }) => {
     s.selectedPlant = payload;
     return s;
   })
-  .add<HoveredPlantPayl>("TOGGLE_HOVERED_PLANT", (s, { payload }) => {
+  .add<HoveredPlantPayl>(Actions.TOGGLE_HOVERED_PLANT, (s, { payload }) => {
     s.hoveredPlant = payload;
     return s;
   })
-  .add<BotOriginQuadrant>("UPDATE_BOT_ORIGIN_QUADRANT", (s, { payload }) => {
-    localStorage.setItem(BOT_ORIGIN_QUADRANT, JSON.stringify(payload));
-    s.botOriginQuadrant = payload;
+  .add<BotOriginQuadrant>(Actions.UPDATE_BOT_ORIGIN_QUADRANT, (s, a) => {
+    localStorage.setItem(BOT_ORIGIN_QUADRANT, JSON.stringify(a.payload));
+    s.botOriginQuadrant = a.payload;
     return s;
   })
-  .add<ZoomLevelPayl>("UPDATE_MAP_ZOOM_LEVEL", (s, { payload }) => {
+  .add<ZoomLevelPayl>(Actions.UPDATE_MAP_ZOOM_LEVEL, (s, { payload }) => {
     let value = s.zoomLevel + payload;
     s.zoomLevel = value;
     localStorage.setItem(ZOOM_LEVEL, value.toString());
     return s;
   })
-  .add<CropLiveSearchResult[]>("OF_SEARCH_RESULTS_OK", (s, { payload }) => {
+  .add<CropLiveSearchResult[]>(Actions.OF_SEARCH_RESULTS_OK, (s, a) => {
     let state = cloneDeep(s);
-    state.cropSearchResults = payload;
+    state.cropSearchResults = a.payload;
     return state;
   })
-  .add<TaggedResource>("DESTROY_RESOURCE_OK", (s, { payload }) => {
+  .add<TaggedResource>(Actions.DESTROY_RESOURCE_OK, (s, { payload }) => {
     if (payload.uuid === s.selectedPlant) { s.selectedPlant = undefined; }
     return s;
   });

@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as axios from "axios";
+import { t } from "i18next";
+import { error as log, success, init as logInit } from "farmbot-toastr";
 import { AuthState } from "../auth/interfaces";
-import { error as log, success, init as logInit } from "../ui";
 import { prettyPrintApiErrors } from "../util";
 import { API } from "../api";
 import { Session } from "../session";
 import { FrontPageState } from "./interfaces";
-import { t } from "i18next";
 
 export class FrontPage extends React.Component<{}, Partial<FrontPageState>> {
   constructor() {

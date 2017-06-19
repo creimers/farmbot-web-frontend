@@ -234,6 +234,7 @@ export namespace ToolTips {
     `Toolbays are where you store your FarmBot Tools. Each Toolbay has Slots
     that you can put your Tools in, which should be reflective of your real
     FarmBot hardware configuration.`
+
 }
 
 export namespace Content {
@@ -257,4 +258,64 @@ export namespace Content {
     Configurator mode. Factory resetting your FarmBot will not affect any data
     or settings from your web app account, allowing you to do a complete restore
     to your device once it is back online and paired with your web app account.`
+
+}
+
+export namespace Actions {
+
+  // Resources
+  export const DESTROY_RESOURCE_OK = `DESTROY_RESOURCE_OK`
+  export const INIT_RESOURCE = `INIT_RESOURCE`
+  export const SAVE_SPECIAL_RESOURCE = `SAVE_SPECIAL_RESOURCE`
+  export const SAVE_RESOURCE_OK = `SAVE_RESOURCE_OK`
+  export const UPDATE_RESOURCE_OK = `UPDATE_RESOURCE_OK`
+  export const EDIT_RESOURCE = `EDIT_RESOURCE`
+  export const OVERWRITE_RESOURCE = `OVERWRITE_RESOURCE`
+  export const SAVE_RESOURCE_START = `SAVE_RESOURCE_START`
+  export const RESOURCE_READY = `RESOURCE_READY`
+
+  // Auth
+  export const LOGIN_OK = `LOGIN_OK`
+
+  // Config
+  export const CHANGE_API_PORT = `CHANGE_API_PORT`
+  export const CHANGE_API_HOST = `CHANGE_API_HOST`
+
+  // Devices
+  export const TOGGLE_CONTROL_PANEL_OPTION = `TOGGLE_CONTROL_PANEL_OPTION`
+  export const CHANGE_STEP_SIZE = `CHANGE_STEP_SIZE`
+  export const SETTING_UPDATE_START = `SETTING_UPDATE_START`
+  export const SETTING_UPDATE_END = `SETTING_UPDATE_END`
+  export const BOT_CHANGE = `BOT_CHANGE`
+  export const FETCH_OS_UPDATE_INFO_OK = `FETCH_OS_UPDATE_INFO_OK`
+  export const FETCH_FW_UPDATE_INFO_OK = `FETCH_FW_UPDATE_INFO_OK`
+  export const SET_SYNC_STATUS = `SET_SYNC_STATUS`
+  export const INVERT_JOG_BUTTON = `INVERT_JOG_BUTTON`
+
+  // Draggable
+  export const PUT_DATA_XFER = `PUT_DATA_XFER`
+  export const DROP_DATA_XFER = `DROP_DATA_XFER`
+
+  // Designer
+  export const SEARCH_QUERY_CHANGE = `SEARCH_QUERY_CHANGE`
+  export const SELECT_PLANT = `SELECT_PLANT`
+  export const TOGGLE_HOVERED_PLANT = `TOGGLE_HOVERED_PLANT`
+  export const UPDATE_BOT_ORIGIN_QUADRANT = `UPDATE_BOT_ORIGIN_QUADRANT`
+  export const UPDATE_MAP_ZOOM_LEVEL = `UPDATE_MAP_ZOOM_LEVEL`
+  export const OF_SEARCH_RESULTS_OK = `OF_SEARCH_RESULTS_OK`
+
+  // Regimens
+  export const PUSH_WEEK = `PUSH_WEEK`
+  export const POP_WEEK = `POP_WEEK`
+  export const TOGGLE_DAY = `TOGGLE_DAY`
+  export const SELECT_REGIMEN = `SELECT_REGIMEN`
+  export const SET_SEQUENCE = `SET_SEQUENCE`
+  export const SET_TIME_OFFSET = `SET_TIME_OFFSET`
+
+  // Sequences
+  export const SELECT_SEQUENCE = `SELECT_SEQUENCE`
+
+  // Farmware
+  export const SELECT_IMAGE = `SELECT_IMAGE`
+
 }

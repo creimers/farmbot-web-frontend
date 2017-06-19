@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as axios from "axios";
 import { t } from "i18next";
-import { error as log, init as logInit } from "../ui";
+import { error as log, init as logInit } from "farmbot-toastr";
 import { prettyPrintApiErrors } from "../util";
 import { API } from "../api";
 import { State, Props } from "./interfaces";

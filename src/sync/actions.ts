@@ -1,15 +1,15 @@
+import * as axios from "axios";
+import { warning } from "farmbot-toastr";
 import { Log, AnyPointer } from "../interfaces";
 import { API } from "../api";
-import * as axios from "axios";
 import { Sequence } from "../sequences/interfaces";
 import { Tool } from "../tools/interfaces";
 import { Regimen } from "../regimens/interfaces";
 import { Peripheral } from "../controls/peripherals/interfaces";
-import { FarmEvent, Crop } from "../farm_designer/interfaces";
+import { FarmEvent } from "../farm_designer/interfaces";
 import { Image } from "../images/interfaces";
 import { DeviceAccountSettings } from "../devices/interfaces";
 import { ResourceName } from "../resources/tagged_resources";
-import { warning } from "../ui/logger";
 import { User } from "../auth/interfaces";
 // import { OpenFarmAPI } from "../open_farm/index";
 

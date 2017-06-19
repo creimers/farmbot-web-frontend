@@ -2,7 +2,7 @@ import * as React from "react";
 import { EditPlantInfoProps } from "../interfaces";
 import { history } from "../../history";
 import { destroy } from "../../api/crud";
-import { error } from "../../ui";
+import { error } from "farmbot-toastr";
 
 export abstract class PlantInfoBase extends
   React.Component<EditPlantInfoProps, {}> {

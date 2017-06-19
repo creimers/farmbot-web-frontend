@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+import * as moment from "moment";
 import { generateReducer } from "../redux/generate_reducer";
 import { RestResources, ResourceIndex } from "./interfaces";
 import {
@@ -24,11 +26,11 @@ import {
 } from "../farm_designer/reducer";
 import { ResourceReadyPayl } from "../sync/actions";
 import { OFCropResponse } from "../open_farm/index";
-import * as moment from "moment";
 import {
   famrwareReducer as farmware,
   farmwareState
 } from "../farmware/reducer";
+import { Actions } from "../constants";
 
 let consumerReducer = combineReducers<RestResources["consumers"]>({
   regimens,
@@ -82,9 +84,9 @@ let afterEach = (state: RestResources, a: ReduxAction<any>) => {
 /** Responsible for all RESTful resources. */
 export let resourceReducer = generateReducer
   <RestResources>(initialState, afterEach)
-  .add<ResourceReadyPayl>("SAVE_SPECIAL_RESOURCE", function(s, a) {
-    let data = arrayWrap(a.payload);
-    let kind = a.payload.name;
+  .add<ResourceReadyPayl>(Actions.SAVE_SPECIAL_RESOURCE, (s, { payload }) => {
+    let data = arrayWrap(payload);
+    let kind = payload.name;
     data.map((body: ResourceReadyPayl) => {
       let crop = body.data as OFCropResponse;
       if (crop.data) {
@@ -94,8 +96,8 @@ export let resourceReducer = generateReducer
     })
     return s;
   })
-  .add<TaggedResource>("SAVE_RESOURCE_OK", function(s, a) {
-    let resource = a.payload;
+  .add<TaggedResource>(Actions.SAVE_RESOURCE_OK, (s, { payload }) => {
+    let resource = payload;
     resource.dirty = false;
     resource.saving = false;
     if (resource
@@ -115,15 +117,15 @@ export let resourceReducer = generateReducer
           s.index.references[resource.uuid] = resource;
           break;
         default:
-          whoops("SAVE_RESOURCE_OK", a.payload.kind);
+          whoops(Actions.SAVE_RESOURCE_OK, payload.kind);
       }
     } else {
       throw new Error("Somehow, a resource was created without an ID?");
     }
     return s;
   })
-  .add<TaggedResource>("DESTROY_RESOURCE_OK", function(s, a) {
-    let resource = a.payload;
+  .add<TaggedResource>(Actions.DESTROY_RESOURCE_OK, (s, { payload }) => {
+    let resource = payload;
     switch (resource.kind) {
       case "device":
       case "users":
@@ -138,13 +140,13 @@ export let resourceReducer = generateReducer
         removeFromIndex(s.index, resource);
         break;
       default:
-        whoops("DESTROY_RESOURCE_OK", a.payload.kind);
+        whoops(Actions.DESTROY_RESOURCE_OK, payload.kind);
     }
     return s;
   })
-  .add<TaggedResource>("UPDATE_RESOURCE_OK", function(s, a) {
-    let uuid = a.payload.uuid;
-    s.index.references[uuid] = a.payload;
+  .add<TaggedResource>(Actions.UPDATE_RESOURCE_OK, (s, { payload }) => {
+    let uuid = payload.uuid;
+    s.index.references[uuid] = payload;
     let tr = s.index.references[uuid];
     if (tr) {
       tr.dirty = false;
@@ -156,35 +158,35 @@ export let resourceReducer = generateReducer
       throw new Error("BAD UUID IN UPDATE_RESOURCE_OK");
     }
   })
-  .add<TaggedResource>("*_RESOURCE_NO", function(s, a) {
-    let uuid = a.payload.uuid;
-    let tr = _.merge(findByUuid(s.index, uuid), a.payload);
+  .add<TaggedResource>("*_RESOURCE_NO", (s, { payload }) => {
+    let uuid = payload.uuid;
+    let tr = _.merge(findByUuid(s.index, uuid), payload);
     tr.dirty = true;
     tr.saving = false;
     sanityCheck(tr);
     return s;
   })
-  .add<EditResourceParams>("EDIT_RESOURCE", function(s, a) {
-    let uuid = a.payload.uuid;
-    let { update } = a.payload;
+  .add<EditResourceParams>(Actions.EDIT_RESOURCE, (s, { payload }) => {
+    let uuid = payload.uuid;
+    let { update } = payload;
     let source = _.merge<TaggedResource>(findByUuid(s.index, uuid),
       { body: update },
       { dirty: true });
     sanityCheck(source);
-    a && isTaggedResource(source);
+    payload && isTaggedResource(source);
     return s;
   })
-  .add<EditResourceParams>("OVERWRITE_RESOURCE", function(s, a) {
-    let uuid = a.payload.uuid;
+  .add<EditResourceParams>("OVERWRITE_RESOURCE", (s, { payload }) => {
+    let uuid = payload.uuid;
     let original = findByUuid(s.index, uuid);
-    original.body = a.payload.update as typeof original.body;
+    original.body = payload.update as typeof original.body;
     original.dirty = true;
     sanityCheck(original);
-    a && isTaggedResource(original);
+    payload && isTaggedResource(original);
     return s;
   })
-  .add<TaggedResource>("INIT_RESOURCE", function(s, a) {
-    let tr = a.payload;
+  .add<TaggedResource>("INIT_RESOURCE", (s, { payload }) => {
+    let tr = payload;
     let uuid = tr.uuid;
     // TEMPORARY STUB:
     // Problem:   Old versions of FBOS send timestamp as 8601 string.
@@ -206,28 +208,28 @@ export let resourceReducer = generateReducer
     sanityCheck(tr);
     return s;
   })
-  .add<TaggedResource>("SAVE_RESOURCE_START", function(s, a) {
-    let resource = findByUuid(s.index, a.payload.uuid);
+  .add<TaggedResource>(Actions.SAVE_RESOURCE_START, (s, { payload }) => {
+    let resource = findByUuid(s.index, payload.uuid);
     resource.saving = true;
     if (!resource.body.id) { delete resource.body.id; }
     return s;
   })
-  .add<ResourceReadyPayl>("RESOURCE_READY", function(state, action) {
-    let { name } = action.payload;
+  .add<ResourceReadyPayl>(Actions.RESOURCE_READY, (s, { payload }) => {
+    let { name } = payload;
     /** Problem:  Most API resources are plural (array wrapped) resource.
      *            A small subset are singular (`device` and a few others),
      *            making `.map()` and friends unsafe.
      *  Solution: wrap everything in an array on the way in. */
-    let unwrapped = action.payload.data;
+    let unwrapped = payload.data;
     let data = arrayWrap(unwrapped);
-    let { index } = state;
-    state.loaded.push(name);
+    let { index } = s;
+    s.loaded.push(name);
     index.byKind[name].map(x => {
       let resource = index.references[x];
       resource && removeFromIndex(index, resource);
     });
     addAllToIndex(index, name, data);
-    return state;
+    return s;
   });
 
 interface HasID {
@@ -237,7 +239,7 @@ interface HasID {
 function addAllToIndex<T extends HasID>(i: ResourceIndex,
   kind: ResourceName,
   all: T[]) {
-  all.map(function(tr) {
+  all.map(function (tr) {
     return addToIndex(i, kind, tr, generateUuid(tr.id, kind));
   });
 }

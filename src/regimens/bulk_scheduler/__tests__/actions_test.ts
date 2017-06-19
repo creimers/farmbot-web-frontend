@@ -1,6 +1,6 @@
 let errorStub = jest.fn();
 jest.mock("i18next", () => ({ t: (i: string) => i }))
-jest.mock("../../../ui/index", () => ({ error: errorStub }));
+jest.mock("farmbot-toastr", () => ({ error: errorStub }));
 
 import { commitBulkEditor } from "../actions";
 import { fakeState } from "../../../__test_support__/fake_state";
