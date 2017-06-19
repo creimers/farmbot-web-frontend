@@ -37,7 +37,7 @@ export function mapStateToProps(state: Everything): FarmEventProps {
             .startOf("day")
             .add(ri.time_offset, "milliseconds");
           let o = occurrence(m2, fe);
-          o.executableName = `Step ${i + 1} for #${fe.id}: ${o.executableName || "regimen"}`;
+          o.executableName = `(Regimen step ${i + 1}) ${o.executableName || "regimen"}`;
           calendar.insert(o);
         })
       }
