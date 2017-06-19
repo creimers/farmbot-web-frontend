@@ -1,11 +1,11 @@
-import { AuthState } from "../auth/interfaces";
+import { AuthState, User } from "../auth/interfaces";
+import { TaggedUser } from "../resources/tagged_resources";
 
 export interface Props {
-  auth: AuthState | undefined;
+  user: TaggedUser;
   dispatch: Function;
-  saveUser: (data: State, dispatch: Function) => void;
-  enactDeletion: (deletion_confirmation: string | undefined,
-    dispatch: Function) => void;
+  saveUser(dispatch: Function, update: Partial<User>): void;
+  enactDeletion(dispatch: Function, deletion_confirmation: string | undefined): void;
 }
 
 /** JSON form that gets POSTed to the API when user updates their info. */

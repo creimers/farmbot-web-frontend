@@ -4,13 +4,14 @@ import {
   McuParamName,
   ConfigurationName
 } from "farmbot";
-import { AuthState } from "../auth/interfaces";
+import { AuthState, User } from "../auth/interfaces";
 import {
   TaggedImage,
   TaggedPeripheral,
   TaggedDevice
 } from "../resources/tagged_resources";
 import { RestResources } from "../resources/interfaces";
+import { TaggedUser } from "../resources/tagged_resources";
 
 export interface Props {
   auth: AuthState | undefined;
@@ -113,7 +114,7 @@ export interface McuInputBoxProps {
 
 export interface EStopButtonProps {
   bot: BotState;
-  auth: AuthState | undefined;
+  user: TaggedUser | undefined;
 }
 
 export interface PeripheralsProps {

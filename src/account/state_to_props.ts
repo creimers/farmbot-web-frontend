@@ -1,25 +1,23 @@
 import { Everything } from "../interfaces";
-import { updateUser, deleteUser } from "./actions";
-import { Props, State } from "./interfaces";
+import { deleteUser } from "./actions";
+import { Props } from "./interfaces";
+import { getUserAccountSettings } from "../resources/selectors";
+import { User } from "../auth/interfaces";
+import { edit, save } from "../api/crud";
 
 export function mapStateToProps(props: Everything): Props {
-  let auth = props.auth;
-
-  let saveUser = (data: State, dispatch: Function) => {
-    dispatch(updateUser(data));
-  };
-
-  // Hear ye, hear ye!
-  let enactDeletion = (deletion_confirmation: string, dispatch: Function) => {
-    let password = deletion_confirmation || "NEVER SET";
-    dispatch(deleteUser({ password }));
-  };
+  let user = getUserAccountSettings(props.resources.index);
 
   return {
-    auth,
-    saveUser,
-    enactDeletion,
-    dispatch: Function
+    user,
+    saveUser(dispatch: Function, update: Partial<User>) {
+      dispatch(edit(user, update));
+      dispatch(save(user.uuid))
+    },
+    enactDeletion(dispatch: Function, password: string | undefined) {
+      dispatch(deleteUser({ password: password || "NEVER SET" }));
+    },
+    dispatch: () => { throw new Error("NEVER SHOULD HAPPEN"); }
   };
 }
 

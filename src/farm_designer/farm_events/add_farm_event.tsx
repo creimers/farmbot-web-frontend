@@ -86,6 +86,7 @@ export class AddFarmEvent
     let fe = uuid && this.props.farmEvents.filter(x => x.uuid === uuid)[0];
     if (fe) {
       return <EditFEForm farmEvent={fe}
+        deviceTimezone={this.props.deviceTimezone}
         repeatOptions={this.props.repeatOptions}
         executableOptions={this.props.executableOptions}
         dispatch={this.props.dispatch}

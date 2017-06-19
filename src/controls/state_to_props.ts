@@ -4,6 +4,7 @@ import {
   getDeviceAccountSettings
 } from "../resources/selectors";
 import { Props } from "./interfaces";
+import { maybeFetchUser } from "../resources/selectors";
 
 export function mapStateToProps(props: Everything): Props {
   let peripherals = _.uniq(selectAllPeripherals(props.resources.index));
@@ -13,7 +14,7 @@ export function mapStateToProps(props: Everything): Props {
     account: getDeviceAccountSettings(resources.index),
     dispatch: props.dispatch,
     bot: props.bot,
-    auth: props.auth,
+    user: maybeFetchUser(props.resources.index),
     resources,
     peripherals
   };

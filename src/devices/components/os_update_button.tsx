@@ -4,19 +4,24 @@ import { t } from "i18next";
 import { ToggleButton } from "../../controls/toggle_button";
 import { checkControllerUpdates, updateConfig } from "../actions";
 import { isUndefined, noop } from "lodash";
+import { semverCompare, SemverResult } from "../../util";
 
 export let OsUpdateButton = ({ bot }: BotProp) => {
   let osUpdateBool = bot.hardware.configuration.os_auto_update;
   let buttonStr = "Can't Connect to bot";
   let buttonColor = "yellow";
-  if (bot.currentOSVersion != undefined) {
-    if (bot.currentOSVersion ===
-      bot.hardware.informational_settings.controller_version) {
-      buttonStr = t("UP TO DATE");
-      buttonColor = "gray";
-    } else {
-      buttonStr = t("UPDATE");
-      buttonColor = "green";
+  let { currentOSVersion } = bot;
+  let { controller_version } = bot.hardware.informational_settings;
+  if (_.isString(currentOSVersion) && _.isString(controller_version)) {
+    switch (semverCompare(currentOSVersion, controller_version)) {
+      case SemverResult.RIGHT_IS_GREATER:
+      case SemverResult.EQUAL:
+        buttonStr = t("UP TO DATE");
+        buttonColor = "gray";
+        break;
+      default:
+        buttonStr = t("UPDATE");
+        buttonColor = "green";
     }
   } else {
     buttonStr = "Can't Connect to release server";

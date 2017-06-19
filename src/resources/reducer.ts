@@ -102,6 +102,7 @@ export let resourceReducer = generateReducer
       && resource.body) {
       switch (resource.kind) {
         case "device":
+        case "users":
         case "farm_events":
         case "logs":
         case "peripherals":
@@ -125,6 +126,7 @@ export let resourceReducer = generateReducer
     let resource = a.payload;
     switch (resource.kind) {
       case "device":
+      case "users":
       case "farm_events":
       case "logs":
       case "peripherals":

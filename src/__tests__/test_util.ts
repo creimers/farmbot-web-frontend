@@ -4,7 +4,9 @@ import {
   getParam,
   betterCompact,
   safeStringFetch,
-  oneOf
+  oneOf,
+  semverCompare,
+  SemverResult
 } from "../util";
 describe("util", () => {
   describe("safeStringFetch", () => {
@@ -100,5 +102,35 @@ describe("util", () => {
       expect(oneOf(["foo"], "QMMADSDASDASD")).toBeFalsy();
       expect(oneOf(["foo", "baz"], "nothing to see here.")).toBeFalsy();
     })
+  });
+
+  describe("semver compare", () => {
+    it("knows when RIGHT_IS_GREATER", () => {
+      expect(semverCompare("3.1.6", "4.0.0"))
+        .toBe(SemverResult.RIGHT_IS_GREATER);
+
+      expect(semverCompare("2.1.6", "4.1.0"))
+        .toBe(SemverResult.RIGHT_IS_GREATER);
+
+      expect(semverCompare("4.1.6", "5.1.9"))
+        .toBe(SemverResult.RIGHT_IS_GREATER);
+
+      expect(semverCompare("1.1.9", "2.0.2"))
+        .toBe(SemverResult.RIGHT_IS_GREATER);
+    });
+
+    it("knows when LEFT_IS_GREATER", () => {
+      expect(semverCompare("4.0.0", "3.1.6"))
+        .toBe(SemverResult.LEFT_IS_GREATER);
+
+      expect(semverCompare("4.1.0", "2.1.6"))
+        .toBe(SemverResult.LEFT_IS_GREATER);
+
+      expect(semverCompare("5.1.9", "4.1.6"))
+        .toBe(SemverResult.LEFT_IS_GREATER);
+
+      expect(semverCompare("2.0.2", "1.1.9"))
+        .toBe(SemverResult.LEFT_IS_GREATER);
+    });
   })
 });

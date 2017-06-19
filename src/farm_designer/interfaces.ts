@@ -14,6 +14,7 @@ import {
 } from "./farm_events/map_state_to_props_add_edit";
 import { PlantPointer } from "../interfaces";
 import { SlotWithTool } from "../resources/interfaces";
+import { BotState } from "../devices/interfaces";
 
 export type BotOriginQuadrant = 1 | 2 | 3 | 4;
 export type ZoomLevelPayl = 0.1 | -0.1;
@@ -40,6 +41,7 @@ export interface Props {
   plants: TaggedPlantPointer[];
   toolSlots: SlotWithTool[];
   crops: TaggedCrop[];
+  bot: BotState;
 }
 
 export type TimeUnit =
@@ -97,6 +99,7 @@ export interface DesignerState {
 export type TaggedExecutable = TaggedSequence | TaggedRegimen;
 export type ExecutableQuery = (kind: ExecutableType, id: number) => TaggedExecutable;
 export interface AddEditFarmEventProps {
+  deviceTimezone: string | undefined;
   executableOptions: TightlyCoupledFarmEventDropDown[];
   repeatOptions: DropDownItem[];
   farmEvents: TaggedFarmEvent[];
@@ -154,6 +157,7 @@ export interface GardenMapProps {
   selectedPlant: TaggedPlantPointer | undefined;
   hoveredPlant: TaggedPlantPointer | undefined;
   crops: TaggedCrop[];
+  bot: BotState;
 }
 
 export interface GardenMapState {

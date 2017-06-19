@@ -23,7 +23,7 @@ describe("cachedIcon()", () => {
     cachedIcon("lettuce")
       .then(function (item) {
         expect(item).toContain(DATA_URI);
-        expect(item).toContain(FAKE_SVG);
+        expect(item).toContain(encodeURIComponent(FAKE_SVG));
         done();
       })
       .catch(() => {

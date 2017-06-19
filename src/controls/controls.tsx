@@ -74,7 +74,7 @@ export class Controls extends React.Component<Props, {}> {
               </div>
               <EStopButton
                 bot={this.props.bot}
-                auth={this.props.auth}
+                user={this.props.user}
               />
             </WidgetHeader>
             <WidgetBody>

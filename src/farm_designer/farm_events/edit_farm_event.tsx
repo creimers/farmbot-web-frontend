@@ -16,6 +16,7 @@ export class EditFarmEvent extends React.Component<AddEditFarmEventProps, {}> {
 
   renderForm(fe: TaggedFarmEvent) {
     return <EditFEForm farmEvent={fe}
+      deviceTimezone={this.props.deviceTimezone}
       repeatOptions={this.props.repeatOptions}
       executableOptions={this.props.executableOptions}
       dispatch={this.props.dispatch}

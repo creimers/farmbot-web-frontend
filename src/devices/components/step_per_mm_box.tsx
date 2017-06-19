@@ -27,10 +27,13 @@ export class BotConfigInputBox extends React.Component<StepsPerMMBoxProps, {}> {
   }
 
   render() {
+    let hmm = this.config[this.setting];
+    let value = (_.isNumber(hmm) || _.isBoolean(hmm)) ? hmm.toString() : "";
+
     return <BlurableInput
       type="number"
       onCommit={this.change(this.props.setting, this.props.dispatch)}
-      value={(this.config[this.setting] || "").toString()}
+      value={value}
     />;
   }
 }

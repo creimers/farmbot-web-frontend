@@ -7,6 +7,9 @@ export const X_AXIS_INVERTED = "x_axis_inverted";
 export const Y_AXIS_INVERTED = "y_axis_inverted";
 export const Z_AXIS_INVERTED = "z_axis_inverted";
 
+/** TODO: Refactor this method to use semverCompare() now that it is a thing.
+ * - RC 16 Jun 2017.
+ */
 export function versionOK(stringyVersion = "0.0.0",
   EXPECTED_MAJOR = 4,
   EXPECTED_MINOR = 0) {

@@ -10,51 +10,53 @@ import { SyncButton } from "./sync_button";
 import { history } from "../history";
 import { updatePageInfo } from "../util";
 
-let DropDown = ({ auth, onClick }: DropDownProps) => {
+let DropDown = ({ user, onClick }: DropDownProps) => {
   // Just checking if user is logged in, otherwise nothing is returned.
-  if (!auth) { return <span></span>; }
+  if (!user) {
+    return <span></span>;
+  } else {
+    // Displaying the user's name in the top right of the screen if available.
+    let hasName = user && user.body.name;
+    let fullName = hasName ? `${hasName}` : "";
+    let firstName = fullName.split(" ")[0] + " ▾";
 
-  // Displaying the user's name in the top right of the screen if available.
-  let hasName = auth.user && auth.user.name;
-  let fullName = hasName ? `${hasName}` : "";
-  let firstName = fullName.split(" ")[0] + " ▾";
-
-  // The bit shown while hovering over username in top right of screen.
-  return <div className="nav-dropdown">
-    <span className="name">
-      {firstName}
-    </span>
-    <div className="nav-dropdown-content">
-      <ul>
-        <li>
-          <Link to="/app/account">
-            <i className="fa fa-cog"></i>
-            {t("Account Settings")}
-          </Link>
-        </li>
-        <li>
-          <a href="https://software.farmbot.io/docs/the-farmbot-web-app"
-            target="_blank">
-            <i className="fa fa-file-text-o"></i>{t("Documentation")}
-          </a>
-        </li>
-        <li>
-          <a onClick={onClick}>
-            <i className="fa fa-sign-out"></i>
-            {t("Logout")}
-          </a>
-        </li>
-      </ul>
-      <div className="version-links">
-        <span>{t("Frontend")}:
+    // The bit shown while hovering over username in top right of screen.
+    return <div className="nav-dropdown">
+      <span className="name">
+        {firstName}
+      </span>
+      <div className="nav-dropdown-content">
+        <ul>
+          <li>
+            <Link to="/app/account">
+              <i className="fa fa-cog"></i>
+              {t("Account Settings")}
+            </Link>
+          </li>
+          <li>
+            <a href="https://software.farmbot.io/docs/the-farmbot-web-app"
+              target="_blank">
+              <i className="fa fa-file-text-o"></i>{t("Documentation")}
+            </a>
+          </li>
+          <li>
+            <a onClick={onClick}>
+              <i className="fa fa-sign-out"></i>
+              {t("Logout")}
+            </a>
+          </li>
+        </ul>
+        <div className="version-links">
+          <span>{t("Frontend")}:
             <a href="https://github.com/FarmBot/farmbot-web-frontend"
-            target="_blank">
-            {process.env.SHORT_REVISION}
-          </a>
-        </span>
+              target="_blank">
+              {process.env.SHORT_REVISION}
+            </a>
+          </span>
+        </div>
       </div>
-    </div>
-  </div>;
+    </div>;
+  }
 };
 
 // Easier way to keep track of links in the navbar.
@@ -100,7 +102,7 @@ export class NavBar extends React.Component<NavBarProps, NavBarState> {
     updatePageInfo(pageName);
 
     let { toggleMobileNav, toggleTicker, logout } = this;
-
+    let user = this.props.user
     return <div className="nav-wrapper">
       <nav role="navigation">
         <button
@@ -178,16 +180,16 @@ export class NavBar extends React.Component<NavBarProps, NavBarState> {
         <div className="right-nav-content">
           <SyncButton
             bot={this.props.bot}
-            auth={this.props.auth}
+            user={this.props.user}
             dispatch={this.props.dispatch}
           />
           <EStopButton
             bot={this.props.bot}
-            auth={this.props.auth}
+            user={this.props.user}
           />
           <DropDown
             onClick={logout}
-            auth={this.props.auth}
+            user={user}
           />
         </div>
 

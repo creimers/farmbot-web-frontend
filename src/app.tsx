@@ -7,8 +7,8 @@ import { init, error } from "./ui";
 import { Spinner } from "./spinner";
 import { AuthState } from "./auth/interfaces";
 import { BotState } from "./devices/interfaces";
-import { ResourceName } from "./resources/tagged_resources";
-import { selectAllLogs } from "./resources/selectors";
+import { ResourceName, TaggedUser } from "./resources/tagged_resources";
+import { selectAllLogs, maybeFetchUser } from "./resources/selectors";
 
 /** Remove 300ms delay on touch devices - https://github.com/ftlabs/fastclick */
 let fastClick = require("fastclick");
@@ -28,14 +28,14 @@ interface AppProps {
   dispatch: Function;
   loaded: ResourceName[];
   logs: Log[];
-  auth: AuthState | undefined;
+  user: TaggedUser | undefined;
   bot: BotState;
 }
 
 function mapStateToProps(props: Everything): AppProps {
   return {
     dispatch: props.dispatch,
-    auth: props.auth,
+    user: maybeFetchUser(props.resources.index),
     bot: props.bot,
     logs: _(selectAllLogs(props.resources.index))
       .map(x => x.body)
@@ -78,11 +78,10 @@ export default class App extends React.Component<AppProps, {}> {
     let syncLoaded = this.isLoaded;
     return <div className="app">
       <NavBar
-        auth={this.props.auth}
+        user={this.props.user}
         bot={this.props.bot}
         dispatch={this.props.dispatch}
-        logs={this.props.logs}
-      />
+        logs={this.props.logs} />
       {!syncLoaded && <Spinner radius={33} strokeWidth={6} />}
       {syncLoaded && this.props.children}
     </div>;

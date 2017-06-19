@@ -1,6 +1,5 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { updateUser } from "./actions";
 import { Settings, DeleteAccount, ChangePassword } from "./components";
 import { State, Props } from "./interfaces";
 import { Page, Row, Col } from "../ui";
@@ -14,8 +13,8 @@ export class Account extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    if (this.props.auth) {
-      let { name, email } = this.props.auth.user;
+    if (this.props.user) {
+      let { name, email } = this.props.user.body;
       this.setState({ name, email });
     }
   }
@@ -26,7 +25,7 @@ export class Account extends React.Component<Props, State> {
   }
 
   savePassword = () => {
-    this.props.dispatch(updateUser(this.state));
+    this.props.saveUser(this.props.dispatch, this.state);
 
     this.setState({
       password: "",
@@ -42,9 +41,7 @@ export class Account extends React.Component<Props, State> {
           <Settings name={this.state.name || ""}
             email={this.state.email || ""}
             set={this.set}
-            save={() => this.props.saveUser(
-              this.state, this.props.dispatch
-            )} />
+            save={() => this.props.saveUser(this.props.dispatch, this.state)} />
         </Row>
         <Row>
           <ChangePassword
@@ -60,9 +57,9 @@ export class Account extends React.Component<Props, State> {
             deletion_confirmation=
             {this.state.deletion_confirmation || ""}
             set={this.set}
-            save={() => this.props.enactDeletion(
-              this.state.deletion_confirmation, this.props.dispatch
-            )} />
+            save={() => this
+            .props
+            .enactDeletion(this.props.dispatch, this.state.deletion_confirmation)} />
         </Row>
       </Col>
     </Page>;

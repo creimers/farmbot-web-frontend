@@ -23,7 +23,8 @@ import {
   TaggedSequence,
   TaggedTool,
   TaggedToolSlotPointer,
-  PointerType
+  PointerType,
+  TaggedUser
 } from "./tagged_resources";
 import { CowardlyDictionary, betterCompact, sortResourcesById } from "../util";
 import { error } from "../ui/logger";
@@ -461,6 +462,32 @@ export function getDeviceAccountSettings(index: ResourceIndex) {
     throw new Error(`
     PROBLEM: Expected getDeviceAccountSettings() to return exactly 1 device.
     We got some other number back, indicating a hazardous condition.`);
+  }
+}
+
+export function maybeFetchUser(index: ResourceIndex):
+TaggedUser | undefined {
+  let list = index.byKind.users;
+  let uuid = list[0];
+  let user = index.references[uuid || -1];
+
+  if (user && sanityCheck(user) && list.length > 1) {
+    throw new Error("Index is broke. Expected exactly 1 user.");
+  };
+  if ((list.length === 1) && user && user.kind === "users") {
+    return user;
+  } else {
+    return undefined;
+  }
+}
+export function getUserAccountSettings(index: ResourceIndex): TaggedUser {
+  let user = maybeFetchUser(index);
+  if (user) {
+    return user;
+  } else {
+    throw new Error(`PROBLEM: Expected getUserAccountSettings() to return
+    exactly 1 device. We got some other number back, indicating a hazardous
+    condition.`);
   }
 }
 

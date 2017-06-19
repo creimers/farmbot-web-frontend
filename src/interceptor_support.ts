@@ -20,7 +20,6 @@ export let RESOURCES: ResourceName[] = [
 // FAST SOLUTION: Ping the bot every time we push "save" or "update".
 //                Our hope is to eventually move this logic into the API.
 export function notifyBotOfChanges(url: string | undefined, action: DataChangeType) {
-  console.log("URL IS: " + url);
   if (url) {
     url.split("/").filter((chunk: ResourceName) => {
       return RESOURCES.includes(chunk);

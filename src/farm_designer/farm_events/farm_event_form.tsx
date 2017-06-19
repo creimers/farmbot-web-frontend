@@ -33,8 +33,8 @@ import { DropDownItem } from "../../ui/fb_select";
 import { history } from "../../history";
 // TIL: https://stackoverflow.com/a/24900248/1064917
 import { betterMerge } from "../../util";
-import { info } from "../../ui/logger";
 import { maybeWarnAboutMissedTasks } from "./util";
+import { TzWarning } from "./tz_warning";
 
 type FormEvent = React.SyntheticEvent<HTMLInputElement>;
 /** Seperate each of the form fields into their own interface. Recombined later
@@ -81,6 +81,7 @@ function recombine(vm: FarmEventViewModel): Partial<TaggedFarmEvent["body"]> {
 }
 
 interface Props {
+  deviceTimezone: string | undefined;
   executableOptions: TightlyCoupledFarmEventDropDown[];
   repeatOptions: DropDownItem[];
   farmEvent: TaggedFarmEvent;
@@ -293,6 +294,7 @@ export class EditFEForm extends React.Component<Props, State> {
           }}>
           {t("Delete")}
         </button>
+        <TzWarning deviceTimezone={this.props.deviceTimezone} />
       </div>
     </div>;
   }

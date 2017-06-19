@@ -16,6 +16,7 @@ import { DeviceAccountSettings } from "../devices/interfaces";
 import { isObject, isString, get } from "lodash";
 
 export type ResourceName =
+  | "users"
   | "device"
   | "farm_events"
   | "images"

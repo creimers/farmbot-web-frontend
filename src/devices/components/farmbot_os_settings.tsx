@@ -27,6 +27,7 @@ import { save } from "../../api/crud";
 import { MustBeOnline } from "../must_be_online";
 import { ToolTips, Content } from "../../constants";
 import { TimezoneSelector } from "../timezones/timezone_selector";
+import { timezoneMismatch } from "../timezones/guess_timezone";
 
 const CAMERA_CHOICES = [
   { label: "USB Camera", value: "USB" },
@@ -64,6 +65,15 @@ export class FarmbotOsSettings
     let { account, dispatch } = this.props;
     dispatch(changeDevice(account, { timezone }));
     dispatch(save(account.uuid));
+  }
+
+  maybeWarnTz = () => {
+    let wrongTZ = timezoneMismatch(this.props.account.body.timezone);
+    if (wrongTZ) {
+      return "This timezone appears to be different than your local time.";
+    } else {
+      return ""
+    }
   }
 
   render() {
@@ -115,6 +125,9 @@ export class FarmbotOsSettings
               </label>
             </Col>
             <Col xs={7}>
+              <div>
+                {this.maybeWarnTz()}
+              </div>
               <div>
                 <TimezoneSelector
                   currentTimezone={this.props.account.body.timezone}

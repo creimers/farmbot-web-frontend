@@ -18,6 +18,7 @@ import { PointLayer } from "./layers/point_layer";
 import { SpreadLayer } from "./layers/spread_layer";
 import { ToolSlotLayer } from "./layers/tool_slot_layer";
 import { HoveredPlantLayer } from "./layers/hovered_plant_layer";
+import { FarmBotLayer } from "./layers/farmbot_layer";
 
 const DRAG_ERROR = `ERROR - Couldn't get zoom level of garden map, check the
   handleDrop() or drag() method in garden_map.tsx`;
@@ -143,6 +144,11 @@ export class GardenMap extends
           botOriginQuadrant={this.props.designer.botOriginQuadrant}
           visible={!!this.props.showFarmbot}
           slots={this.props.toolSlots}
+        />
+        <FarmBotLayer
+          botOriginQuadrant={this.props.designer.botOriginQuadrant}
+          visible={!!this.props.showFarmbot}
+          bot={this.props.bot}
         />
         <HoveredPlantLayer
           isEditing={this.isEditing}

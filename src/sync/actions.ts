@@ -10,6 +10,7 @@ import { Image } from "../images/interfaces";
 import { DeviceAccountSettings } from "../devices/interfaces";
 import { ResourceName } from "../resources/tagged_resources";
 import { warning } from "../ui/logger";
+import { User } from "../auth/interfaces";
 // import { OpenFarmAPI } from "../open_farm/index";
 
 export interface ResourceReadyPayl {
@@ -33,6 +34,7 @@ export function fetchSyncData(dispatch: Function) {
   let fail = () => warning("Please try refreshing the page.",
     "Error downloading data");
 
+  fetch<User>("users", API.current.usersPath)
   fetch<DeviceAccountSettings>("device", API.current.devicePath)
   fetch<FarmEvent[]>("farm_events", API.current.farmEventsPath);
   fetch<Image[]>("images", API.current.imagesPath);

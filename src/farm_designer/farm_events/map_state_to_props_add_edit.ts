@@ -13,7 +13,8 @@ import {
   selectAllSequences,
   hasId,
   findSequenceById,
-  findRegimenById
+  findRegimenById,
+  getDeviceAccountSettings
 } from "../../resources/selectors";
 import {
   TaggedFarmEvent,
@@ -168,7 +169,11 @@ export function mapStateToPropsAddEdit(props: Everything): AddEditFarmEventProps
       default: throw new Error("GOT A BAD `KIND` STRING");
     }
   }
+
   return {
+    deviceTimezone: getDeviceAccountSettings(props.resources.index)
+      .body
+      .timezone,
     dispatch: props.dispatch,
     regimensById,
     sequencesById,

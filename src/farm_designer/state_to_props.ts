@@ -29,6 +29,7 @@ export function mapStateToProps(props: Everything) {
     points: selectAllGenericPointers(props.resources.index),
     toolSlots: joinToolsAndSlot(props.resources.index),
     hoveredPlant,
-    plants
+    plants,
+    bot: props.bot
   };
 }

@@ -3,12 +3,13 @@
 let ONLY_ONCE = {
   need_to_talk: true
 }
+
 export function inferTimezone(current: string | undefined): string {
   if (current) {
     return current;
   }
-
-  if (Intl && Intl.DateTimeFormat) {
+  let browserTime = maybeResolveTZ();
+  if (browserTime) {
     if (ONLY_ONCE.need_to_talk) {
       alert("This account did not have a timezone set. " +
         "Farmbot requires a timezone to operate. " +
@@ -18,10 +19,7 @@ export function inferTimezone(current: string | undefined): string {
       ONLY_ONCE.need_to_talk = false;
     }
     // WARNING SIDE EFFECTS!!!
-    return Intl
-      .DateTimeFormat()
-      .resolvedOptions()
-      .timeZone;
+    return browserTime;
   }
   if (ONLY_ONCE.need_to_talk) {
     alert("Warning: Farmbot could not guess your timezone. " +
@@ -31,4 +29,30 @@ export function inferTimezone(current: string | undefined): string {
     ONLY_ONCE.need_to_talk = false;
   };
   return "UTC";
+}
+
+/** Sometimes, a mismatch between the device time zone and the user time zone
+ * can occur. When this happens,
+ */
+export function timezoneMismatch(botTime: string | undefined,
+  userTime: string | undefined = maybeResolveTZ()): boolean {
+
+  if (_.isString(botTime) && _.isString(userTime)) {
+    return botTime.toUpperCase() !== userTime.toUpperCase();
+  } else {
+    // Dont show warnings if TZ data is unavailable.
+    return false;
+  }
+}
+
+/** Use browser's i18n functionality to guess timezone. */
+function maybeResolveTZ(): string | undefined {
+  if (Intl && Intl.DateTimeFormat) {
+    // WARNING SIDE EFFECTS!!!
+    return Intl
+      .DateTimeFormat()
+      .resolvedOptions()
+      .timeZone;
+  }
+  return undefined;
 }

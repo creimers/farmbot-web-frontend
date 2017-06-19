@@ -23,8 +23,8 @@ const TEXT_MAPPING: Record<SyncStatus, string> = {
   "maintenance": "MAINTENANCE DOWNTIME"
 };
 
-export function SyncButton({ auth, bot, dispatch }: NavButtonProps) {
-  if (!auth) {
+export function SyncButton({ user, bot, dispatch }: NavButtonProps) {
+  if (!user) {
     return <span></span>;
   }
   let { sync_status } = bot.hardware.informational_settings;

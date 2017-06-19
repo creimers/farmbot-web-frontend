@@ -5,12 +5,11 @@ export interface Token {
 
 export interface AuthState {
   token: Token;
-  user: User;
 }
 
 export interface UnencodedToken {
-  /** SUBJECT - The user's email. */
-  sub: string;
+  // /** SUBJECT - The user's email. STOP USING THIS! */
+  // sub: string;
   /** ISSUED AT */
   iat: number;
   /** JSON TOKEN IDENTIFIER - a serial number for the token. */

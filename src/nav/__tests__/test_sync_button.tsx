@@ -9,7 +9,7 @@ let FAKE_BOT_STATE = defensiveClone(bot);
 describe("<SyncButton/>", function () {
   it("renders nothing when not given a bot", function () {
     let dispatcher = jest.fn();
-    let result = render(<SyncButton auth={undefined}
+    let result = render(<SyncButton user={undefined}
       dispatch={dispatcher}
       bot={FAKE_BOT_STATE} />);
     expect(result.hasClass("nav-sync")).toBeFalsy();

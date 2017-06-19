@@ -1,16 +1,16 @@
-import { AuthState } from "../auth/interfaces";
 import { BotState } from "../devices/interfaces";
 import { Log } from "../interfaces";
+import { TaggedUser } from "../resources/tagged_resources";
 
 export interface NavButtonProps {
-  auth: AuthState | undefined;
+  user: TaggedUser | undefined;
   dispatch: Function;
   bot: BotState;
   onClick?: () => void;
 }
 
 export interface DropDownProps {
-  auth: AuthState | undefined;
+  user: TaggedUser | undefined;
   onClick?: () => void;
 }
 
@@ -22,6 +22,6 @@ export interface NavBarState {
 export interface NavBarProps {
   logs: Log[];
   bot: BotState;
-  auth: AuthState | undefined;
+  user: TaggedUser | undefined;
   dispatch: Function;
 }

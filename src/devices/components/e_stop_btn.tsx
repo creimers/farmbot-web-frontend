@@ -15,7 +15,7 @@ export class EStopButton extends React.Component<EStopButtonProps, {}> {
     let emergencyLockStatusColor = locked ? "yellow" : "red";
     let emergencyLockStatusText = locked ? "UNLOCK" : "E-STOP";
 
-    if (this.props.auth) {
+    if (this.props.user) {
       return <button
         className={`red e-stop ${emergencyLockStatusColor}`}
         onClick={toggleEmergencyLock}>
