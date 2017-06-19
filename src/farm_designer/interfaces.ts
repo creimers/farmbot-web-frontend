@@ -120,6 +120,7 @@ export interface AddEditFarmEventProps {
  * CalendarDay.
  */
 export interface CalendarOccurrence {
+  mmdd: string;
   sortKey: number;
   timeStr: string;
   executableName: string;
