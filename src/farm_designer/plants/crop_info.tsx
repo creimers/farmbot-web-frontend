@@ -3,7 +3,7 @@ import { BackArrow } from "../../ui";
 import { t } from "i18next";
 import * as _ from "lodash";
 import { DATA_URI, DEFAULT_ICON } from "../../open_farm/index";
-import { SpeciesInfoProps, DraggableEvent } from "../interfaces";
+import { CropInfoProps, DraggableEvent } from "../interfaces";
 import { history } from "../../history";
 import { connect } from "react-redux";
 import { findBySlug } from "../search_selectors";
@@ -18,7 +18,7 @@ export function mapStateToProps(props: Everything): any {
 }
 
 @connect(mapStateToProps)
-export class SpeciesInfo extends React.Component<SpeciesInfoProps, {}> {
+export class CropInfo extends React.Component<CropInfoProps, {}> {
   handleDragStart = (e: DraggableEvent) => {
     let icon = e.currentTarget.getAttribute("data-icon-url");
     let img = document.createElement("img");
@@ -33,23 +33,23 @@ export class SpeciesInfo extends React.Component<SpeciesInfoProps, {}> {
   }
 
   render() {
-    let species = history.getCurrentLocation().pathname.split("/")[5];
+    let crop = history.getCurrentLocation().pathname.split("/")[5];
     let result =
-      findBySlug(this.props.cropSearchResults, species || "PLANT_NOT_FOUND");
+      findBySlug(this.props.cropSearchResults, crop || "PLANT_NOT_FOUND");
 
     let basePath = "/app/designer/plants/crop_search/";
 
     let backgroundURL = `linear-gradient(
       rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${result.image})`;
 
-    return <div className="panel-container green-panel species-info-panel">
+    return <div className="panel-container green-panel crop-info-panel">
       <div className="panel-header green-panel"
         style={{ background: backgroundURL }}>
         <p className="panel-title">
           <BackArrow /> {result.crop.name}
           <a
             className="right-button mobile-only"
-            onClick={() => history.push(basePath + species + "/add")}>
+            onClick={() => history.push(basePath + crop + "/add")}>
             {t("Add to map")}
           </a>
         </p>

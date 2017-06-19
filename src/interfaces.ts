@@ -32,7 +32,7 @@ export interface Log {
 interface Location {
   /** EX: /app/designer */
   pathname: string;
-  /** EX: ?id=twowing-silverbell&p1=SpeciesInfo */
+  /** EX: ?id=twowing-silverbell&p1=CropInfo */
   search: string;
   hash: string;
   // /** ¯\_(ツ)_/¯ */

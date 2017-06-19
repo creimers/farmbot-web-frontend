@@ -65,8 +65,8 @@ export class GardenMap extends
       let zoomLvl = parseFloat(window.getComputedStyle(map).zoom || DRAG_ERROR);
       let { pageX, pageY } = e;
       let box = el.getBoundingClientRect();
-      let species = history.getCurrentLocation().pathname.split("/")[5];
-      let OFEntry = this.findCrop(species);
+      let crop = history.getCurrentLocation().pathname.split("/")[5];
+      let OFEntry = this.findCrop(crop);
       let params: ScreenToGardenParams = {
         quadrant: this.props.designer.botOriginQuadrant,
         pageX: pageX + page.scrollLeft,

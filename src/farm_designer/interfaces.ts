@@ -193,7 +193,7 @@ export interface EditPlantInfoProps {
   findPlant(stringyID: string | undefined): TaggedPlantPointer | undefined;
 }
 
-export interface DNDSpeciesMobileState {
+export interface DNDCropMobileState {
   isDragging: boolean;
 }
 
@@ -214,7 +214,7 @@ export interface HoveredPlantPayl {
   icon: string;
 }
 
-export interface SpeciesCatalogProps {
+export interface CropCatalogProps {
   cropSearchQuery: string;
   dispatch: Function;
   cropSearchResults: CropLiveSearchResult[];
@@ -222,7 +222,7 @@ export interface SpeciesCatalogProps {
     (dispatch: Function) => void;
 }
 
-export interface SpeciesInfoProps {
+export interface CropInfoProps {
   cropSearchQuery: string;
   dispatch: Function;
   designer: DesignerState;

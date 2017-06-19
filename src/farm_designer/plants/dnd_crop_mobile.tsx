@@ -8,16 +8,16 @@ import { isMobile } from "../../util";
 import { history } from "../../history";
 import { DEFAULT_ICON } from "../../open_farm/index";
 import {
-  SpeciesInfoProps,
-  DNDSpeciesMobileState,
+  CropInfoProps,
+  DNDCropMobileState,
   DraggableEvent
 } from "../interfaces";
 import { findBySlug } from "../search_selectors";
 
 @connect((state: Everything) => state)
 /** DND => "drag and drop" */
-export class DNDSpeciesMobile
-  extends React.Component<SpeciesInfoProps, DNDSpeciesMobileState> {
+export class DNDCropMobile
+  extends React.Component<CropInfoProps, DNDCropMobileState> {
   constructor() {
     super();
     this.state = { isDragging: false };
@@ -38,18 +38,18 @@ export class DNDSpeciesMobile
   }
 
   render() {
-    let species = history.getCurrentLocation().pathname.split("/")[5];
+    let crop = history.getCurrentLocation().pathname.split("/")[5];
 
     let result =
       findBySlug(this.props.cropSearchResults,
-        species || "PLANT_NOT_FOUND");
+        crop || "PLANT_NOT_FOUND");
 
     /** rgba arguments are a more mobile-friendly way apply filters */
     let backgroundURL = isMobile() ? `linear-gradient(
       rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${result.image})` : "";
 
     return <div className={`panel-container green-panel
-    dnd-species-mobile-panel is-dragging-${this.state.isDragging}`}>
+    dnd-crop-mobile-panel is-dragging-${this.state.isDragging}`}>
       <div className="panel-header green-panel"
         style={{ background: backgroundURL }}>
         <p className="panel-title">

@@ -156,24 +156,24 @@ export class RootComponent extends React.Component<RootComponentProps, {}> {
           {
             path: "plants/crop_search",
             getComponent(location: any, cb: any) {
-              System.import("./farm_designer/plants/species_catalog.tsx").then(
-                (module: any) => cb(null, module.SpeciesCatalog)
+              System.import("./farm_designer/plants/crop_catalog.tsx").then(
+                (module: any) => cb(null, module.CropCatalog)
               ).catch(errorLoading(cb));
             },
           },
           {
-            path: "plants/crop_search/:species",
+            path: "plants/crop_search/:crop",
             getComponent(location: any, cb: any) {
-              System.import("./farm_designer/plants/species_info.tsx").then(
-                (module: any) => cb(null, module.SpeciesInfo)
+              System.import("./farm_designer/plants/crop_info.tsx").then(
+                (module: any) => cb(null, module.CropInfo)
               ).catch(errorLoading(cb));
             },
           },
           {
-            path: "plants/crop_search/:species/add",
+            path: "plants/crop_search/:crop/add",
             getComponent(location: any, cb: any) {
-              System.import("./farm_designer/plants/dnd_species_mobile.tsx").then(
-                (module: any) => cb(null, module.DNDSpeciesMobile)
+              System.import("./farm_designer/plants/dnd_crop_mobile.tsx").then(
+                (module: any) => cb(null, module.DNDCropMobile)
               ).catch(errorLoading(cb));
             },
           },

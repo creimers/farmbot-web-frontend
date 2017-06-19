@@ -16,7 +16,7 @@
   }
 }
 
-.species-info-panel {
+.crop-info-panel {
   .panel-header {
     background-size: 144% !important;
     background-repeat: no-repeat !important;
@@ -59,15 +59,15 @@
   .crop-drag-info-tile {
     display: none;
   }
-  .species-info-panel .panel-header,
-  .dnd-species-mobile-panel .panel-header {
+  .crop-info-panel .panel-header,
+  .dnd-crop-mobile-panel .panel-header {
     background-repeat: no-repeat !important;
     background-position: center center !important;
     height: 12rem;
     overflow-y: scroll;
     padding-bottom: 1rem;
   }
-  .dnd-species-mobile-panel {
+  .dnd-crop-mobile-panel {
     transition: all 0.4s ease-in-out;
     .object-list {
       transition: all 0.4s ease-in-out;

@@ -4,10 +4,10 @@ import { Everything } from "../../interfaces";
 import { connect } from "react-redux";
 import { t } from "i18next";
 import { OpenFarmResults } from "./openfarm_search_results";
-import { SpeciesCatalogProps } from "../interfaces";
+import { CropCatalogProps } from "../interfaces";
 import { OFSearch } from "../util";
 
-export function mapStateToProps(props: Everything): SpeciesCatalogProps {
+export function mapStateToProps(props: Everything): CropCatalogProps {
   return {
     OFSearch,
     cropSearchQuery: props.resources.consumers.farm_designer.cropSearchQuery,
@@ -21,12 +21,12 @@ export function mapStateToProps(props: Everything): SpeciesCatalogProps {
 }
 
 @connect(mapStateToProps)
-export class SpeciesCatalog extends React.Component<SpeciesCatalogProps, {}> {
+export class CropCatalog extends React.Component<CropCatalogProps, {}> {
   render() {
-    return <div className="panel-container green-panel species-catalog-panel">
+    return <div className="panel-container green-panel crop-catalog-panel">
       <div className="panel-header green-panel">
         <p className="panel-title">
-          <BackArrow /> {t("Choose a species")}
+          <BackArrow /> {t("Choose a crop")}
         </p>
       </div>
       <div className="panel-top">
