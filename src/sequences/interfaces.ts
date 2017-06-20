@@ -114,6 +114,7 @@ export interface StepInputProps {
   sequence: TaggedSequence;
   field: LegalArgString;
   dispatch: Function;
+  type_?: "text" | "hidden" | undefined;
   index: number;
 }
 

@@ -8,13 +8,14 @@ export function InputDefault({
   field,
   dispatch,
   sequence,
+  type_,
   index
 }: StepInputProps) {
   let raw = (step.args as any)[field];
   let notUndefied = (isString(raw) || isNumber(raw));
   let val = notUndefied ? raw : "";
 
-  return <input type="text"
+  return <input type={type_ || "text"}
     value={val}
     onChange={updateStep({ dispatch, step, field, index, sequence })} />;
 }
