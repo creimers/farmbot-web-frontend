@@ -197,9 +197,7 @@ export function changeDevice(device: TaggedDevice,
 
 
 export function MCUFactoryReset() {
-  return devices
-    .current
-    .resetMCU();
+  return devices.current.resetMCU();
 }
 
 export function botConfigChange(key: configKey, value: number) {
