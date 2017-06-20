@@ -1,9 +1,10 @@
 import * as React from "react";
 import { t } from "i18next";
 import { Row, Col } from "../../../ui/index";
+import { JSXChildren } from "../../../util";
 
 interface SpacePanelHeaderProps {
-  children?: JSX.Element | undefined;
+  children?: JSXChildren;
 }
 
 export function SpacePanelHeader({ children }: SpacePanelHeaderProps) {

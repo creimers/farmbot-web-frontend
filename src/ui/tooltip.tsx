@@ -1,8 +1,9 @@
 import * as React from "react";
 import { t } from "i18next";
+import { JSXChildren } from "../util";
 
 interface ToolTipProps {
-  children?: JSX.Element | undefined;
+  children?: JSXChildren;
   className?: string;
   helpText: string;
 }

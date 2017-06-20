@@ -1,7 +1,8 @@
 import * as React from "react";
+import { JSXChildren } from "../util";
 
 interface RowProps {
-  children?: JSX.Element | undefined;
+  children?: JSXChildren;
   className?: string;
 }
 

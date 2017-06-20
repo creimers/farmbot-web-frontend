@@ -1,8 +1,9 @@
 import * as React from "react";
 import { parseClassNames } from "./util";
+import { JSXChildren } from "../util";
 
 interface ColumnProps {
-  children?: JSX.Element | undefined;
+  children?: JSXChildren;
   /** {xs-col-size} */
   xs?: number;
   /** {sm-col-size} */

@@ -393,3 +393,7 @@ export function semverCompare(left: string, right: string): SemverResult {
 
   return SemverResult.EQUAL;
 };
+
+/** TODO: Upgrading to TSC 2.4, maybe we don't need this?
+ * - RC 20 June 2016 */
+export type JSXChildren = JSX.Element[] | JSX.Element | string | undefined;
