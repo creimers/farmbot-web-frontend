@@ -2,7 +2,6 @@ import { Sequence } from "../sequences/interfaces";
 import { Tool } from "../tools/interfaces";
 import { Regimen } from "../regimens/interfaces";
 import { FarmEvent, Crop } from "../farm_designer/interfaces";
-import { Image } from "../images/index";
 import {
   Log,
   GenericPointer,
@@ -14,6 +13,7 @@ import { User } from "../auth/interfaces";
 import { assertUuid } from "./selectors";
 import { DeviceAccountSettings } from "../devices/interfaces";
 import { isObject, isString, get } from "lodash";
+import { Image } from "../images/interfaces";
 
 export type ResourceName =
   | "users"

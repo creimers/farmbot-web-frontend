@@ -1,7 +1,7 @@
 import * as React from "react";
 import { t } from "i18next";
-import { DropDownItem, DeprecatedFBSelect } from "../ui/fb_select";
-import { Row, Col } from "../ui/index";
+import { DropDownItem, DeprecatedFBSelect } from "../../ui/fb_select";
+import { Row, Col } from "../../ui/index";
 
 const calibrationAxes: DropDownItem[] = [
   { label: "X", value: "x" }, { label: "Y", value: "y" }

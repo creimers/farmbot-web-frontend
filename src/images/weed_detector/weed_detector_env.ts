@@ -1,4 +1,4 @@
-import { WeedDetectorENV } from "./interfaces";
+import { WeedDetectorENV } from "../interfaces";
 import { box, Box } from "boxed_value";
 
 /** Tries its hardest to deserialize FarmBot's weed detector ENV vars.
