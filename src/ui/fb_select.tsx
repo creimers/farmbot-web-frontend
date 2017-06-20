@@ -1,6 +1,7 @@
 import * as React from "react";
 
-type OptionComponent = React.ComponentClass<DropDownItem>
+type OptionComponent =
+  | React.ComponentClass<DropDownItem>
   | React.StatelessComponent<DropDownItem>;
 
 export interface DropDownItem {
@@ -52,14 +53,22 @@ export const NULL_CHOICE: DropDownItem = Object.freeze({
   value: ""
 });
 
-export class DeprecatedFBSelect extends React.Component<Readonly<SelectProps>, Partial<SelectState>> {
+/** Wow. TSC 2.4 is neat. It found a bunch of subtle issues relating to the ES7
+ * object spread operator. For now, I've quieted the errors down by making
+ * `FixMe` a strict union of the three interfaces. This is *actually* what FB
+ * Select was using for data internally, but TSC did not catch it till now.
+ * - RC
+ */
+type FixMe = SelectProps & SelectState & DropDownItem;
+
+export class DeprecatedFBSelect extends React.Component<Readonly<SelectProps>, Partial<FixMe>> {
   constructor() {
     super();
     this.state = { touched: false };
   }
 
   componentDidMount() {
-    let defaults = { isOpen: !!this.props.isOpen };
+    let defaults: Partial<FixMe> = { isOpen: !!this.props.isOpen };
     let { initialValue } = this.props;
     if (initialValue) {
       defaults = { ...defaults, ...initialValue };

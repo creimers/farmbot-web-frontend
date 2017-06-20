@@ -15,7 +15,6 @@ export interface Props {
 
 export interface WebcamPanelState {
   isEditing: boolean;
-  url: string;
 }
 
 export interface DirectionButtonProps {
