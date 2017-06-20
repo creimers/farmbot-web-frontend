@@ -54,10 +54,11 @@ export const additionalSettingsMenu = () => {
     <label htmlFor="image_bot_origin_location">
       {t(`Origin Location in Image`)}
     </label>
-    <DeprecatedFBSelect
+    <FBSelect
       list={originLocations}
-      placeholder="Select..."
-      id="image_bot_origin_location" />
+      onChange={() => { }}
+      selectedItem={undefined}
+      placeholder="Select..." />
     <Row>
       <Col xs={6}>
         <label htmlFor="coord_scale">
