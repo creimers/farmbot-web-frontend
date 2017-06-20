@@ -2,6 +2,7 @@ import * as React from "react";
 import { t } from "i18next";
 import { DropDownItem, DeprecatedFBSelect } from "../../ui/fb_select";
 import { Row, Col } from "../../ui/index";
+import { FBSelect } from "../../ui/new_fb_select";
 
 const calibrationAxes: DropDownItem[] = [
   { label: "X", value: "x" }, { label: "Y", value: "y" }
@@ -28,13 +29,14 @@ export const additionalSettingsMenu = () => {
     </label>
     <input type="number" id="calibration_object_separation"
       placeholder="(Number)" />
-    <label htmlFor="calibration_object_separation_axis">
+    <label>
       {t(`Calibration Object Separation along axis`)}
     </label>
-    <DeprecatedFBSelect
+    <FBSelect
+      onChange={(x) => { }}
+      selectedItem={undefined}
       list={calibrationAxes}
-      placeholder="Select..."
-      id="calibration_object_separation_axis" />
+      placeholder="Select..." />
     <Row>
       <Col xs={6}>
         <label htmlFor="camera_offset_x">

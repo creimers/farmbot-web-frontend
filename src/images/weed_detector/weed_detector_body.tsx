@@ -53,7 +53,6 @@ interface Props {
   S: undefined | (number | undefined)[];
   V: undefined | (number | undefined)[];
   onSliderChange(key: keyof HSV<"">, values: [number, number]): void;
-  // onSliderChange(key: keyof HSV<"">, values: [number, number]): void;
 }
 
 type BMI = "blur" | "morph" | "iteration";
