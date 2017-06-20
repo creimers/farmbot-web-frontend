@@ -59,8 +59,8 @@ let errorLoading = (cb: any) => function handleError(err: any) {
 let controlsRoute = {
   path: "app/controls",
   getComponent(location: any, cb: any) {
-    import("./controls/controls").then(
-      (module) => cb(null, module.Controls)
+    System.import("./controls/controls.tsx").then(
+      (module: any) => cb(null, module.Controls)
     ).catch(errorLoading(cb));
   }
 };
