@@ -58,14 +58,14 @@ export function TileMoveRelative({ dispatch, currentStep, index, currentSequence
                   index={index}
                   field="z" />
               </div>
-              <div className="col-xs-6 col-md-3">
+              {/*<div className="col-xs-6 col-md-3">
                 <label>{t("Speed")}</label>
                 <StepInputBox dispatch={dispatch}
                   step={currentStep}
                   sequence={currentSequence}
                   index={index}
                   field="speed" />
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>

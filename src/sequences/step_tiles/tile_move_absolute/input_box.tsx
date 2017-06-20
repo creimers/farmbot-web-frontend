@@ -1,10 +1,9 @@
 import * as React from "react";
-import { Col } from "../../../ui/index";
 import { BlurableInput } from "../../../ui/blurable_input";
 import { InputBoxProps } from "./interfaces";
 
 export function InputBox(p: InputBoxProps) {
-  return <Col xs={3}>
+  return <div>
     <label>
       {p.children}
     </label>
@@ -14,5 +13,5 @@ export function InputBox(p: InputBoxProps) {
       type="number"
       name={p.name}
       value={p.value} />
-  </Col>;
+  </div>;
 }
