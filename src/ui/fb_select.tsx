@@ -1,6 +1,7 @@
 import * as React from "react";
 
-type OptionComponent = React.ComponentClass<DropDownItem>
+type OptionComponent =
+  | React.ComponentClass<DropDownItem>
   | React.StatelessComponent<DropDownItem>;
 
 export interface DropDownItem {

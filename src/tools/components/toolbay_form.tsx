@@ -80,7 +80,7 @@ export class ToolBayForm extends React.Component<ToolBayFormProps, {}> {
                   <BlurableInput
                     value={(slot.body.x || 0).toString()}
                     onCommit={(e) => {
-                      dispatch(edit(slot, { x: e.currentTarget.value }));
+                      dispatch(edit(slot, { x: parseInt(e.currentTarget.value, 10) }));
                     }}
                     type="number"
                   />
@@ -89,7 +89,7 @@ export class ToolBayForm extends React.Component<ToolBayFormProps, {}> {
                   <BlurableInput
                     value={(slot.body.y || 0).toString()}
                     onCommit={(e) => {
-                      dispatch(edit(slot, { y: e.currentTarget.value }));
+                      dispatch(edit(slot, { y: parseInt(e.currentTarget.value, 10) }));
                     }}
                     type="number"
                   />
@@ -98,7 +98,7 @@ export class ToolBayForm extends React.Component<ToolBayFormProps, {}> {
                   <BlurableInput
                     value={(slot.body.z || 0).toString()}
                     onCommit={(e) => {
-                      dispatch(edit(slot, { z: e.currentTarget.value }));
+                      dispatch(edit(slot, { z: parseInt(e.currentTarget.value, 10) }));
                     }}
                     type="number"
                   />

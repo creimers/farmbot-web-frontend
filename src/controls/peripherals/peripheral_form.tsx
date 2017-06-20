@@ -26,7 +26,8 @@ export function PeripheralForm(props: PeripheralFormProps) {
             placeholder="Pin #"
             onChange={(e) => {
               let { value } = e.currentTarget;
-              dispatch(edit(p, { pin: value }));
+              let update: Partial<typeof p.body> = { pin: parseInt(value, 10) };
+              dispatch(edit(p, update));
             }} />
         </Col>
         <Col xs={2}>

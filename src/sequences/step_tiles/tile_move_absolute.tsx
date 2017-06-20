@@ -26,7 +26,7 @@ import {
   findSlotByToolId,
   findPointerByTypeAndId
 } from "../../resources/selectors";
-import { defensiveClone } from "../../util";
+import { defensiveClone, betterMerge } from "../../util";
 import { overwrite } from "../../api/crud";
 import { Xyz } from "../../devices/interfaces";
 import { TileMoveAbsSelect } from "./tile_move_absolute/select";
@@ -85,7 +85,7 @@ export class TileMoveAbsolute extends Component<StepParams, MoveAbsState> {
     let copy = defensiveClone(this.props.currentSequence).body;
     let step = (copy.body || [])[this.props.index];
     if (step && step.kind === "move_absolute") {
-      step.args = { ...step.args, ...update };
+      step.args = betterMerge(step.args, update);
       this.props.dispatch(overwrite(this.props.currentSequence, copy));
     } else {
       throw new Error("Impossible condition.");
