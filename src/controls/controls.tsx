@@ -14,6 +14,7 @@ import { ToolTips } from "../constants";
 import { WebcamPanel } from "./webcam_panel";
 import { Props } from "./interfaces";
 import { Xyz } from "../devices/interfaces";
+import { Popover, Position } from "@blueprintjs/core";
 
 @connect(mapStateToProps)
 export class Controls extends React.Component<Props, {}> {
@@ -35,43 +36,41 @@ export class Controls extends React.Component<Props, {}> {
             <WidgetHeader
               title="Move"
               helpText={ToolTips.MOVE}>
-              <div className="invert-controls-menu-outer">
-                <div className="invert-controls-menu-inner">
-                  <i className="fa fa-gear" />
-                  <div className="content">
+              <Popover position={Position.BOTTOM}>
+                <i className="fa fa-gear" />
+                <div>
+                  <label>
+                    {t("Invert Jog Buttons")}
+                  </label>
+                  <fieldset>
                     <label>
-                      {t("Invert Jog Buttons")}
+                      {t("X Axis")}
                     </label>
-                    <fieldset>
-                      <label>
-                        {t("X Axis")}
-                      </label>
-                      <button
-                        className={"toggle-button " + xBtnColor}
-                        onClick={this.toggle("x")}
-                      />
-                    </fieldset>
-                    <fieldset>
-                      <label>
-                        {t("Y Axis")}
-                      </label>
-                      <button
-                        className={"toggle-button " + yBtnColor}
-                        onClick={this.toggle("y")}
-                      />
-                    </fieldset>
-                    <fieldset>
-                      <label>
-                        {t("Z Axis")}
-                      </label>
-                      <button
-                        className={"toggle-button " + zBtnColor}
-                        onClick={this.toggle("z")}
-                      />
-                    </fieldset>
-                  </div>
+                    <button
+                      className={"toggle-button " + xBtnColor}
+                      onClick={this.toggle("x")}
+                    />
+                  </fieldset>
+                  <fieldset>
+                    <label>
+                      {t("Y Axis")}
+                    </label>
+                    <button
+                      className={"toggle-button " + yBtnColor}
+                      onClick={this.toggle("y")}
+                    />
+                  </fieldset>
+                  <fieldset>
+                    <label>
+                      {t("Z Axis")}
+                    </label>
+                    <button
+                      className={"toggle-button " + zBtnColor}
+                      onClick={this.toggle("z")}
+                    />
+                  </fieldset>
                 </div>
-              </div>
+              </Popover>
               <EStopButton
                 bot={this.props.bot}
                 user={this.props.user}

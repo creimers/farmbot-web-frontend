@@ -1,0 +1,14 @@
+// Padding for the popups.
+.pt-popover-content {
+  padding: 1rem;
+}
+
+// Arrow is slightly off by default in the popup menu.
+.pt-tether-element-attached-left.pt-tether-target-attached-right>.pt-popover>.pt-popover-arrow {
+  left: -1rem;
+}
+
+// As of right now, all the menus appear from floated icons in the widgets.
+.pt-popover-target {
+  float: right;
+}

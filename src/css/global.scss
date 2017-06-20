@@ -77,6 +77,9 @@ a {
 
 .fa {
   cursor: pointer !important;
+  &.fa-gear {
+    color: $white;
+  }
 }
 
 .select-search-container {

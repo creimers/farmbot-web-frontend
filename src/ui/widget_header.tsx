@@ -10,15 +10,13 @@ interface WidgetHeaderProps {
 export function WidgetHeader(props: WidgetHeaderProps) {
   return <div className="widget-header">
     {props.children}
-    <div>
-      <h5>{t(props.title)}</h5>
-      {props.helpText &&
-        <i className="fa fa-question-circle widget-help-icon">
-          <div className="widget-help-text">
-            {props.helpText}
-          </div>
-        </i>
-      }
-    </div>
+    <h5>{t(props.title)}</h5>
+    {props.helpText &&
+      <i className="fa fa-question-circle widget-help-icon">
+        <div className="widget-help-text">
+          {props.helpText}
+        </div>
+      </i>
+    }
   </div>;
 }
