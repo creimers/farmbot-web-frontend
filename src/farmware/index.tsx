@@ -1,13 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Page, Col, Row } from "../ui/index";
-import { WeedDetector } from "../images/index";
 import { FarmwarePanel } from "./farmware_panel";
 import { mapStateToProps } from "./state_to_props";
 import { Photos } from "./photos";
 import { CameraCalibration } from "./camera_calibration";
 import { FarmwareProps } from "../devices/interfaces";
 import { detectWeeds } from "../images/actions";
+import { WeedDetector } from "../images/weed_detector/index";
 
 @connect(mapStateToProps)
 export class FarmwarePage extends React.Component<FarmwareProps, void> {

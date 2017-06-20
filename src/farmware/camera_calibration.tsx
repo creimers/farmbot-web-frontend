@@ -2,8 +2,8 @@ import * as React from "react";
 import { t } from "i18next";
 import { Widget, Row, Col } from "../ui/index";
 import { CameraCalibrationState, CameraCalibrationProps } from "./interfaces";
-import { TitleBar } from "../images/weed_detector_title";
-import { WeedDetectorBody } from "../images/weed_detector_body";
+import { TitleBar } from "../images/weed_detector/weed_detector_title";
+import { WeedDetectorBody } from "../images/weed_detector/weed_detector_body";
 import { ToolTips } from "../constants";
 
 export class CameraCalibration

@@ -2,18 +2,19 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Pair } from "farmbot";
 import { success, error } from "farmbot-toastr";
-import { DetectorState, WeedDetectorENV } from "./interfaces";
+import { DetectorState } from "../interfaces";
 import { TitleBar } from "./weed_detector_title";
-import { devices } from "../device";
-import { Row, Col, Widget } from "../ui/index";
+import { devices } from "../../device";
+import { Row, Col, Widget } from "../../ui/index";
 import { t } from "i18next";
-import { resetWeedDetection, selectImage, detectWeeds } from "./actions";
-import { Progress } from "../util";
-import { HSV } from "./index";
-import { FarmwareProps } from "../devices/interfaces";
-import { mapStateToProps } from "../farmware/state_to_props";
-import { ToolTips } from "../constants";
+import { resetWeedDetection, selectImage, detectWeeds } from "../actions";
+import { Progress } from "../../util";
+import { HSV } from "../index";
+import { FarmwareProps } from "../../devices/interfaces";
+import { mapStateToProps } from "../../farmware/state_to_props";
+import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./weed_detector_body";
+import { WeedDetectorENV } from "./remote_env";
 const PLANT_DETECTION_OPTIONS_KEY = "PLANT_DETECTION_options";
 
 @connect(mapStateToProps)
@@ -106,9 +107,9 @@ export class WeedDetector
                 currentImage={this.props.currentImage}
                 images={this.props.images}
                 onSliderChange={this.sliderChange}
-                H={this.farmwareSettings.H}
-                S={this.farmwareSettings.S}
-                V={this.farmwareSettings.V}
+                H={[this.farmwareSettings.H_LO, this.farmwareSettings.H_HI]}
+                S={[this.farmwareSettings.S_LO, this.farmwareSettings.S_HI]}
+                V={[this.farmwareSettings.V_LO, this.farmwareSettings.V_HI]}
               />
             </Col>
           </Row>

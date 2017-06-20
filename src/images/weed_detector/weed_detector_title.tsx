@@ -1,7 +1,7 @@
 import * as React from "react";
 import { t } from "i18next";
 import { additionalSettingsMenu } from "./weed_detector_config";
-import { WidgetHeader } from "../ui/index";
+import { WidgetHeader } from "../../ui/index";
 
 interface Props {
   onSave?(): void;

@@ -1,4 +1,5 @@
 import { TaggedImage } from "../resources/tagged_resources";
+import { WeedDetectorENV } from "./weed_detector/remote_env";
 
 export interface Image {
   id: number;
@@ -25,17 +26,6 @@ export interface HSV<T> {
 export interface HiLo {
   hi: number;
   lo: number;
-}
-
-/** JSON document that gets sent to the weed detection python script as an WeedDetectorENV
- *  variable. */
-export interface WeedDetectorENV {
-  H: [number, number];
-  S: [number, number];
-  V: [number, number];
-  blur: number;
-  morph: number;
-  iterations: number;
 }
 
 export interface DetectorState {

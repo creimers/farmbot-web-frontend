@@ -1,10 +1,10 @@
 import * as React from "react";
-import { FarmbotColorPicker } from "./farmbot_picker";
-import { BlurableInput } from "../ui/index";
-import { ImageFlipper } from "./image_flipper";
-import { HSV } from "./interfaces";
+import { FarmbotColorPicker } from "../farmbot_picker";
+import { BlurableInput } from "../../ui/index";
+import { ImageFlipper } from "../image_flipper";
+import { HSV } from "../interfaces";
 import { WeedDetectorSlider } from "./weed_detector_slider";
-import { TaggedImage } from "../resources/tagged_resources";
+import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
 
 const DEFAULTS = {
