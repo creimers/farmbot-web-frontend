@@ -1,5 +1,7 @@
 import * as moment from "moment";
-import { FarmEventWithExecutable } from "../interfaces";
+import {
+  FarmEventWithExecutable
+} from "../farm_designer/farm_events/calendar/interfaces";
 
 export const TIME = {
   MONDAY: moment("2017-06-19 01:30:00 -0500"),
