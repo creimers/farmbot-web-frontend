@@ -11,14 +11,26 @@ import { Everything } from "../../interfaces";
 import { OpenFarm } from "../openfarm";
 import { OFSearch } from "../util";
 
-export function mapStateToProps(props: Everything): any {
+export function mapStateToProps(props: Everything): CropInfoProps {
   return {
-    OFSearch
-  }
+    OFSearch,
+    dispatch: Function,
+    cropSearchResults: props
+      .resources
+      .consumers
+      .farm_designer
+      .cropSearchResults || []
+  };
 }
 
 @connect(mapStateToProps)
 export class CropInfo extends React.Component<CropInfoProps, {}> {
+
+  componentDidMount() {
+    let crop = history.getCurrentLocation().pathname.split("/")[5];
+    OFSearch(crop)(this.props.dispatch);
+  }
+
   handleDragStart = (e: DraggableEvent) => {
     let icon = e.currentTarget.getAttribute("data-icon-url");
     let img = document.createElement("img");

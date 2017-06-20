@@ -3,21 +3,15 @@ import * as _ from "lodash";
 import { OpenFarm, CropSearchResult } from "./openfarm";
 import { DEFAULT_ICON } from "../open_farm/index";
 
-interface OpenFarmSearchQueryParams {
-  value: string;
-  dispatch: Function;
-}
-
 let url = (q: string) => `${OpenFarm.cropUrl}?include=pictures&filter=${q}`;
 
 let openFarmSearchQuery = _.throttle((q: string) =>
   Axios.get<CropSearchResult>(url(q)), 800);
 
-export let OFSearch = (e: React.FormEvent<HTMLInputElement>) =>
+export let OFSearch = (searchTerm: string) =>
   (dispatch: Function) => {
-    let { value } = e.currentTarget;
-    dispatch({ type: "SEARCH_QUERY_CHANGE", payload: value });
-    openFarmSearchQuery(value)
+    dispatch({ type: "SEARCH_QUERY_CHANGE", payload: searchTerm });
+    openFarmSearchQuery(searchTerm)
       .then(resp => {
         let images: { [key: string]: string } = {};
         _.get<OpenFarm.Included[]>(resp, "data.included", [])

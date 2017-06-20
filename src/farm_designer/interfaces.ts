@@ -218,14 +218,12 @@ export interface CropCatalogProps {
   cropSearchQuery: string;
   dispatch: Function;
   cropSearchResults: CropLiveSearchResult[];
-  OFSearch: (e: React.FormEvent<HTMLInputElement>) =>
+  OFSearch: (searchTerm: string) =>
     (dispatch: Function) => void;
 }
 
 export interface CropInfoProps {
-  cropSearchQuery: string;
   dispatch: Function;
-  designer: DesignerState;
   cropSearchResults: CropLiveSearchResult[];
   OFSearch: (query: string) => (dispatch: Function) => void;
 }

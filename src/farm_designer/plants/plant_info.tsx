@@ -38,7 +38,6 @@ export class PlantInfo extends PlantInfoBase {
   }
 
   render() {
-    console.log("props", this.props);
     let plant_info = this.plant && this.plant
     return plant_info ? this.default(plant_info) : this.fallback();
   }
