@@ -1,32 +1,15 @@
 import { Dictionary } from "farmbot/dist";
 import { CalendarOccurrence, CalendarDay } from "../../interfaces";
 import * as moment from "moment";
+import * as _ from "lodash";
+
 interface CalendarData {
   sortKey: number;
   month: string;
   day: number;
   items: CalendarOccurrence[]
 }
-// {
-//   "0620":[
-//     {
-//       "mmdd": "0620",
-//       "sortKey": 1497997320,
-//       "timeStr": "05:22 pm",
-//       "executableName": "Test Regimen 456",
-//       "executableId": 23,
-//       "id": 65
-//     },
-//     {
-//       "mmdd": "0620",
-//       "sortKey": 1497997620,
-//       "timeStr": "05:27 pm",
-//       "executableName": "(Test Regimen 456)",
-//       "executableId": 23,
-//       "id": 65
-//     }
-//   ]
-// }
+
 export class Calendar {
   /** We sort by this attribute. Left as const so that the comiler can catch
    * name changes. */
