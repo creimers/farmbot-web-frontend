@@ -303,7 +303,7 @@ export function sortResourcesById<T extends TaggedResource>(input: T[]): T[] {
 }
 
 /** Light wrapper around _.merge() to prevent common type errors / mistakes. */
-export function betterMerge<T>(target: T, update: (T | Partial<T>)): T {
+export function betterMerge<T, U>(target: T, update: U): T & U {
   return _.merge({}, target, update);
 }
 
