@@ -1,5 +1,6 @@
 import { ResourceIndex } from "../../../resources/interfaces";
 import { MoveAbsolute, PointType } from "farmbot/dist";
+import { JSXChildren } from "../../../util";
 export const TOOL: "Tool" = "Tool";
 
 export type CALLBACK = (out: LocationData) => void;
@@ -12,7 +13,7 @@ export interface TileMoveAbsProps {
 
 export interface InputBoxProps {
   onCommit(e: React.SyntheticEvent<HTMLInputElement>): void;
-  children?: JSX.Element;
+  children?: JSXChildren;
   disabled?: boolean;
   name: string;
   value: string;

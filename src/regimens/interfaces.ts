@@ -6,6 +6,7 @@ import { BotState } from "../devices/interfaces";
 import { TaggedRegimen, TaggedSequence } from "../resources/tagged_resources";
 import { ResourceIndex } from "../resources/interfaces";
 import { RegimenState } from "./reducer";
+import { JSXChildren } from "../util";
 
 export interface MiddleSectionProps {
   regimen: TaggedRegimen | undefined;
@@ -77,7 +78,7 @@ export interface RegimenItem {
 export interface AddRegimenProps {
   dispatch: Function;
   className?: string;
-  children?: JSX.Element;
+  children?: JSXChildren;
 }
 
 export interface RegimensListProps {
