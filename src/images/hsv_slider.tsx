@@ -53,7 +53,8 @@ export class HsvSlider extends React.Component<EnvSliderProps, EnvSliderState> {
    * Returns undefined otherwise.
    */
   get remoteValues() {
-    return (this.props.env)[this.name] || [];
+    console.error(`FIX THIS!`);
+    return [];
   }
 
   /** The slider's high value */
