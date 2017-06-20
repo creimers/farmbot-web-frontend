@@ -1,8 +1,9 @@
 import * as React from "react";
+import { JSXChildren } from "../util";
 // import { parseClassNames } from "./util";
 
 interface WidgetProps {
-  children?: JSX.Element | undefined;
+  children?: JSXChildren;
   className?: string;
 }
 

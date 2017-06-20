@@ -1,4 +1,5 @@
 import * as React from "react";
+import { JSXChildren } from "../util";
 let emoji = require("markdown-it-emoji");
 let md = require("markdown-it")({
   /** Enable HTML tags in source */
@@ -14,7 +15,7 @@ let md = require("markdown-it")({
 md.use(emoji);
 
 interface MarkdownProps {
-  children?: JSX.Element | string | undefined;
+  children?: JSXChildren;
 }
 
 export function Markdown(props: MarkdownProps) {

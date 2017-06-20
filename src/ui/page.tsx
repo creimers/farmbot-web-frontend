@@ -1,7 +1,8 @@
 import * as React from "react";
+import { JSXChildren } from "../util";
 
 interface PageProps {
-  children?: JSX.Element | undefined;
+  children?: JSXChildren;
   className?: string;
 }
 

@@ -16,6 +16,7 @@ import {
   TaggedToolSlotPointer
 } from "../resources/tagged_resources";
 import { ResourceIndex } from "../resources/interfaces";
+import { JSXChildren } from "../util";
 
 export interface Props {
   dispatch: Function;
@@ -87,7 +88,7 @@ export interface StepButtonParams {
   current: TaggedSequence | undefined;
   step: SequenceBodyItem;
   dispatch: Function;
-  children?: JSX.Element | undefined;
+  children?: JSXChildren;
   color: "blue"
   | "green"
   | "orange"
