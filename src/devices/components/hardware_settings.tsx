@@ -17,13 +17,6 @@ export class HardwareSettings extends
 
   render() {
     let { bot, dispatch } = this.props;
-    let controlPanelState = this.props.controlPanelState;
-    let {
-      homing_and_calibration,
-      motors,
-      encoders_and_endstops,
-      danger_zone
-    } = controlPanelState;
 
     return <Widget className="hardware-widget">
       <WidgetHeader title="Hardware" helpText={ToolTips.HW_SETTINGS}>
