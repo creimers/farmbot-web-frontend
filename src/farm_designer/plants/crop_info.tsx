@@ -107,39 +107,56 @@ export class CropInfo extends React.Component<CropInfoProps, {}> {
                 .map((pair: string, i: number) => {
                   let key = pair[0];
                   let value = pair[1];
-                  if (key !== "svg_icon") {
-                    return <li key={i}>
-                      <strong>
-                        {_.startCase(key)}:&nbsp;
-                      </strong>
-                      <span>
-                        {value || "Not Set"}
-                      </span>
-                    </li>
-                  } else {
-                    {
+                  switch (key) {
+                    case "svg_icon":
                       /**
-                       * If there's a value, give
-                       * it an img element to render the actual graphic. If no
-                       * value, return "Not Set".
-                       */
-                    }
-                    return <li key={i}>
-                      <strong>{t("SVG Icon")}: </strong>
-                      {value ?
-                        <div>
-                          <img
-                            src={DATA_URI + value}
-                            width={100}
-                            height={100}
-                          />
-                        </div>
-                        :
+                      * If there's a value, give it an img element to render the
+                      * actual graphic. If no value, return "Not Set".
+                      */
+                      return <li key={i}>
+                        <strong>{t("SVG Icon")}: </strong>
+                        {value ?
+                          <div>
+                            <img
+                              src={DATA_URI + value}
+                              width={100}
+                              height={100}
+                            />
+                          </div>
+                          :
+                          <span>
+                            {t("Not Set")}
+                          </span>
+                        }
+                      </li>
+                    /**
+                     * Need to convert the `cm` provided by OpenFarm to `mm`
+                     * to match the Farm Designer units.
+                     */
+                    case "spread":
+                    case "row_spacing":
+                    case "height":
+                    case "guides_count":
+                      return <li key={i}>
+                        <strong>
+                          {_.startCase(key)}:&nbsp;
+                        </strong>
                         <span>
-                          {t("Not Set")}
+                          {(parseInt(value) * 10) + t("mm") || t("Not Set")}
                         </span>
-                      }
-                    </li>
+                      </li>
+                    /**
+                     * Default behavior for all other properties.
+                     */
+                    default:
+                      return <li key={i}>
+                        <strong>
+                          {_.startCase(key)}:&nbsp;
+                        </strong>
+                        <span>
+                          {value || t("Not Set")}
+                        </span>
+                      </li>
                   }
                 }).value()
             }
