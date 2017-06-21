@@ -57,6 +57,6 @@ export let DEFAULTS: WeedDetectorENV = {
   coord_scale: 0,
   calibration_object_separation: 0,
   total_rotation_angle: 0,
-  calibration_along_axis: 0,
-  image_bot_origin_location: 0
+  calibration_along_axis: SPECIAL_VALUES.X,
+  image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT
 }

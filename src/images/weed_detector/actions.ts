@@ -7,8 +7,9 @@ export function envSet(key: keyof ENV, value: number) {
   devices.current.setUserEnv({ [key]: JSON.stringify(value) });
 }
 
-export function envGet(key: keyof ENV, env: CowardlyDictionary<string>): number {
-  let candidate = parseInt((env[key] || ""), 10);
+export function envGet(key: keyof ENV,
+  env: CowardlyDictionary<string | number>): number {
+  let candidate = parseInt(JSON.stringify(env[key] || ""), 10);
 
   return _.isNaN(candidate) ? DEFAULTS[key] : candidate;
 }

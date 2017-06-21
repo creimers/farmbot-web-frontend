@@ -6,6 +6,7 @@ import { FBSelect } from "../../ui/new_fb_select";
 import { SettingsMenuProps } from "./interfaces";
 import { WeedDetectorENV, SPECIAL_VALUES } from "./remote_env";
 import * as _ from "lodash";
+import { envGet } from "./actions";
 
 const calibrationAxes: DropDownItem[] = [
   { label: "X", value: SPECIAL_VALUES.X },
@@ -30,7 +31,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
       </label>
       <input type="number"
         id={conf}
-        value={props.values[conf]}
+        value={envGet(conf, props.values)}
         onBlur={e => props.onChange(conf, parseInt(e.currentTarget.value, 10))}
         placeholder={label} />
     </div>
@@ -46,7 +47,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
 
   let find = (needle: keyof WeedDetectorENV, haystack: DropDownItem[]): DropDownItem => {
     let finder = (x: DropDownItem): boolean => {
-      return _.isNumber(x.label) && (x.label === props.values[needle]);
+      return _.isNumber(x.label) && (x.label === envGet(needle, props.values));
     }
     return haystack.filter(finder)[0] || NULL_CHOICE;
   }
@@ -60,7 +61,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     <input
       type="checkbox"
       id="invert_hue_selection"
-      value={!!props.values.invert_hue_selection ?
+      value={envGet("invert_hue_selection", props.values) ?
         SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE}
       onChange={e => props.onChange("invert_hue_selection", e.currentTarget.checked ?
         SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE)} />

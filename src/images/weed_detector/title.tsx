@@ -46,7 +46,6 @@ export function TitleBar({
       className="red">
       {deletionProgress || t("CLEAR WEEDS")}
     </button>
-    {/* TODO: Hook up calibration */}
     <button
       hidden={!onCalibrate}
       onClick={() => { }}
