@@ -1,7 +1,8 @@
 import * as React from "react";
 import { t } from "i18next";
-import { additionalSettingsMenu } from "./weed_detector_config";
+import { WeedDetectorConfig } from "./weed_detector_config";
 import { WidgetHeader } from "../../ui/index";
+import { envSet } from "./actions";
 
 interface Props {
   onSave?(): void;
@@ -56,7 +57,9 @@ export function TitleBar({
       <i
         onClick={onSettingToggle}
         className="fa fa-cog" >
-        {settingsMenuOpen && additionalSettingsMenu()}
+        {settingsMenuOpen && <WeedDetectorConfig
+          values={{}}
+          onChange={envSet} />}
       </i>
     }
   </WidgetHeader>;

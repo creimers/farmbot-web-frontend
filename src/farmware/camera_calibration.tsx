@@ -24,7 +24,7 @@ export class CameraCalibration
   STUBS = { H: [0], S: [0], V: [0] }
 
   render() {
-    return <Widget className="weed-detector-widget coming-soon">
+    return <Widget className="weed-detector-widget">
       <Row>
         <Col>
           <TitleBar
