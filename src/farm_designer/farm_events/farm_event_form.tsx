@@ -2,7 +2,7 @@ import * as React from "react";
 import * as moment from "moment";
 import * as _ from "lodash";
 import { t } from "i18next";
-import { success, error, warning } from "farmbot-toastr";
+import { success, error } from "farmbot-toastr";
 import { TaggedFarmEvent } from "../../resources/tagged_resources";
 import {
   TimeUnit,
@@ -89,10 +89,14 @@ interface Props {
 }
 
 interface State {
-  /** Hold a partial FarmEvent locally*/
+  /** Hold a partial FarmEvent locally */
   fe: Partial<FarmEventViewModel>;
-  /** This form has local state and does not cause any global state changes when editing.
-   * Example: Navigating away from the page while editing will discard changes. */
+  /**
+   * This form has local state and does not cause any global state changes when
+   * editing.
+   *
+   * Example: Navigating away from the page while editing will discard changes.
+   */
   localCopyDirty: boolean;
 };
 
@@ -163,18 +167,18 @@ export class EditFEForm extends React.Component<Props, State> {
         let nextRun = frmEvnt.body.calendar && frmEvnt.body.calendar[0];
         if (nextRun) {
           // TODO: Internationalizing this will be a challenge.
-          success(`This Farm Event will run ${moment(nextRun).fromNow()},` +
-            ` but you must first SYNC YOUR DEVICE. If you do not sync, ` +
-            ` The event will not run.`);
+          success(`This Farm Event will run ${moment(nextRun).fromNow()}, but
+            you must first SYNC YOUR DEVICE. If you do not sync, the event will
+            not run.`);
           this.props.dispatch(maybeWarnAboutMissedTasks(frmEvnt, function () {
-            alert("You are scheduling a regimen to run today. " +
-              "Be aware that running a regimen too late in the day " +
-              "may result in skipped regimen tasks. Consider rescheduling " +
-              "this event to tomorrow if this is a concern.");
+            alert(`You are scheduling a regimen to run today. Be aware that
+              running a regimen too late in the day may result in skipped
+              regimen tasks. Consider rescheduling this event to tomorrow if
+              this is a concern.`);
           }))
         } else {
-          error("This Farm Event does not appear to have a valid run time." +
-            " Perhaps you entered bad dates?");
+          error(`This Farm Event does not appear to have a valid run time.
+            Perhaps you entered bad dates?`);
         }
       })
       .catch(() => {
