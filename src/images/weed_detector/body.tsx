@@ -6,52 +6,28 @@ import { HSV } from "../interfaces";
 import { WeedDetectorSlider } from "./slider";
 import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
+import { DEFAULTS } from "./remote_env";
 
-const DEFAULTS = {
-  H: {
-    LOWEST: 0,
-    HIGHEST: 179,
-    FALLBACK_LO: 30,
-    FALLBACK_HI: 90
-  },
-  S: {
-    LOWEST: 0,
-    HIGHEST: 255,
-    FALLBACK_LO: 50,
-    FALLBACK_HI: 255
-  },
-  V: {
-    LOWEST: 0,
-    HIGHEST: 255,
-    FALLBACK_LO: 50,
-    FALLBACK_HI: 255
-  },
-  BLUR: {
-    LOWEST: 0,
-    HIGHEST: 100,
-    FALLBACK: 15
-  },
-  MORPH: {
-    LOWEST: 0,
-    HIGHEST: 100,
-    FALLBACK: 6
-  },
-  ITERATION: {
-    LOWEST: 0,
-    HIGHEST: 100,
-    FALLBACK: 4
-  },
+const RANGES = {
+  H: { LOWEST: 0, HIGHEST: 179 },
+  S: { LOWEST: 0, HIGHEST: 255 },
+  V: { LOWEST: 0, HIGHEST: 255 },
+  BLUR: { LOWEST: 0, HIGHEST: 100 },
+  MORPH: { LOWEST: 0, HIGHEST: 100 },
+  ITERATION: { LOWEST: 0, HIGHEST: 100 },
 };
-
 
 interface Props {
   onFlip(uuid: string | undefined): void;
   onProcessPhoto(image_id: number): void;
   currentImage: TaggedImage | undefined;
   images: TaggedImage[];
-  H: undefined | (number | undefined)[];
-  S: undefined | (number | undefined)[];
-  V: undefined | (number | undefined)[];
+  H_LO: number;
+  H_HI: number;
+  S_LO: number;
+  S_HI: number;
+  V_LO: number;
+  V_HI: number;
   onSliderChange(key: keyof HSV<"">, values: [number, number]): void;
 }
 
@@ -63,21 +39,17 @@ function onCommit(BMI: BMI) {
 
 export function WeedDetectorBody({
   images,
-  H,
-  S,
-  V,
+  H_LO,
+  H_HI,
+  S_LO,
+  S_HI,
+  V_LO,
+  V_HI,
   onSliderChange,
   onProcessPhoto,
   currentImage,
   onFlip
 }: Props) {
-
-  let h_lo = (H || [])[0] || DEFAULTS.H.FALLBACK_LO;
-  let h_hi = (H || [])[1] || DEFAULTS.H.FALLBACK_HI;
-  let s_lo = (S || [])[0] || DEFAULTS.S.FALLBACK_LO;
-  let s_hi = (S || [])[1] || DEFAULTS.S.FALLBACK_HI;
-  let v_lo = (V || [])[0] || DEFAULTS.V.FALLBACK_LO;
-  let v_hi = (V || [])[1] || DEFAULTS.V.FALLBACK_HI;
 
   function onChange(HSV: keyof HSV<"">) {
     return (values: [number, number]) => {
@@ -92,11 +64,6 @@ export function WeedDetectorBody({
     }
   }
 
-  /** Chris- I don't want to mess up your conventions in the CSS or
-   * add rules that might already exist. Feel free to pull this out and put it
-   * in a better place.
-   *   -RC 7 JUN 17
-   */
   const CHRIS_HALP = { "marginTop": 25 }
   return <div className="widget-content">
     <div className="row">
@@ -108,32 +75,32 @@ export function WeedDetectorBody({
         <WeedDetectorSlider
           onChange={onChange("H")}
           onRelease={_.noop}
-          lowest={DEFAULTS.H.LOWEST}
-          highest={DEFAULTS.H.HIGHEST}
-          lowValue={h_lo}
-          highValue={h_hi} />
+          lowest={RANGES.H.LOWEST}
+          highest={RANGES.H.HIGHEST}
+          lowValue={H_LO}
+          highValue={H_HI} />
         <label htmlFor="saturation">{t("SATURATION")}</label>
         <WeedDetectorSlider
           onChange={onChange("S")}
           onRelease={_.noop}
-          lowest={DEFAULTS.S.LOWEST}
-          highest={DEFAULTS.S.HIGHEST}
-          lowValue={s_lo}
-          highValue={s_hi} />
+          lowest={RANGES.S.LOWEST}
+          highest={RANGES.S.HIGHEST}
+          lowValue={S_LO}
+          highValue={S_HI} />
         <label htmlFor="value">{t("VALUE")}</label>
         <WeedDetectorSlider
           onChange={onChange("V")}
           onRelease={_.noop}
-          lowest={DEFAULTS.V.LOWEST}
-          highest={DEFAULTS.V.HIGHEST}
-          lowValue={v_lo}
-          highValue={v_hi} />
+          lowest={RANGES.V.LOWEST}
+          highest={RANGES.V.HIGHEST}
+          lowValue={V_LO}
+          highValue={V_HI} />
       </div>
       <div className="col-md-6 col-sm-12">
         <FarmbotColorPicker
-          h={[h_lo, h_hi]}
-          s={[s_lo, s_hi]}
-          v={[v_lo, v_hi]} />
+          h={[H_LO, H_HI]}
+          s={[S_LO, S_HI]}
+          v={[V_LO, V_HI]} />
       </div>
     </div>
     <div className="row">
@@ -146,27 +113,27 @@ export function WeedDetectorBody({
       <div className="col-md-4 col-sm-4">
         <label>{t("BLUR")}</label>
         <BlurableInput type="number"
-          min={DEFAULTS.BLUR.LOWEST}
-          max={DEFAULTS.BLUR.HIGHEST}
+          min={RANGES.BLUR.LOWEST}
+          max={RANGES.BLUR.HIGHEST}
           onCommit={onCommit("blur")}
-          value={"" + DEFAULTS.BLUR.FALLBACK} />
+          value={"" + DEFAULTS.blur} />
       </div>
 
       <div className="col-md-4 col-sm-4">
         <label>{t("MORPH")}</label>
         <BlurableInput type="number"
-          min={DEFAULTS.MORPH.LOWEST}
-          max={DEFAULTS.MORPH.HIGHEST}
+          min={RANGES.MORPH.LOWEST}
+          max={RANGES.MORPH.HIGHEST}
           onCommit={onCommit("morph")}
-          value={"" + DEFAULTS.MORPH.FALLBACK} />
+          value={"" + DEFAULTS.morph} />
       </div>
       <div className="col-md-4 col-sm-4">
         <label>{t("ITERATION")}</label>
         <BlurableInput type="number"
-          min={DEFAULTS.ITERATION.LOWEST}
-          max={DEFAULTS.ITERATION.HIGHEST}
+          min={RANGES.ITERATION.LOWEST}
+          max={RANGES.ITERATION.HIGHEST}
           onCommit={onCommit("iteration")}
-          value={"" + DEFAULTS.ITERATION.FALLBACK} />
+          value={"" + DEFAULTS.iteration} />
       </div>
     </div>
     <button className="green"

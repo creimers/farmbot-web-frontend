@@ -16,7 +16,6 @@ export enum SPECIAL_VALUES {
   X = 6,
   Y = 7
 }
-
 export type WeedDetectorENVKey =
   | "H_HI"
   | "H_LO"
@@ -26,7 +25,7 @@ export type WeedDetectorENVKey =
   | "S_LO"
   | "blur"
   | "morph"
-  | "iterations"
+  | "iteration"
   | "invert_hue_selection"
   | "camera_offset_x"
   | "camera_offset_y"
@@ -50,7 +49,7 @@ export let DEFAULTS: WeedDetectorENV = {
   V_HI: 255,
   blur: 15,
   morph: 6,
-  iterations: 4,
+  iteration: 4,
   invert_hue_selection: 0,
   camera_offset_x: 0,
   camera_offset_y: 0,
@@ -59,4 +58,4 @@ export let DEFAULTS: WeedDetectorENV = {
   total_rotation_angle: 0,
   calibration_along_axis: SPECIAL_VALUES.X,
   image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT
-}
+};
