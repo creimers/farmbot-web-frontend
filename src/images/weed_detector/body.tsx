@@ -3,7 +3,7 @@ import { FarmbotColorPicker } from "../farmbot_picker";
 import { BlurableInput } from "../../ui/index";
 import { ImageFlipper } from "../image_flipper";
 import { HSV } from "../interfaces";
-import { WeedDetectorSlider } from "./weed_detector_slider";
+import { WeedDetectorSlider } from "./slider";
 import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
 
