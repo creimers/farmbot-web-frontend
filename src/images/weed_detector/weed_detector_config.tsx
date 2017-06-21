@@ -1,6 +1,6 @@
 import * as React from "react";
 import { t } from "i18next";
-import { DropDownItem, DeprecatedFBSelect } from "../../ui/fb_select";
+import { DropDownItem } from "../../ui/fb_select";
 import { Row, Col } from "../../ui/index";
 import { FBSelect } from "../../ui/new_fb_select";
 import { SettingsMenuProps } from "./interfaces";
