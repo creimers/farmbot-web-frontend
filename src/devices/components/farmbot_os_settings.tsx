@@ -124,7 +124,7 @@ export class FarmbotOsSettings
               </label>
             </Col>
             <Col xs={7}>
-              <div>
+              <div className="note">
                 {this.maybeWarnTz()}
               </div>
               <div>
