@@ -41,4 +41,22 @@ export type WeedDetectorENVKey =
  * */
 export type WeedDetectorENV = Record<WeedDetectorENVKey, number>;
 
-
+export let DEFAULTS: WeedDetectorENV = {
+  H_LO: 30,
+  S_LO: 50,
+  V_LO: 50,
+  H_HI: 90,
+  S_HI: 255,
+  V_HI: 255,
+  blur: 15,
+  morph: 6,
+  iterations: 4,
+  invert_hue_selection: 0,
+  camera_offset_x: 0,
+  camera_offset_y: 0,
+  coord_scale: 0,
+  calibration_object_separation: 0,
+  total_rotation_angle: 0,
+  calibration_along_axis: 0,
+  image_bot_origin_location: 0
+}
