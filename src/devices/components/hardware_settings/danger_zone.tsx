@@ -3,6 +3,7 @@ import { t } from "i18next";
 import { DangerZoneProps } from "../interfaces";
 import { Row, Col } from "../../../ui/index";
 import { Header } from "./header";
+import { Collapse } from "@blueprintjs/core";
 
 export function DangerZone(props: DangerZoneProps) {
 
@@ -16,7 +17,7 @@ export function DangerZone(props: DangerZoneProps) {
       name={"danger_zone"}
       dispatch={dispatch}
     />
-    <div className={`is-open-${!!danger_zone}`}>
+    <Collapse isOpen={!!danger_zone}>
       <Row>
         <Col xs={4}>
           <label>
@@ -39,6 +40,6 @@ export function DangerZone(props: DangerZoneProps) {
           </button>
         </Col>
       </Row>
-    </div>
+    </Collapse>
   </section>;
 }

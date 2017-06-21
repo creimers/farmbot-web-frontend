@@ -5,6 +5,7 @@ import { ToolTips } from "../../../constants";
 import { NumericMCUInputGroup } from "../numeric_mcu_input_group";
 import { EncodersProps } from "../interfaces";
 import { Header } from "./header";
+import { Collapse } from "@blueprintjs/core";
 
 export function EncodersAndEndStops(props: EncodersProps) {
 
@@ -18,7 +19,7 @@ export function EncodersAndEndStops(props: EncodersProps) {
       name={"encoders_and_endstops"}
       dispatch={dispatch}
     />
-    <div className={`is-open-${!!encoders_and_endstops}`}>
+    <Collapse isOpen={!!encoders_and_endstops}>
       <BooleanMCUInputGroup
         name={t("Enable Encoders")}
         tooltip={t(ToolTips.ENABLE_ENCODERS)}
@@ -91,6 +92,6 @@ export function EncodersAndEndStops(props: EncodersProps) {
         dispatch={dispatch}
         bot={bot}
       />
-    </div>
+    </Collapse>
   </section>;
 }

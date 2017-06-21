@@ -9,6 +9,7 @@ import { ZeroRow } from "../zero_row";
 import { enabledAxisMap } from "../axis_tracking_status";
 import { HomingAndCalibrationProps } from "../interfaces";
 import { Header } from "./header";
+import { Collapse } from "@blueprintjs/core";
 
 export function HomingAndCalibration(props: HomingAndCalibrationProps) {
 
@@ -29,7 +30,7 @@ export function HomingAndCalibration(props: HomingAndCalibrationProps) {
       dispatch={dispatch}
       bool={homing_and_calibration}
     />
-    <div className={`is-open-${!!homing_and_calibration}`}>
+    <Collapse isOpen={!!homing_and_calibration}>
       <HomingRow hardware={mcu_params} />
       <CalibrationRow hardware={mcu_params} />
       <ZeroRow />
@@ -90,6 +91,6 @@ export function HomingAndCalibration(props: HomingAndCalibrationProps) {
         bot={bot}
         dispatch={dispatch}
       />
-    </div>
+    </Collapse>
   </section>;
 }
