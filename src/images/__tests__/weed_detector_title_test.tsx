@@ -1,7 +1,7 @@
 import "../../unmock_i18next";
 import * as React from "react";
 import { mount } from "enzyme";
-import { TitleBar } from "../weed_detector/weed_detector_title";
+import { TitleBar } from "../weed_detector/title";
 
 describe("<TitleBar/>", () => {
   it("Has a progress bar", () => {

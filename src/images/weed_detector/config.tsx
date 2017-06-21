@@ -1,20 +1,23 @@
 import * as React from "react";
 import { t } from "i18next";
 import { DropDownItem } from "../../ui/fb_select";
-import { Row, Col } from "../../ui/index";
+import { Row, Col, NULL_CHOICE } from "../../ui/index";
 import { FBSelect } from "../../ui/new_fb_select";
 import { SettingsMenuProps } from "./interfaces";
-import { WeedDetectorENV } from "./remote_env";
+import { WeedDetectorENV, SPECIAL_VALUES } from "./remote_env";
+import * as _ from "lodash";
+import { envGet } from "./actions";
 
 const calibrationAxes: DropDownItem[] = [
-  { label: "X", value: "x" }, { label: "Y", value: "y" }
+  { label: "X", value: SPECIAL_VALUES.X },
+  { label: "Y", value: SPECIAL_VALUES.Y }
 ];
 
 const originLocations: DropDownItem[] = [
-  { label: "Top Left", value: "top_left" },
-  { label: "Top Right", value: "top_right" },
-  { label: "Bottom Left", value: "bottom_left" },
-  { label: "Bottom Right", value: "bottom_right" }
+  { label: "Top Left", value: SPECIAL_VALUES.TOP_LEFT },
+  { label: "Top Right", value: SPECIAL_VALUES.TOP_RIGHT },
+  { label: "Bottom Left", value: SPECIAL_VALUES.BOTTOM_LEFT },
+  { label: "Bottom Right", value: SPECIAL_VALUES.BOTTOM_RIGHT }
 ];
 
 export function WeedDetectorConfig(props: SettingsMenuProps) {
@@ -28,10 +31,25 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
       </label>
       <input type="number"
         id={conf}
-        value={props.values[conf]}
+        value={envGet(conf, props.values)}
         onBlur={e => props.onChange(conf, parseInt(e.currentTarget.value, 10))}
         placeholder={label} />
     </div>
+  };
+
+  let setDDI = (k: keyof WeedDetectorENV) => (d: DropDownItem) => {
+    if (_.isNumber(d.value)) {
+      props.onChange(k, d.value);
+    } else {
+      throw new Error("Weed detector got a non-numeric value");
+    }
+  }
+
+  let find = (needle: keyof WeedDetectorENV, haystack: DropDownItem[]): DropDownItem => {
+    let finder = (x: DropDownItem): boolean => {
+      return _.isNumber(x.label) && (x.label === envGet(needle, props.values));
+    }
+    return haystack.filter(finder)[0] || NULL_CHOICE;
   }
   return <div className="additional-settings-menu"
     onClick={(e) => e.stopPropagation()}>
@@ -43,16 +61,18 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     <input
       type="checkbox"
       id="invert_hue_selection"
-      value={!!props.values.invert_hue_selection ? 1 : 0}
-      onChange={e => props.onChange("invert_hue_selection", e.currentTarget.checked ? 1 : 0)} />
+      value={envGet("invert_hue_selection", props.values) ?
+        SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE}
+      onChange={e => props.onChange("invert_hue_selection", e.currentTarget.checked ?
+        SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE)} />
     <NumberBox conf={"calibration_object_separation"}
       label={t(`Calibration Object Separation`)} />
     <label>
       {t(`Calibration Object Separation along axis`)}
     </label>
     <FBSelect
-      onChange={(x) => { }}
-      selectedItem={undefined}
+      onChange={setDDI("calibration_along_axis")}
+      selectedItem={find("calibration_along_axis", calibrationAxes)}
       list={calibrationAxes}
       placeholder="Select..." />
     <Row>
@@ -68,8 +88,8 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     </label>
     <FBSelect
       list={originLocations}
-      onChange={() => { }}
-      selectedItem={undefined}
+      onChange={setDDI("image_bot_origin_location")}
+      selectedItem={find("image_bot_origin_location", calibrationAxes)}
       placeholder="Select..." />
     <Row>
       <Col xs={6}>

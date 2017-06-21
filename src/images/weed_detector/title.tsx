@@ -1,6 +1,6 @@
 import * as React from "react";
 import { t } from "i18next";
-import { WeedDetectorConfig } from "./weed_detector_config";
+import { WeedDetectorConfig } from "./config";
 import { WidgetHeader } from "../../ui/index";
 import { envSet } from "./actions";
 
@@ -46,7 +46,6 @@ export function TitleBar({
       className="red">
       {deletionProgress || t("CLEAR WEEDS")}
     </button>
-    {/* TODO: Hook up calibration */}
     <button
       hidden={!onCalibrate}
       onClick={() => { }}

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Pair } from "farmbot";
 import { success, error } from "farmbot-toastr";
 import { DetectorState } from "../interfaces";
-import { TitleBar } from "./weed_detector_title";
+import { TitleBar } from "./title";
 import { devices } from "../../device";
 import { Row, Col, Widget } from "../../ui/index";
 import { t } from "i18next";
@@ -13,7 +13,7 @@ import { HSV } from "../index";
 import { FarmwareProps } from "../../devices/interfaces";
 import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
-import { WeedDetectorBody } from "./weed_detector_body";
+import { WeedDetectorBody } from "./body";
 import { WeedDetectorENV } from "./remote_env";
 const PLANT_DETECTION_OPTIONS_KEY = "PLANT_DETECTION_options";
 

@@ -7,12 +7,14 @@
  * SEE: https://docs.python.org/3/library/enum.html
  */
 export enum SPECIAL_VALUES {
-  TOP_LEFT = 1,
-  TOP_RIGHT = 2,
-  BOTTOM_LEFT = 3,
-  BOTTOM_RIGHT = 4,
-  X = 5,
-  Y = 6
+  FALSE = 0,
+  TRUE = 1,
+  TOP_LEFT = 2,
+  TOP_RIGHT = 3,
+  BOTTOM_LEFT = 4,
+  BOTTOM_RIGHT = 5,
+  X = 6,
+  Y = 7
 }
 
 export type WeedDetectorENVKey =
@@ -39,4 +41,22 @@ export type WeedDetectorENVKey =
  * */
 export type WeedDetectorENV = Record<WeedDetectorENVKey, number>;
 
-
+export let DEFAULTS: WeedDetectorENV = {
+  H_LO: 30,
+  S_LO: 50,
+  V_LO: 50,
+  H_HI: 90,
+  S_HI: 255,
+  V_HI: 255,
+  blur: 15,
+  morph: 6,
+  iterations: 4,
+  invert_hue_selection: 0,
+  camera_offset_x: 0,
+  camera_offset_y: 0,
+  coord_scale: 0,
+  calibration_object_separation: 0,
+  total_rotation_angle: 0,
+  calibration_along_axis: SPECIAL_VALUES.X,
+  image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT
+}
