@@ -398,3 +398,18 @@ export function semverCompare(left: string, right: string): SemverResult {
  * - RC 20 June 2016 */
 type JSXChild = JSX.Element | string | undefined;
 export type JSXChildren = JSXChild[] | JSXChild;
+
+/** HACK: Server side caching (or webpack) is not doing something right.
+ *        This is a work around until then. */
+export function hardRefresh() {
+  let HARD_RESET = "NEED_HARD_REFRESH2";
+  console.warn("[HARD RESET] 1");
+  if (localStorage) {
+    console.warn("[HARD RESET] 2");
+    if (!localStorage.getItem(HARD_RESET)) {
+      localStorage.setItem(HARD_RESET, "DONE");
+      console.warn("[HARD RESET] 3");
+      window.location.reload(true);
+    }
+  };
+}

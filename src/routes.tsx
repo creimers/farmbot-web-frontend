@@ -9,7 +9,8 @@ import { Store } from "./redux/interfaces";
 import { ready } from "./config/actions";
 import { Session } from "./session";
 import { isMobile } from "./util";
-
+import { hardRefresh } from "./util";
+hardRefresh()
 interface RootComponentProps {
   store: Store;
 }

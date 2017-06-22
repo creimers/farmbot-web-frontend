@@ -24,7 +24,7 @@ export function Motors({ dispatch, bot }: MotorsProps) {
       dispatch={dispatch}
     />
     <div className={`is-open-${!!motors}`}>
-      {/*<Row>
+      <Row>
         <Col xs={6}>
           <label>
             {t("Max Retries")}
@@ -37,7 +37,7 @@ export function Motors({ dispatch, bot }: MotorsProps) {
             bot={bot}
             dispatch={dispatch} />
         </Col>
-      </Row>*/}
+      </Row>
       <NumericMCUInputGroup
         name={t("Max Speed (steps/s)")}
         tooltip={t(ToolTips.MAX_SPEED)}
