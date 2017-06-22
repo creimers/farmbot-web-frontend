@@ -21,9 +21,9 @@ export class CameraCalibration
 
   calibrate = () => { }
 
-  STUBS = { H: [0], S: [0], V: [0] }
-
   render() {
+    console.warn("Need to transfer the correct " +
+      "props to <WeedDetectorBody/>!! - RC")
     return <Widget className="weed-detector-widget">
       <Row>
         <Col>
@@ -42,9 +42,12 @@ export class CameraCalibration
                 images={this.props.images}
                 currentImage={this.props.currentImage}
                 onSliderChange={this.sliderChange}
-                H={this.STUBS.H}
-                S={this.STUBS.S}
-                V={this.STUBS.V}
+                H_LO={-1}
+                S_LO={-1}
+                V_LO={-1}
+                H_HI={-1}
+                S_HI={-1}
+                V_HI={-1}
               />
             </Col>
           </Row>

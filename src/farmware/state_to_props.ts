@@ -1,7 +1,6 @@
 import { Everything } from "../interfaces";
 import { selectAllImages } from "../resources/selectors";
 import { FarmwareProps } from "../devices/interfaces";
-import { betterMerge } from "../util";
 import { parseEnv } from "../images/weed_detector/actions";
 
 export function mapStateToProps(props: Everything): FarmwareProps {
@@ -12,8 +11,15 @@ export function mapStateToProps(props: Everything): FarmwareProps {
 
   let currentImage = images
     .filter(i => i.uuid === props.resources.consumers.farmware.currentImage)[0];
-
+  let { farmwares } = props.bot.hardware.process_info;
+  let syncStatus = props
+    .bot
+    .hardware
+    .informational_settings
+    .sync_status || "unknown";
   return {
+    farmwares,
+    syncStatus,
     env: parseEnv(props.bot.hardware.user_env),
     dispatch: props.dispatch,
     currentImage,

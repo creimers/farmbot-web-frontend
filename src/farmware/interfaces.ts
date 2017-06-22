@@ -1,5 +1,6 @@
 import { BotState } from "../devices/interfaces";
 import { TaggedImage } from "../resources/tagged_resources";
+import { SyncStatus, Dictionary, FarmwareManifest } from "farmbot/dist";
 
 export interface FWState {
   selectedFarmware: string | undefined;
@@ -7,7 +8,8 @@ export interface FWState {
 }
 
 export interface FWProps {
-  bot: BotState;
+  syncStatus: SyncStatus;
+  farmwares: Dictionary<FarmwareManifest | undefined>;
 }
 
 export interface Props {

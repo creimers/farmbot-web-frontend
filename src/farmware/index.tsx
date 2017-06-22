@@ -21,7 +21,9 @@ export class FarmwarePage extends React.Component<FarmwareProps, void> {
             currentImage={this.props.currentImage} />
         </Col>
         <Col xs={12} sm={4}>
-          <FarmwarePanel bot={this.props.bot} />
+          <FarmwarePanel
+            syncStatus={this.props.syncStatus}
+            farmwares={this.props.farmwares} />
         </Col>
       </Row>
       <Row>

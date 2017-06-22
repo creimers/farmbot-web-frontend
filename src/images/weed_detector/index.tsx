@@ -35,14 +35,14 @@ export class WeedDetector
   }
 
   sliderChange = (key: keyof HSV<"">, values: [number, number]) => {
-    let oldSettings = this.farmwareSettings;
+    let oldSettings = this.props.env;
     let newSettings = { [key]: values };
     let remoteFarmwareSettings = { ...oldSettings, ...newSettings };
     this.setState({ remoteFarmwareSettings });
   }
 
   test = () => {
-    let settings = this.farmwareSettings;
+    let settings = this.props.env;
     let pairs = Object
       .keys(settings)
       .map<Pair>(function (value: keyof typeof settings, index) {
@@ -59,7 +59,7 @@ export class WeedDetector
           <TitleBar
             onDeletionClick={this.clearWeeds}
             deletionProgress={this.state.deletionProgress}
-            onSave={this.saveSettings}
+            onSave={() => { throw new Error("NEVER @@") }}
             onTest={this.test}
             title={"Weed Detector"}
             help={t(ToolTips.WEED_DETECTOR)}
@@ -72,10 +72,12 @@ export class WeedDetector
                 currentImage={this.props.currentImage}
                 images={this.props.images}
                 onSliderChange={this.sliderChange}
-                H={[this.farmwareSettings.H_LO, this.farmwareSettings.H_HI]}
-                S={[this.farmwareSettings.S_LO, this.farmwareSettings.S_HI]}
-                V={[this.farmwareSettings.V_LO, this.farmwareSettings.V_HI]}
-              />
+                H_LO={this.props.env.H_LO}
+                H_HI={this.props.env.H_HI}
+                S_LO={this.props.env.S_LO}
+                S_HI={this.props.env.S_HI}
+                V_LO={this.props.env.V_LO}
+                V_HI={this.props.env.V_HI} />
             </Col>
           </Row>
         </Col>

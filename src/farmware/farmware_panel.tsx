@@ -12,6 +12,7 @@ import {
   Row,
   Col
 } from "../ui";
+import { betterCompact } from "../util";
 
 export class FarmwarePanel extends React.Component<FWProps, Partial<FWState>> {
   constructor() {
@@ -61,15 +62,17 @@ export class FarmwarePanel extends React.Component<FWProps, Partial<FWState>> {
   }
 
   fwList = () => {
-    let { farmwares } = this.props.bot.hardware.process_info;
-    let choices = Object.keys(farmwares).map((x, i) => {
-      let fw = farmwares[x];
-      let hasVers = (fw.meta && _.isString(fw.meta.version));
-      // Guard against legacy Farmwares. Can be removed in a month.
-      // -- RC June 2017.
-      let label = hasVers ? `${fw.name} ${fw.meta.version}` : fw.name;
-      return { value: fw.uuid, label };
-    });
+    let { farmwares } = this.props;
+    let choices = betterCompact(Object
+      .keys(farmwares)
+      .map(x => farmwares[x]))
+      .map((fw, i) => {
+        let hasVers = (fw.meta && _.isString(fw.meta.version));
+        // Guard against legacy Farmwares. Can be removed in a month.
+        // -- RC June 2017.
+        let label = hasVers ? `${fw.name} ${fw.meta.version}` : fw.name;
+        return { value: fw.uuid, label };
+      });
     return choices;
   }
 
@@ -79,7 +82,7 @@ export class FarmwarePanel extends React.Component<FWProps, Partial<FWState>> {
       </WidgetHeader>
       <WidgetBody>
         <MustBeOnline fallback="Not available when FarmBot is offline."
-          status={this.props.bot.hardware.informational_settings.sync_status}
+          status={this.props.syncStatus}
           lockOpen={process.env.NODE_ENV !== "production"}>
           <Row>
             <fieldset>

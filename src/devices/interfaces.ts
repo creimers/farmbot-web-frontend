@@ -2,7 +2,10 @@ import { BotStateTree } from "farmbot";
 import {
   ALLOWED_MESSAGE_TYPES,
   McuParamName,
-  ConfigurationName
+  ConfigurationName,
+  Dictionary,
+  SyncStatus,
+  FarmwareManifest
 } from "farmbot";
 import { AuthState } from "../auth/interfaces";
 import {
@@ -130,6 +133,8 @@ export interface FarmwareProps {
   env: WeedDetectorENV;
   images: TaggedImage[];
   currentImage: TaggedImage | undefined;
+  syncStatus: SyncStatus;
+  farmwares: Dictionary<FarmwareManifest | undefined>;
 }
 
 export interface HardwareSettingsProps {
