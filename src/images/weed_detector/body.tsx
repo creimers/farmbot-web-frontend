@@ -10,6 +10,7 @@ import {
   DEFAULTS,
   WeedDetectorENVKey as EnvKey
 } from "./remote_env";
+import { envSet } from "./actions";
 
 const RANGES = {
   H: { LOWEST: 0, HIGHEST: 179 },
@@ -36,8 +37,9 @@ interface Props {
 
 type BMI = "blur" | "morph" | "iteration";
 
-function onCommit(BMI: BMI) {
-  return () => console.log("ON COMMIT FOR " + BMI);
+let onCommit = (BMI: BMI) => (e: React.SyntheticEvent<HTMLInputElement>) => {
+  console.log("WOW")
+  envSet(BMI, parseInt(e.currentTarget.value, 10) || 0);
 }
 
 export function WeedDetectorBody({
