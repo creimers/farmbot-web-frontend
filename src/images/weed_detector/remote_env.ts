@@ -35,6 +35,28 @@ export type WeedDetectorENVKey =
   | "calibration_along_axis"
   | "image_bot_origin_location";
 
+/** The runtime equivalent for WeedDetectorENVKey.
+ *  Good for iterating and whatnot. */
+export let EVERY_KEY: WeedDetectorENVKey[] = [
+  "H_HI",
+  "H_LO",
+  "V_HI",
+  "V_LO",
+  "S_HI",
+  "S_LO",
+  "blur",
+  "morph",
+  "iteration",
+  "invert_hue_selection",
+  "camera_offset_x",
+  "camera_offset_y",
+  "coord_scale",
+  "calibration_object_separation",
+  "total_rotation_angle",
+  "calibration_along_axis",
+  "image_bot_origin_location"
+]
+
 /** THIS IS WHAT THE STATE LOOKS LIKE ON FARMBOT'S END.
  * Keep this interface up to date
  * */
