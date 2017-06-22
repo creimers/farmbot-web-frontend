@@ -6,7 +6,10 @@ import { HSV } from "../interfaces";
 import { WeedDetectorSlider } from "./slider";
 import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
-import { DEFAULTS } from "./remote_env";
+import {
+  DEFAULTS,
+  WeedDetectorENVKey as EnvKey
+} from "./remote_env";
 
 const RANGES = {
   H: { LOWEST: 0, HIGHEST: 179 },
@@ -28,7 +31,7 @@ interface Props {
   S_HI: number;
   V_LO: number;
   V_HI: number;
-  onSliderChange(key: keyof HSV<"">, values: [number, number]): void;
+  onSliderChange(key: EnvKey, value: number): void;
 }
 
 type BMI = "blur" | "morph" | "iteration";
@@ -50,12 +53,18 @@ export function WeedDetectorBody({
   currentImage,
   onFlip
 }: Props) {
+  /** Mapping of HSV values to FBOS Env variables. */
+  let CHANGE_MAP: Record<HSV, [EnvKey, EnvKey]> = {
+    H: ["H_LO", "H_HI"],
+    S: ["S_LO", "S_HI"],
+    V: ["V_LO", "V_LO"]
+  }
 
-  function onChange(HSV: keyof HSV<"">) {
-    return (values: [number, number]) => {
-      onSliderChange && onSliderChange(HSV, values);
-    };
-  };
+  let onChange = (key: HSV) => (values: [number, number]) => {
+    let keys = CHANGE_MAP[key];
+    [0, 1].map(i => onSliderChange(keys[i], values[i]));
+    console.log(keys);
+  }
 
   let processPhoto = () => {
     let img = currentImage || images[0];

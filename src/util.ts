@@ -407,13 +407,13 @@ export type JSXChildren = JSXChild[] | JSXChild;
  *        This is a work around until then. */
 export function hardRefresh() {
   let HARD_RESET = "NEED_HARD_REFRESH2";
-  console.warn("[HARD RESET] 1");
   if (localStorage) {
-    console.warn("[HARD RESET] 2");
     if (!localStorage.getItem(HARD_RESET)) {
       localStorage.setItem(HARD_RESET, "DONE");
-      console.warn("[HARD RESET] 3");
+      console.warn("[HARD RESET]");
       window.location.reload(true);
+    } else {
+      console.warn("Not running hard reset because key already present: " + HARD_RESET);
     }
   };
 }

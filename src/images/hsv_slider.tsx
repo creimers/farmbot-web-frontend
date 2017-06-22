@@ -3,14 +3,14 @@ import { HSV, HiLo, EnvSliderProps, EnvSliderState } from "./interfaces";
 import { RangeSlider } from "@blueprintjs/core/dist/components/slider/rangeSlider";
 
 /** Max HSV allowed by farmbot weed detector. */
-const RANGE: HSV<HiLo> = {
+const RANGE: Record<HSV, HiLo> = {
   H: { lo: 0, hi: 179 },
   S: { lo: 0, hi: 255 },
   V: { lo: 0, hi: 255 }
 };
 
 /** Default HSV if none found on bot. */
-const DEFAULTS: HSV<HiLo> = {
+const DEFAULTS: Record<HSV, HiLo> = {
   H: { lo: 30, hi: 90 },
   S: { lo: 50, hi: 255 },
   V: { lo: 50, hi: 255 }
@@ -36,8 +36,11 @@ export class HsvSlider extends React.Component<EnvSliderProps, EnvSliderState> {
     });
   }
 
-  get name() {
-    return this.props.name;
+  get name(): HSV {
+    switch (this.props.name) {
+      case "H": case "S": case "V": this.props.name
+      default: throw new Error("HSV is bad.")
+    }
   }
 
   /** Triggered on componentDidMount() and when the user snaps the slider to a

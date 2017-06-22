@@ -16,7 +16,8 @@ import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./body";
 import { WeedDetectorENV } from "./remote_env";
 const PLANT_DETECTION_OPTIONS_KEY = "PLANT_DETECTION_options";
-
+import { WeedDetectorENVKey as ENVKey } from "./remote_env";
+import { envSet } from "./actions";
 @connect(mapStateToProps)
 export class WeedDetector
   extends React.Component<FarmwareProps, Partial<DetectorState>> {
@@ -34,11 +35,11 @@ export class WeedDetector
     this.setState({ deletionProgress: "Deleting..." });
   }
 
-  sliderChange = (key: keyof HSV<"">, values: [number, number]) => {
-    let oldSettings = this.props.env;
-    let newSettings = { [key]: values };
-    let remoteFarmwareSettings = { ...oldSettings, ...newSettings };
-    this.setState({ remoteFarmwareSettings });
+  /** Mapping of HSV values to FBOS Env variables. */
+  CHANGE_MAP: Record<HSV, [ENVKey, ENVKey]> = {
+    H: ["H_LO", "H_HI"],
+    S: ["S_LO", "S_HI"],
+    V: ["V_LO", "V_LO"]
   }
 
   test = () => {
@@ -71,7 +72,7 @@ export class WeedDetector
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}
                 images={this.props.images}
-                onSliderChange={this.sliderChange}
+                onSliderChange={envSet}
                 H_LO={this.props.env.H_LO}
                 H_HI={this.props.env.H_HI}
                 S_LO={this.props.env.S_LO}

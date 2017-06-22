@@ -33,6 +33,12 @@ export interface CameraCalibrationProps {
   images: TaggedImage[];
   currentImage: TaggedImage | undefined;
   onProcessPhoto(id: number): void;
+  H_LO: number;
+  S_LO: number;
+  V_LO: number;
+  H_HI: number;
+  S_HI: number;
+  V_HI: number;
 }
 
 export interface FarmwareState {

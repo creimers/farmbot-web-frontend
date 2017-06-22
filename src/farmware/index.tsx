@@ -8,6 +8,7 @@ import { CameraCalibration } from "./camera_calibration";
 import { FarmwareProps } from "../devices/interfaces";
 import { detectWeeds } from "../images/actions";
 import { WeedDetector } from "../images/weed_detector/index";
+import { envGet } from "../images/weed_detector/actions";
 
 @connect(mapStateToProps)
 export class FarmwarePage extends React.Component<FarmwareProps, void> {
@@ -31,7 +32,13 @@ export class FarmwarePage extends React.Component<FarmwareProps, void> {
           <CameraCalibration
             onProcessPhoto={(id) => { this.props.dispatch(detectWeeds(id)); }}
             currentImage={this.props.currentImage}
-            images={this.props.images} />
+            images={this.props.images}
+            H_LO={envGet("H_LO", this.props.env)}
+            S_LO={envGet("S_LO", this.props.env)}
+            V_LO={envGet("V_LO", this.props.env)}
+            H_HI={envGet("H_HI", this.props.env)}
+            S_HI={envGet("S_HI", this.props.env)}
+            V_HI={envGet("V_HI", this.props.env)} />
         </Col>
         <Col xs={12} sm={5} smOffset={1}>
           <WeedDetector {...this.props} />
