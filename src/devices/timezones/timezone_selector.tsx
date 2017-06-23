@@ -1,10 +1,8 @@
 import * as React from "react";
-import { Row, Col } from "../../ui/index";
-import { FBSelect } from "../../ui/new_fb_select";
-import { t } from "i18next";
 import { DropDownItem } from "../../ui/fb_select";
 import { list } from "./tz_list";
 import { inferTimezone } from "./guess_timezone";
+import { FilterSearch } from "../../ui/index";
 
 const CHOICES: DropDownItem[] = list.map(x => ({ label: x, value: x }));
 
@@ -38,8 +36,8 @@ export class TimezoneSelector extends React.Component<TZSelectorProps, {}> {
   }
 
   render() {
-    return <FBSelect list={CHOICES}
-      selectedItem={this.selectedItem()}
-      onChange={this.itemSelected} />;
+    return <FilterSearch
+      items={CHOICES}
+    />
   }
 }

@@ -130,7 +130,8 @@ export class FarmbotOsSettings
               <div>
                 <TimezoneSelector
                   currentTimezone={this.props.account.body.timezone}
-                  onUpdate={this.handleTimezone} />
+                  onUpdate={this.handleTimezone}
+                />
               </div>
             </Col>
           </Row>

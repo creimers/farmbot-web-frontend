@@ -9,6 +9,27 @@
 }
 
 // As of right now, all the menus appear from floated icons in the widgets.
-.pt-popover-target {
-  float: right;
+.widget-header {
+  .pt-popover-target {
+    float: right;
+  }
+}
+
+.device-widget {
+  .pt-popover-target {
+    width: 100%;
+  }
+  .pt-icon-standard {
+    float: right;
+    margin-top: 0.7rem;
+  }
+  .pt-button {
+    text-align: left;
+    width: 100%;
+    span {
+      font-weight: normal;
+      text-transform: none;
+      font-size: 1.2rem;
+    }
+  }
 }
