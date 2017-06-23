@@ -2,7 +2,7 @@ import * as React from "react";
 import { t } from "i18next";
 import { WeedDetectorConfig } from "./config";
 import { WidgetHeader } from "../../ui/index";
-import { envSet } from "./remote_env";
+import { envSave } from "./remote_env";
 
 interface Props {
   onSave?(): void;
@@ -58,7 +58,7 @@ export function TitleBar({
         className="fa fa-cog" >
         {settingsMenuOpen && <WeedDetectorConfig
           values={{}}
-          onChange={envSet} />}
+          onChange={envSave} />}
       </i>
     }
   </WidgetHeader>;

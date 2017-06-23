@@ -5,7 +5,7 @@ import { CameraCalibrationState, CameraCalibrationProps } from "./interfaces";
 import { TitleBar } from "../images/weed_detector/title";
 import { WeedDetectorBody } from "../images/weed_detector/body";
 import { ToolTips } from "../constants";
-import { envSet } from "../images/weed_detector/remote_env";
+import { envSave } from "../images/weed_detector/remote_env";
 
 export class CameraCalibration
   extends React.Component<CameraCalibrationProps, CameraCalibrationState> {
@@ -16,10 +16,6 @@ export class CameraCalibration
 
   toggleSettingsMenu = () => {
     this.setState({ settingsMenuOpen: !this.state.settingsMenuOpen });
-  }
-
-  sliderChange = (key: "H" | "S" | "V", values: [number, number]) => {
-
   }
 
   calibrate = () => {
@@ -44,7 +40,7 @@ export class CameraCalibration
                 onFlip={(u) => { this.props }}
                 images={this.props.images}
                 currentImage={this.props.currentImage}
-                onSliderChange={envSet}
+                onSliderChange={envSave}
                 H_LO={this.props.H_LO}
                 S_LO={this.props.S_LO}
                 V_LO={this.props.V_LO}

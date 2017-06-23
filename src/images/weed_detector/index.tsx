@@ -15,7 +15,7 @@ import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./body";
 import {
   WeedDetectorENV,
-  envSet,
+  envSave,
   WeedDetectorENVKey as ENVKey
 } from "./remote_env";
 
@@ -73,7 +73,7 @@ export class WeedDetector
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}
                 images={this.props.images}
-                onSliderChange={envSet}
+                onSliderChange={envSave}
                 H_LO={this.props.env.H_LO}
                 H_HI={this.props.env.H_HI}
                 S_LO={this.props.env.S_LO}

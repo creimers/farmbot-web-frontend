@@ -311,6 +311,19 @@ export function betterMerge<T, U>(target: T, update: U): T & U {
   return _.merge({}, target, update);
 }
 
+/** Like parseFloat, but allows you to control fallback value instead of
+ * returning NaN. */
+export function betterParseNum(num: string | undefined,
+  fallback: number): number {
+  try {
+    let maybe = JSON.parse("" + num);
+    if (_.isNumber(maybe) && !_.isNaN(maybe)) {
+      return maybe;
+    }
+  } catch (_err) {
+  }
+  return fallback;
+}
 /** Determine if a string contains one of multiple values. */
 export function oneOf(list: string[], target: string) {
   let matches = 0;

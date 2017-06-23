@@ -9,7 +9,7 @@ import { t } from "i18next";
 import {
   DEFAULTS,
   WeedDetectorENVKey as EnvKey,
-  envSet
+  envSave
 } from "./remote_env";
 
 const RANGES = {
@@ -39,7 +39,7 @@ type BMI = "blur" | "morph" | "iteration";
 
 let onCommit = (BMI: BMI) => (e: React.SyntheticEvent<HTMLInputElement>) => {
   console.log("WOW")
-  envSet(BMI, parseInt(e.currentTarget.value, 10) || 0);
+  envSave(BMI, parseInt(e.currentTarget.value, 10) || 0);
 }
 
 export function WeedDetectorBody({
