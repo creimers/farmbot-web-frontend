@@ -1,8 +1,8 @@
 import {
   WeedDetectorENV,
   FormatTranslationMap,
-  FormatterFn,
   WeedDetectorENVKey,
+  getSpecialValue,
   Translation
 } from "../remote_env";
 import { box } from "boxed_value";
@@ -26,7 +26,7 @@ export enum SPECIAL_VALUES {
 
 /** The runtime equivalent for WeedDetectorENVKey.
  *  Good for iterating and whatnot. */
-export let EVERY_KEY: WeedDetectorENVKey[] = [
+export const EVERY_KEY: WeedDetectorENVKey[] = [
   "H_HI",
   "H_LO",
   "V_HI",
@@ -48,7 +48,7 @@ export let EVERY_KEY: WeedDetectorENVKey[] = [
 
 /** Sometimes, ENV var values are not available but rendering must still be
  * performed. This map provides a set of defaults for every ENV var. */
-export let DEFAULTS: WeedDetectorENV = {
+export const DEFAULTS: WeedDetectorENV = {
   H_LO: 30,
   S_LO: 50,
   V_LO: 50,
@@ -68,22 +68,12 @@ export let DEFAULTS: WeedDetectorENV = {
   image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT
 };
 
-export function getSpecialValue(key: string | number):
-  SPECIAL_VALUES {
-  let k = _.snakeCase("" + key).toUpperCase();
-  let v = _.get(SPECIAL_VALUES, k, NaN);
-  if (_.isUndefined(v) || _.isNaN(v)) {
-    throw new Error("Not a SPECIAL_VALUE: " + k);
-  } else {
-    return v;
-  }
-}
-export let DEFAULT_FORMATTER: Translation = {
+export const DEFAULT_FORMATTER: Translation = {
   format: (key, val) => val,
   parse: (key, val) => {
-    let fallback = DEFAULTS[key];
+    const fallback = DEFAULTS[key];
     try {
-      let b = box(JSON.parse(val));
+      const b = box(JSON.parse(val));
       switch (b.kind) {
         case "number":
           return b.value;
@@ -102,32 +92,5 @@ export let DEFAULT_FORMATTER: Translation = {
     }
   }
 };
-/** Some keys in the weed detector ENV require special handling.
- * In those cases, you can write a translation function and register it under
- * its name.
- */
-export let TRANSLATORS: FormatTranslationMap = {
-  // image_bot_origin_location: {
-  //   parse: DEFAULT_FORMATTER.parse,
-  //   format: (k, v) => {
-  //     switch (v) {
-  //       case SPECIAL_VALUES.BOTTOM_LEFT: return SPECIAL_VALUES[v];
-  //       case SPECIAL_VALUES.BOTTOM_RIGHT: return SPECIAL_VALUES[v]
-  //       case SPECIAL_VALUES.TOP_LEFT: return SPECIAL_VALUES[v];
-  //       case SPECIAL_VALUES.TOP_RIGHT: return SPECIAL_VALUES[v];
-  //       default: throw new Error("Can't format value: " + v);
-  //     };
-  //   }
-  // },
-  // calibration_along_axis: {
-  //   parse: DEFAULT_FORMATTER.parse,
-  //   format: (k, v) => {
-  //     return (v === SPECIAL_VALUES.X) ?
-  //       SPECIAL_VALUES[SPECIAL_VALUES.X] : SPECIAL_VALUES[SPECIAL_VALUES.Y];
-  //   }
-  // },
-  // invert_hue_selection: {
-  //   parse: DEFAULT_FORMATTER.parse,
-  //   format: (k, v) => (v === SPECIAL_VALUES.TRUE) ? true : false
-  // }
-};
+/** If we hit any "special cases", we can register them here: */
+export const TRANSLATORS: FormatTranslationMap = {};

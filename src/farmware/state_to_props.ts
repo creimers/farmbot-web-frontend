@@ -1,7 +1,7 @@
 import { Everything } from "../interfaces";
 import { selectAllImages } from "../resources/selectors";
 import { FarmwareProps } from "../devices/interfaces";
-import { parseEnv } from "../images/weed_detector/remote_env";
+import { prepopulateEnv } from "../images/weed_detector/remote_env";
 
 export function mapStateToProps(props: Everything): FarmwareProps {
   let images = _(selectAllImages(props.resources.index))
@@ -20,7 +20,7 @@ export function mapStateToProps(props: Everything): FarmwareProps {
   return {
     farmwares,
     syncStatus,
-    env: parseEnv(props.bot.hardware.user_env),
+    env: prepopulateEnv(props.bot.hardware.user_env),
     dispatch: props.dispatch,
     currentImage,
     images

@@ -24,12 +24,12 @@ export type WeedDetectorENV = Record<WeedDetectorENVKey, number>;
 export type ALLOWED_TYPES = string | number | boolean;
 
 /** Takes an interally formatted ENV var and formats it in a way that is useful
- * for the weed detector expects. Eg, convert 0 to "true". */
+ * for the weed detector. Eg, convert 0 to "true". */
 export type FormatterFn =
   (key: WeedDetectorENVKey, val: number) => ALLOWED_TYPES;
 
 /** Takes a value from the outside world and parses it for use within this app.
- * Example: Turn "top right" into the number 3. */
+ * Example: Turn "TOP_RIGHT" into the number 3. */
 export type ParserFn =
   (key: WeedDetectorENVKey, val: string) => number;
 
