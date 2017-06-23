@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Pair } from "farmbot";
-import { success, error } from "farmbot-toastr";
 import { DetectorState } from "../interfaces";
 import { TitleBar } from "./title";
 import { devices } from "../../device";
@@ -14,10 +13,12 @@ import { FarmwareProps } from "../../devices/interfaces";
 import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./body";
-import { WeedDetectorENV } from "./remote_env";
-const PLANT_DETECTION_OPTIONS_KEY = "PLANT_DETECTION_options";
-import { WeedDetectorENVKey as ENVKey } from "./remote_env";
-import { envSet } from "./actions";
+import {
+  WeedDetectorENV,
+  envSet,
+  WeedDetectorENVKey as ENVKey
+} from "./remote_env";
+
 @connect(mapStateToProps)
 export class WeedDetector
   extends React.Component<FarmwareProps, Partial<DetectorState>> {

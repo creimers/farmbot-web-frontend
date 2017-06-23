@@ -8,9 +8,9 @@ import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
 import {
   DEFAULTS,
-  WeedDetectorENVKey as EnvKey
+  WeedDetectorENVKey as EnvKey,
+  envSet
 } from "./remote_env";
-import { envSet } from "./actions";
 
 const RANGES = {
   H: { LOWEST: 0, HIGHEST: 179 },

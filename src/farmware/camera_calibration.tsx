@@ -5,7 +5,7 @@ import { CameraCalibrationState, CameraCalibrationProps } from "./interfaces";
 import { TitleBar } from "../images/weed_detector/title";
 import { WeedDetectorBody } from "../images/weed_detector/body";
 import { ToolTips } from "../constants";
-import { envSet } from "../images/weed_detector/actions";
+import { envSet } from "../images/weed_detector/remote_env";
 
 export class CameraCalibration
   extends React.Component<CameraCalibrationProps, CameraCalibrationState> {

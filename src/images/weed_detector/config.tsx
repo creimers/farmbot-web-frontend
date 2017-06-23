@@ -4,9 +4,8 @@ import { DropDownItem } from "../../ui/fb_select";
 import { Row, Col, NULL_CHOICE } from "../../ui/index";
 import { FBSelect } from "../../ui/new_fb_select";
 import { SettingsMenuProps } from "./interfaces";
-import { WeedDetectorENV, SPECIAL_VALUES } from "./remote_env";
+import { WeedDetectorENV, SPECIAL_VALUES, envGet } from "./remote_env";
 import * as _ from "lodash";
-import { envGet } from "./actions";
 import { BlurableInput } from "../../ui/blurable_input";
 
 const calibrationAxes: DropDownItem[] = [
