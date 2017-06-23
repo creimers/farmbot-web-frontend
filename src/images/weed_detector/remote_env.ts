@@ -4,12 +4,10 @@ import * as _ from "lodash";
 
 /** I would rather not deal with all the weird edge cases that come with
  * supporting strings and numbers right now. It adds too many edge cases for the
- * FE to validate against. When we need to support text that users will read, I
- * can re-visit this.
- *
- * Please use Enums for now on weed detector.
- * SEE: https://docs.python.org/3/library/enum.html
- */
+ * FE to validate against. Example: Needing to conditionally determine if an ENV
+ * key is string vs. number vs. bool. Using only numbers (and translating values
+ * when transmitting) allows us to minimize the use of such conditionals.
+ * When we need to support text that users will read, I can re-visit this. */
 export enum SPECIAL_VALUES {
   FALSE = 0,
   TRUE = 1,
@@ -20,6 +18,19 @@ export enum SPECIAL_VALUES {
   X = 6,
   Y = 7
 }
+/** TODO: Maybe refactor this to a string enum after TS 2.4 upgrade.
+ * RC 6/23/17 */
+const SPECIAL_FORMATS = {
+  [SPECIAL_VALUES.FALSE]: false,
+  [SPECIAL_VALUES.TRUE]: true,
+  [SPECIAL_VALUES.TOP_LEFT]: "TOP_LEFT",
+  [SPECIAL_VALUES.TOP_RIGHT]: "TOP_RIGHT",
+  [SPECIAL_VALUES.BOTTOM_LEFT]: "BOTTOM_LEFT",
+  [SPECIAL_VALUES.BOTTOM_RIGHT]: "BOTTOM_RIGHT",
+  [SPECIAL_VALUES.X]: "X",
+  [SPECIAL_VALUES.Y]: "Y",
+}
+
 
 export type WeedDetectorENVKey =
   | "H_HI"
@@ -95,14 +106,17 @@ type FormatTranslationMap = Partial<Record<WeedDetectorENVKey, FormatterFn>>;
 let FORMATTERS: FormatTranslationMap = {
   image_bot_origin_location: (k, v) => {
     switch (v) {
-      case SPECIAL_VALUES.BOTTOM_LEFT: return "BOTTOM_LEFT";
-      case SPECIAL_VALUES.BOTTOM_RIGHT: return "BOTTOM_RIGHT";
-      case SPECIAL_VALUES.TOP_LEFT: return "TOP_LEFT";
-      case SPECIAL_VALUES.TOP_RIGHT: return "TOP_RIGHT";
+      case SPECIAL_VALUES.BOTTOM_LEFT: return SPECIAL_FORMATS[v];
+      case SPECIAL_VALUES.BOTTOM_RIGHT: return SPECIAL_FORMATS[v]
+      case SPECIAL_VALUES.TOP_LEFT: return SPECIAL_FORMATS[v];
+      case SPECIAL_VALUES.TOP_RIGHT: return SPECIAL_FORMATS[v];
       default: throw new Error("Can't format value: " + v);
     };
   },
-  calibration_along_axis: (k, v) => (v === SPECIAL_VALUES.X) ? "X" : "Y",
+  calibration_along_axis: (k, v) => {
+    return (v === SPECIAL_VALUES.X) ?
+      SPECIAL_FORMATS[SPECIAL_VALUES.X] : SPECIAL_FORMATS[SPECIAL_VALUES.Y];
+  },
   invert_hue_selection: (k, v) => (v === SPECIAL_VALUES.TRUE) ? true : false
 };
 
