@@ -155,25 +155,29 @@ export function localStorageBoolFetch(key: string): boolean {
  * old browsers and our error logs were getting full of IE related bugs. */
 export function stopIE() {
   function flunk() {
-    // Can't use i18next here, because old IE versions don't have promises,
-    // so English only here, unfortunatly.
-    alert(t("This app only works with modern browsers."));
+    // DO NOT USE i18next here.
+    // IE Cannot handle it.
+    const READ_THE_COMMENT_ABOVE = "This app only works with modern browsers.";
+    alert(READ_THE_COMMENT_ABOVE);
     window.location.href = "https://www.google.com/chrome/";
   }
-
-  let REQUIRED_GLOBALS = ["Promise", "console", "WebSocket", "Intl"];
-  // Can't use Array.proto.map because IE.
-  // Can't translate the text because IE (no promises)
-  for (var i = 0; i < REQUIRED_GLOBALS.length; i++) {
-    if (!window.hasOwnProperty(REQUIRED_GLOBALS[i])) {
-      flunk();
+  try {
+    let REQUIRED_GLOBALS = ["Promise", "console", "WebSocket", "Intl"];
+    // Can't use Array.proto.map because IE.
+    // Can't translate the text because IE (no promises)
+    for (var i = 0; i < REQUIRED_GLOBALS.length; i++) {
+      if (!window.hasOwnProperty(REQUIRED_GLOBALS[i])) {
+        flunk();
+      }
     }
-  }
-  let REQUIRED_ARRAY_METHODS = ["includes", "map", "filter"];
-  for (i = 0; i < REQUIRED_ARRAY_METHODS.length; i++) {
-    if (!Array.prototype.hasOwnProperty(REQUIRED_ARRAY_METHODS[i])) {
-      flunk();
+    let REQUIRED_ARRAY_METHODS = ["includes", "map", "filter"];
+    for (i = 0; i < REQUIRED_ARRAY_METHODS.length; i++) {
+      if (!Array.prototype.hasOwnProperty(REQUIRED_ARRAY_METHODS[i])) {
+        flunk();
+      }
     }
+  } catch (error) {
+    flunk();
   }
 }
 
@@ -398,3 +402,18 @@ export function semverCompare(left: string, right: string): SemverResult {
  * - RC 20 June 2016 */
 type JSXChild = JSX.Element | string | undefined;
 export type JSXChildren = JSXChild[] | JSXChild;
+
+/** HACK: Server side caching (or webpack) is not doing something right.
+ *        This is a work around until then. */
+export function hardRefresh() {
+  let HARD_RESET = "NEED_HARD_REFRESH2";
+  if (localStorage) {
+    if (!localStorage.getItem(HARD_RESET)) {
+      localStorage.setItem(HARD_RESET, "DONE");
+      console.warn("[HARD RESET]");
+      window.location.reload(true);
+    } else {
+      console.warn("Not running hard reset because key already present: " + HARD_RESET);
+    }
+  };
+}

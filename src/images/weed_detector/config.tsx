@@ -7,6 +7,7 @@ import { SettingsMenuProps } from "./interfaces";
 import { WeedDetectorENV, SPECIAL_VALUES } from "./remote_env";
 import * as _ from "lodash";
 import { envGet } from "./actions";
+import { BlurableInput } from "../../ui/blurable_input";
 
 const calibrationAxes: DropDownItem[] = [
   { label: "X", value: SPECIAL_VALUES.X },
@@ -29,10 +30,10 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
       <label htmlFor={conf}>
         {label}
       </label>
-      <input type="number"
+      <BlurableInput type="number"
         id={conf}
-        value={envGet(conf, props.values)}
-        onBlur={e => props.onChange(conf, parseInt(e.currentTarget.value, 10))}
+        value={"" + envGet(conf, props.values)}
+        onCommit={e => props.onChange(conf, parseInt(e.currentTarget.value, 10))}
         placeholder={label} />
     </div>
   };

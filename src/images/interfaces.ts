@@ -15,12 +15,8 @@ export interface Image {
   };
 }
 
-/** Hue, Saturation, Value map. */
-export interface HSV<T> {
-  H: T;
-  S: T;
-  V: T;
-}
+/** Hue, Saturation, Value */
+export type HSV = "H" | "S" | "V";
 
 /** A simple range object. */
 export interface HiLo {
@@ -43,9 +39,9 @@ export interface FarmbotPickerProps {
 }
 
 export interface EnvSliderProps {
-  name: keyof HSV<{}>;
+  name: HSV;
   env: Partial<WeedDetectorENV>;
-  onChange?: (key: keyof HSV<{}>, val: [number, number]) => void;
+  onChange?: (key: HSV, val: [number, number]) => void;
 }
 
 export interface EnvSliderState extends Partial<HiLo> {

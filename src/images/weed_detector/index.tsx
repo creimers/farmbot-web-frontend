@@ -16,37 +16,14 @@ import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./body";
 import { WeedDetectorENV } from "./remote_env";
 const PLANT_DETECTION_OPTIONS_KEY = "PLANT_DETECTION_options";
-
+import { WeedDetectorENVKey as ENVKey } from "./remote_env";
+import { envSet } from "./actions";
 @connect(mapStateToProps)
 export class WeedDetector
   extends React.Component<FarmwareProps, Partial<DetectorState>> {
   constructor() {
     super();
     this.state = { remoteFarmwareSettings: {} };
-  }
-
-  /** Attempts to deserialize data on the device.
-   * Returns {} as Partial<WeedDetectorENV> if anything goes wrong. */
-  get optionsOnDevice(): Partial<WeedDetectorENV> {
-    let { user_env } = this.props.bot.hardware;
-    let jsonString = user_env[PLANT_DETECTION_OPTIONS_KEY] || "{}";
-    try { return JSON.parse(jsonString) } catch (e) { return {}; }
-  }
-
-  get farmwareSettings() {
-    return { ...this.optionsOnDevice, ...this.state.remoteFarmwareSettings };
-  }
-
-  componentDidMount() {
-    const IS_ONLINE = !!this
-      .props
-      .bot
-      .hardware
-      .user_env["LAST_CLIENT_CONNECTED"];
-    const NEEDS_SETUP = !!Object.keys(this.optionsOnDevice).length;
-    let remoteFarmwareSettings = this.farmwareSettings;
-    (IS_ONLINE && NEEDS_SETUP) ?
-      this.saveSettings() : this.setState({ remoteFarmwareSettings });
   }
 
   clearWeeds = () => {
@@ -58,26 +35,15 @@ export class WeedDetector
     this.setState({ deletionProgress: "Deleting..." });
   }
 
-  saveSettings = () => {
-    let nextEnv = {
-      [PLANT_DETECTION_OPTIONS_KEY]: JSON.stringify(this.farmwareSettings)
-    };
-
-    let ok = () => success(t("Settings saved."));
-    let no = () => error(t("Settings NOT saved."));
-
-    devices.current.setUserEnv(nextEnv).then(ok, no);
-  }
-
-  sliderChange = (key: keyof HSV<"">, values: [number, number]) => {
-    let oldSettings = this.farmwareSettings;
-    let newSettings = { [key]: values };
-    let remoteFarmwareSettings = { ...oldSettings, ...newSettings };
-    this.setState({ remoteFarmwareSettings });
+  /** Mapping of HSV values to FBOS Env variables. */
+  CHANGE_MAP: Record<HSV, [ENVKey, ENVKey]> = {
+    H: ["H_LO", "H_HI"],
+    S: ["S_LO", "S_HI"],
+    V: ["V_LO", "V_LO"]
   }
 
   test = () => {
-    let settings = this.farmwareSettings;
+    let settings = this.props.env;
     let pairs = Object
       .keys(settings)
       .map<Pair>(function (value: keyof typeof settings, index) {
@@ -94,7 +60,7 @@ export class WeedDetector
           <TitleBar
             onDeletionClick={this.clearWeeds}
             deletionProgress={this.state.deletionProgress}
-            onSave={this.saveSettings}
+            onSave={() => { throw new Error("NEVER @@") }}
             onTest={this.test}
             title={"Weed Detector"}
             help={t(ToolTips.WEED_DETECTOR)}
@@ -106,11 +72,13 @@ export class WeedDetector
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}
                 images={this.props.images}
-                onSliderChange={this.sliderChange}
-                H={[this.farmwareSettings.H_LO, this.farmwareSettings.H_HI]}
-                S={[this.farmwareSettings.S_LO, this.farmwareSettings.S_HI]}
-                V={[this.farmwareSettings.V_LO, this.farmwareSettings.V_HI]}
-              />
+                onSliderChange={envSet}
+                H_LO={this.props.env.H_LO}
+                H_HI={this.props.env.H_HI}
+                S_LO={this.props.env.S_LO}
+                S_HI={this.props.env.S_HI}
+                V_LO={this.props.env.V_LO}
+                V_HI={this.props.env.V_HI} />
             </Col>
           </Row>
         </Col>

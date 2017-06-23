@@ -5,6 +5,7 @@ import { CameraCalibrationState, CameraCalibrationProps } from "./interfaces";
 import { TitleBar } from "../images/weed_detector/title";
 import { WeedDetectorBody } from "../images/weed_detector/body";
 import { ToolTips } from "../constants";
+import { envSet } from "../images/weed_detector/actions";
 
 export class CameraCalibration
   extends React.Component<CameraCalibrationProps, CameraCalibrationState> {
@@ -17,11 +18,13 @@ export class CameraCalibration
     this.setState({ settingsMenuOpen: !this.state.settingsMenuOpen });
   }
 
-  sliderChange = () => { }
+  sliderChange = (key: "H" | "S" | "V", values: [number, number]) => {
 
-  calibrate = () => { }
+  }
 
-  STUBS = { H: [0], S: [0], V: [0] }
+  calibrate = () => {
+    console.log("calibrate()");
+  }
 
   render() {
     return <Widget className="weed-detector-widget">
@@ -41,10 +44,13 @@ export class CameraCalibration
                 onFlip={(u) => { this.props }}
                 images={this.props.images}
                 currentImage={this.props.currentImage}
-                onSliderChange={this.sliderChange}
-                H={this.STUBS.H}
-                S={this.STUBS.S}
-                V={this.STUBS.V}
+                onSliderChange={envSet}
+                H_LO={this.props.H_LO}
+                S_LO={this.props.S_LO}
+                V_LO={this.props.V_LO}
+                H_HI={this.props.H_HI}
+                S_HI={this.props.S_HI}
+                V_HI={this.props.V_HI}
               />
             </Col>
           </Row>

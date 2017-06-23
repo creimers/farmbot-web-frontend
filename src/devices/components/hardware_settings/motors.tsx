@@ -10,7 +10,6 @@ import { BotConfigInputBox } from "../step_per_mm_box";
 import { MotorsProps } from "../interfaces";
 import { Row, Col } from "../../../ui/index";
 import { Header } from "./header";
-import { Collapse } from "@blueprintjs/core";
 
 export function Motors({ dispatch, bot }: MotorsProps) {
 
@@ -24,8 +23,8 @@ export function Motors({ dispatch, bot }: MotorsProps) {
       name={"motors"}
       dispatch={dispatch}
     />
-    <Collapse isOpen={!!motors}>
-      {/*<Row>
+    <div className={`is-open-${!!motors}`}>
+      <Row>
         <Col xs={6}>
           <label>
             {t("Max Retries")}
@@ -36,10 +35,9 @@ export function Motors({ dispatch, bot }: MotorsProps) {
           <BotConfigInputBox
             setting="max_movement_retries"
             bot={bot}
-            dispatch={dispatch}
-          />
+            dispatch={dispatch} />
         </Col>
-      </Row>*/}
+      </Row>
       <NumericMCUInputGroup
         name={t("Max Speed (steps/s)")}
         tooltip={t(ToolTips.MAX_SPEED)}
@@ -144,6 +142,6 @@ export function Motors({ dispatch, bot }: MotorsProps) {
           />
         </Col>
       </Row>
-    </Collapse>
+    </div>
   </section>;
 }
