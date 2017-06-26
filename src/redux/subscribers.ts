@@ -9,7 +9,8 @@ function dontStopThem() { }
 /** Subscribe to the store. Stop the user from exiting if any part of the
  * state tree contains `dirty: true`. */
 export function dontExitIfBrowserIsOnHold(state: Everything) {
-  let unsavedWork = !!all(state.resources.index).filter(r => r.dirty).length;
+  let unsavedWork =
+    !!all(state.resources.index).filter(r => r.dirty).length;
   window.onbeforeunload = (unsavedWork) ? stopThem : dontStopThem;
 }
 

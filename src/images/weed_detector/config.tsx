@@ -61,8 +61,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     <input
       type="checkbox"
       id="invert_hue_selection"
-      value={envGet("invert_hue_selection", props.values) ?
-        SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE}
+      value={envGet("invert_hue_selection", props.values)}
       onChange={e => props.onChange("invert_hue_selection", e.currentTarget.checked ?
         SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE)} />
     <NumberBox conf={"calibration_object_separation"}
