@@ -9,8 +9,9 @@ import { defensiveClone, betterParseNum } from "../../../util";
  * replaced with a default value. */
 export function prepopulateEnv(env: Dictionary<string | undefined>): WeedDetectorENV {
   let output = defensiveClone(DEFAULTS);
-  EVERY_KEY.map(key => output[key] = envGet(key, output[key]));
-
+  EVERY_KEY.map(key => {
+    output[key] = betterParseNum(env[key], DEFAULTS[key]);
+  });
   return output;
 }
 

@@ -25,6 +25,7 @@ export function TitleBar({
   deletionProgress,
   onDeletionClick,
   onCalibrate,
+  env,
   title,
   help
 }: Props) {
@@ -58,7 +59,7 @@ export function TitleBar({
         onClick={onSettingToggle}
         className="fa fa-cog" >
         {settingsMenuOpen && <WeedDetectorConfig
-          values={{}}
+          values={env}
           onChange={envSave} />}
       </i>
     }
