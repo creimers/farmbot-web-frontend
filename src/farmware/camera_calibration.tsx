@@ -32,6 +32,7 @@ export class CameraCalibration
             settingsMenuOpen={!!this.state.settingsMenuOpen}
             onSettingToggle={this.toggleSettingsMenu}
             onCalibrate={this.calibrate}
+            env={this.props.env}
           />
           <Row>
             <Col sm={12}>
@@ -41,6 +42,7 @@ export class CameraCalibration
                 images={this.props.images}
                 currentImage={this.props.currentImage}
                 onSliderChange={envSave}
+                env={this.props.env}
                 H_LO={this.props.H_LO}
                 S_LO={this.props.S_LO}
                 V_LO={this.props.V_LO}

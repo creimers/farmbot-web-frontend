@@ -9,7 +9,8 @@ import { t } from "i18next";
 import {
   DEFAULTS,
   WeedDetectorENVKey as EnvKey,
-  envSave
+  envSave,
+  WeedDetectorENV
 } from "./remote_env";
 
 const RANGES = {
@@ -26,6 +27,7 @@ interface Props {
   onProcessPhoto(image_id: number): void;
   currentImage: TaggedImage | undefined;
   images: TaggedImage[];
+  env: Partial<WeedDetectorENV>;
   H_LO: number;
   H_HI: number;
   S_LO: number;

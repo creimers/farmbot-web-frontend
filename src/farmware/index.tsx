@@ -33,6 +33,7 @@ export class FarmwarePage extends React.Component<FarmwareProps, void> {
             onProcessPhoto={(id) => { this.props.dispatch(detectWeeds(id)); }}
             currentImage={this.props.currentImage}
             images={this.props.images}
+            env={this.props.env}
             H_LO={envGet("H_LO", this.props.env)}
             S_LO={envGet("S_LO", this.props.env)}
             V_LO={envGet("V_LO", this.props.env)}

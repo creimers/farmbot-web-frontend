@@ -16,7 +16,8 @@ import { WeedDetectorBody } from "./body";
 import {
   WeedDetectorENV,
   envSave,
-  WeedDetectorENVKey as ENVKey
+  WeedDetectorENVKey as ENVKey,
+  envGet
 } from "./remote_env";
 
 @connect(mapStateToProps)
@@ -65,6 +66,7 @@ export class WeedDetector
             onTest={this.test}
             title={"Weed Detector"}
             help={t(ToolTips.WEED_DETECTOR)}
+            env={this.props.env}
           />
           <Row>
             <Col sm={12}>
@@ -74,12 +76,13 @@ export class WeedDetector
                 currentImage={this.props.currentImage}
                 images={this.props.images}
                 onSliderChange={envSave}
-                H_LO={this.props.env.H_LO}
-                H_HI={this.props.env.H_HI}
-                S_LO={this.props.env.S_LO}
-                S_HI={this.props.env.S_HI}
-                V_LO={this.props.env.V_LO}
-                V_HI={this.props.env.V_HI} />
+                env={this.props.env}
+                H_LO={envGet("H_LO", this.props.env)}
+                H_HI={envGet("H_HI", this.props.env)}
+                S_LO={envGet("S_LO", this.props.env)}
+                S_HI={envGet("S_HI", this.props.env)}
+                V_LO={envGet("V_LO", this.props.env)}
+                V_HI={envGet("V_HI", this.props.env)} />
             </Col>
           </Row>
         </Col>

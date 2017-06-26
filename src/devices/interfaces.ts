@@ -130,7 +130,7 @@ export interface PeripheralsProps {
 
 export interface FarmwareProps {
   dispatch: Function;
-  env: WeedDetectorENV;
+  env: Partial<WeedDetectorENV>;
   images: TaggedImage[];
   currentImage: TaggedImage | undefined;
   syncStatus: SyncStatus;
