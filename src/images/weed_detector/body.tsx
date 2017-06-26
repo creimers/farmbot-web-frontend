@@ -59,13 +59,12 @@ export function WeedDetectorBody({
   let CHANGE_MAP: Record<HSV, [EnvKey, EnvKey]> = {
     H: ["H_LO", "H_HI"],
     S: ["S_LO", "S_HI"],
-    V: ["V_LO", "V_LO"]
+    V: ["V_LO", "V_HI"]
   }
 
   let onChange = (key: HSV) => (values: [number, number]) => {
     let keys = CHANGE_MAP[key];
     [0, 1].map(i => onSliderChange(keys[i], values[i]));
-    console.log(keys);
   }
 
   let processPhoto = () => {
