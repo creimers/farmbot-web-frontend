@@ -8,16 +8,43 @@ import { WeedDetectorENV, SPECIAL_VALUES, envGet } from "./remote_env";
 import * as _ from "lodash";
 import { BlurableInput } from "../../ui/blurable_input";
 
+let LOOKUP = {
+  [SPECIAL_VALUES.X]: {
+    label: "X",
+    value: SPECIAL_VALUES.X
+  },
+  [SPECIAL_VALUES.Y]: {
+    label: "Y",
+    value: SPECIAL_VALUES.Y
+  },
+  [SPECIAL_VALUES.TOP_LEFT]: {
+    label: "Top Left",
+    value: SPECIAL_VALUES.TOP_LEFT
+  },
+  [SPECIAL_VALUES.TOP_RIGHT]: {
+    label: "Top Right",
+    value: SPECIAL_VALUES.TOP_RIGHT
+  },
+  [SPECIAL_VALUES.BOTTOM_LEFT]: {
+    label: "Bottom Left",
+    value: SPECIAL_VALUES.BOTTOM_LEFT
+  },
+  [SPECIAL_VALUES.BOTTOM_RIGHT]: {
+    label: "Bottom Right",
+    value: SPECIAL_VALUES.BOTTOM_RIGHT
+  },
+}
+
 const calibrationAxes: DropDownItem[] = [
-  { label: "X", value: SPECIAL_VALUES.X },
-  { label: "Y", value: SPECIAL_VALUES.Y }
+  LOOKUP[SPECIAL_VALUES.X],
+  LOOKUP[SPECIAL_VALUES.Y]
 ];
 
 const originLocations: DropDownItem[] = [
-  { label: "Top Left", value: SPECIAL_VALUES.TOP_LEFT },
-  { label: "Top Right", value: SPECIAL_VALUES.TOP_RIGHT },
-  { label: "Bottom Left", value: SPECIAL_VALUES.BOTTOM_LEFT },
-  { label: "Bottom Right", value: SPECIAL_VALUES.BOTTOM_RIGHT }
+  LOOKUP[SPECIAL_VALUES.TOP_LEFT],
+  LOOKUP[SPECIAL_VALUES.TOP_RIGHT],
+  LOOKUP[SPECIAL_VALUES.BOTTOM_LEFT],
+  LOOKUP[SPECIAL_VALUES.BOTTOM_RIGHT],
 ];
 
 export function WeedDetectorConfig(props: SettingsMenuProps) {
@@ -46,11 +73,8 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     }
   }
 
-  let find = (needle: keyof WeedDetectorENV, haystack: DropDownItem[]): DropDownItem => {
-    let finder = (x: DropDownItem): boolean => {
-      return _.isNumber(x.label) && (x.label === envGet(needle, props.values));
-    }
-    return haystack.filter(finder)[0] || NULL_CHOICE;
+  let find = (needle: keyof WeedDetectorENV): DropDownItem => {
+    return LOOKUP[envGet(needle, props.values)] || NULL_CHOICE;
   }
   return <div className="additional-settings-menu"
     onClick={(e) => e.stopPropagation()}>
@@ -72,7 +96,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     </label>
     <FBSelect
       onChange={setDDI("calibration_along_axis")}
-      selectedItem={find("calibration_along_axis", calibrationAxes)}
+      selectedItem={find("calibration_along_axis")}
       list={calibrationAxes}
       placeholder="Select..." />
     <Row>
@@ -89,7 +113,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     <FBSelect
       list={originLocations}
       onChange={setDDI("image_bot_origin_location")}
-      selectedItem={find("image_bot_origin_location", calibrationAxes)}
+      selectedItem={find("image_bot_origin_location")}
       placeholder="Select..." />
     <Row>
       <Col xs={6}>

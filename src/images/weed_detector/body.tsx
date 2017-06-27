@@ -7,10 +7,10 @@ import { WeedDetectorSlider } from "./slider";
 import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
 import {
-  DEFAULTS,
   WeedDetectorENVKey as EnvKey,
   envSave,
-  WeedDetectorENV
+  WeedDetectorENV,
+  envGet
 } from "./remote_env";
 
 const RANGES = {
@@ -46,6 +46,7 @@ let onCommit = (BMI: BMI) => (e: React.SyntheticEvent<HTMLInputElement>) => {
 
 export function WeedDetectorBody({
   images,
+  env,
   H_LO,
   H_HI,
   S_LO,
@@ -128,7 +129,7 @@ export function WeedDetectorBody({
           min={RANGES.BLUR.LOWEST}
           max={RANGES.BLUR.HIGHEST}
           onCommit={onCommit("blur")}
-          value={"" + DEFAULTS.blur} />
+          value={"" + envGet("blur", env)} />
       </div>
 
       <div className="col-md-4 col-sm-4">
@@ -137,7 +138,7 @@ export function WeedDetectorBody({
           min={RANGES.MORPH.LOWEST}
           max={RANGES.MORPH.HIGHEST}
           onCommit={onCommit("morph")}
-          value={"" + DEFAULTS.morph} />
+          value={"" + envGet("morph", env)} />
       </div>
       <div className="col-md-4 col-sm-4">
         <label>{t("ITERATION")}</label>
@@ -145,7 +146,7 @@ export function WeedDetectorBody({
           min={RANGES.ITERATION.LOWEST}
           max={RANGES.ITERATION.HIGHEST}
           onCommit={onCommit("iteration")}
-          value={"" + DEFAULTS.iteration} />
+          value={"" + envGet("iteration", env)} />
       </div>
     </div>
     <button className="green"
