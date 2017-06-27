@@ -1,4 +1,10 @@
-import { WeedDetectorENVKey, TRANSLATORS, DEFAULT_FORMATTER, SPECIAL_VALUES } from "../remote_env";
+import {
+  WeedDetectorENVKey,
+  TRANSLATORS,
+  DEFAULT_FORMATTER,
+  SPECIAL_VALUES
+} from "../remote_env";
+import * as _ from "lodash";
 
 /** Translate values before sending to weed detector. FE => FBOS. */
 export function formatEnvKey(key: WeedDetectorENVKey, value: number) {
@@ -18,8 +24,12 @@ export function parseEnvKey(key: WeedDetectorENVKey, value: string) {
  */
 export function getSpecialValue(key: string | number):
   SPECIAL_VALUES {
-  let k = _.snakeCase("" + key).toUpperCase();
+
+  let k = _.snakeCase(("" + key).toUpperCase()).toUpperCase();
   let v = _.get(SPECIAL_VALUES, k, NaN);
+  if (!SPECIAL_VALUES) {
+    console.log("BEE OOOOPP")
+  }
   if (_.isUndefined(v) || _.isNaN(v)) {
     throw new Error("Not a SPECIAL_VALUE: " + k);
   } else {

@@ -71,7 +71,6 @@ export const DEFAULTS: WeedDetectorENV = {
 export const DEFAULT_FORMATTER: Translation = {
   format: (key, val) => val,
   parse: (key, val) => {
-    const fallback = DEFAULTS[key];
     try {
       const b = box(JSON.parse(val));
       switch (b.kind) {
@@ -79,7 +78,7 @@ export const DEFAULT_FORMATTER: Translation = {
           return b.value;
         case "boolean":
         case "string":
-          return getSpecialValue(b.value);
+          return getSpecialValue(val);
         default:
           throw new Error("BAD DATA TYPE");
       }
@@ -92,5 +91,5 @@ export const DEFAULT_FORMATTER: Translation = {
     }
   }
 };
-/** If we hit any "special cases", we can register them here: */
+/** If we hit any "special cases", we can register them here. */
 export const TRANSLATORS: FormatTranslationMap = {};
