@@ -27,9 +27,7 @@ export function getSpecialValue(key: string | number):
 
   let k = _.snakeCase(("" + key).toUpperCase()).toUpperCase();
   let v = _.get(SPECIAL_VALUES, k, NaN);
-  if (!SPECIAL_VALUES) {
-    console.log("BEE OOOOPP")
-  }
+
   if (_.isUndefined(v) || _.isNaN(v)) {
     throw new Error("Not a SPECIAL_VALUE: " + k);
   } else {

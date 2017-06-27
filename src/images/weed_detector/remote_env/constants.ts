@@ -69,7 +69,16 @@ export const DEFAULTS: WeedDetectorENV = {
 };
 
 export const DEFAULT_FORMATTER: Translation = {
-  format: (key, val) => val,
+  format: (key, val): number | string => {
+    switch (key) {
+      case "invert_hue_selection":
+      case "calibration_along_axis":
+      case "image_bot_origin_location":
+        return ("" + (SPECIAL_VALUES[val] || val));
+      default:
+        return val;
+    }
+  },
   parse: (key, val) => {
     try {
       const b = box(JSON.parse(val));
