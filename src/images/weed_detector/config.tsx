@@ -52,7 +52,6 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     conf: keyof WeedDetectorENV;
     label: string;
   }) => {
-    console.dir(props.values);
     return <div>
       <label htmlFor={conf}>
         {label}
