@@ -3,13 +3,13 @@ import { prepopulateEnv, DEFAULTS, envGet } from "../weed_detector/remote_env";
 describe("populateEnv()", () => {
   it("sets values", () => {
     let result = prepopulateEnv({ calibration_object_separation: "12" });
-    expect(result.calibration_object_separation).toEqual(12);
+    expect(result.CAMERA_CALIBRATION_calibration_object_separation).toEqual(12);
   });
 
   it("Falls back on defaults", () => {
     let result = prepopulateEnv({});
-    let actual = result.calibration_object_separation;
-    let expected = DEFAULTS.calibration_object_separation;
+    let actual = result.CAMERA_CALIBRATION_calibration_object_separation;
+    let expected = DEFAULTS.CAMERA_CALIBRATION_calibration_object_separation;
     expect(actual).toEqual(expected);
   });
 });
@@ -36,7 +36,8 @@ describe("envGet()", () => {
   };
 
   it("grabs current value", () => {
-    let result = envGet("calibration_object_separation", myEnv);
+    let result = envGet("CAMERA_CALIBRATION_calibration_object_separation",
+      myEnv);
     expect(result).toEqual(29);
   })
 })

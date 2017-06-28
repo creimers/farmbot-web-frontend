@@ -50,7 +50,8 @@ describe("parseEnvKey()", () => {
   it("makes stuff a number again", () => {
     // TODO: Figure out why this is broke.
     pending("Y U NO WORK??");
-    let r = parseEnvKey("image_bot_origin_location", JSON.stringify("TOP_lEFt"));
+    let r = parseEnvKey("CAMERA_CALIBRATION_image_bot_origin_location",
+      JSON.stringify("TOP_lEFt"));
     expect(r).toEqual(SPECIAL_VALUES.TOP_LEFT);
   });
 });

@@ -85,25 +85,25 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     <input
       type="checkbox"
       id="invert_hue_selection"
-      value={envGet("invert_hue_selection", props.values)}
-      onChange={e => props.onChange("invert_hue_selection", e.currentTarget.checked ?
+      value={envGet("CAMERA_CALIBRATION_invert_hue_selection", props.values)}
+      onChange={e => props.onChange("CAMERA_CALIBRATION_invert_hue_selection", e.currentTarget.checked ?
         SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE)} />
-    <NumberBox conf={"calibration_object_separation"}
+    <NumberBox conf={"CAMERA_CALIBRATION_calibration_object_separation"}
       label={t(`Calibration Object Separation`)} />
     <label>
       {t(`Calibration Object Separation along axis`)}
     </label>
     <FBSelect
-      onChange={setDDI("calibration_along_axis")}
-      selectedItem={find("calibration_along_axis")}
+      onChange={setDDI("CAMERA_CALIBRATION_calibration_along_axis")}
+      selectedItem={find("CAMERA_CALIBRATION_calibration_along_axis")}
       list={calibrationAxes}
       placeholder="Select..." />
     <Row>
       <Col xs={6}>
-        <NumberBox conf={"camera_offset_x"} label={t(`Camera Offset X`)} />
+        <NumberBox conf={"CAMERA_CALIBRATION_camera_offset_x"} label={t(`Camera Offset X`)} />
       </Col>
       <Col xs={6}>
-        <NumberBox conf={"camera_offset_y"} label={t(`Camera Offset Y`)} />
+        <NumberBox conf={"CAMERA_CALIBRATION_camera_offset_y"} label={t(`Camera Offset Y`)} />
       </Col>
     </Row>
     <label htmlFor="image_bot_origin_location">
@@ -111,15 +111,15 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     </label>
     <FBSelect
       list={originLocations}
-      onChange={setDDI("image_bot_origin_location")}
-      selectedItem={find("image_bot_origin_location")}
+      onChange={setDDI("CAMERA_CALIBRATION_image_bot_origin_location")}
+      selectedItem={find("CAMERA_CALIBRATION_image_bot_origin_location")}
       placeholder="Select..." />
     <Row>
       <Col xs={6}>
-        <NumberBox conf={"coord_scale"} label={t(`Pixel coordinate scale`)} />
+        <NumberBox conf={"CAMERA_CALIBRATION_coord_scale"} label={t(`Pixel coordinate scale`)} />
       </Col>
       <Col xs={6}>
-        <NumberBox conf={"total_rotation_angle"} label={t(`Camera rotation`)} />
+        <NumberBox conf={"CAMERA_CALIBRATION_total_rotation_angle"} label={t(`Camera rotation`)} />
       </Col>
     </Row>
   </div>;

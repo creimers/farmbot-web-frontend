@@ -27,53 +27,71 @@ export enum SPECIAL_VALUES {
 /** The runtime equivalent for WeedDetectorENVKey.
  *  Good for iterating and whatnot. */
 export const EVERY_KEY: WDENVKey[] = [
-  "H_HI",
-  "H_LO",
-  "V_HI",
-  "V_LO",
-  "S_HI",
-  "S_LO",
-  "blur",
-  "morph",
-  "iteration",
-  "invert_hue_selection",
-  "camera_offset_x",
-  "camera_offset_y",
-  "coord_scale",
-  "calibration_object_separation",
-  "total_rotation_angle",
-  "calibration_along_axis",
-  "image_bot_origin_location"
-]
+  "CAMERA_CALIBRATION_blur",
+  "CAMERA_CALIBRATION_calibration_along_axis",
+  "CAMERA_CALIBRATION_calibration_object_separation",
+  "CAMERA_CALIBRATION_camera_offset_x",
+  "CAMERA_CALIBRATION_camera_offset_y",
+  "CAMERA_CALIBRATION_coord_scale",
+  "CAMERA_CALIBRATION_H_HI",
+  "CAMERA_CALIBRATION_H_LO",
+  "CAMERA_CALIBRATION_image_bot_origin_location",
+  "CAMERA_CALIBRATION_invert_hue_selection",
+  "CAMERA_CALIBRATION_iteration",
+  "CAMERA_CALIBRATION_morph",
+  "CAMERA_CALIBRATION_S_HI",
+  "CAMERA_CALIBRATION_S_LO",
+  "CAMERA_CALIBRATION_total_rotation_angle",
+  "CAMERA_CALIBRATION_V_HI",
+  "CAMERA_CALIBRATION_V_LO",
+  "WEED_DETECTOR_blur",
+  "WEED_DETECTOR_H_HI",
+  "WEED_DETECTOR_H_LO",
+  "WEED_DETECTOR_iteration",
+  "WEED_DETECTOR_morph",
+  "WEED_DETECTOR_S_HI",
+  "WEED_DETECTOR_S_LO",
+  "WEED_DETECTOR_V_HI",
+  "WEED_DETECTOR_V_LO"
+];
 
 /** Sometimes, ENV var values are not available but rendering must still be
  * performed. This map provides a set of defaults for every ENV var. */
 export const DEFAULTS: WD_ENV = {
-  H_LO: 30,
-  S_LO: 50,
-  V_LO: 50,
-  H_HI: 90,
-  S_HI: 255,
-  V_HI: 255,
-  blur: 15,
-  morph: 6,
-  iteration: 4,
-  camera_offset_x: 0,
-  camera_offset_y: 0,
-  coord_scale: 0,
-  calibration_object_separation: 0,
-  total_rotation_angle: 0,
-  invert_hue_selection: SPECIAL_VALUES.FALSE,
-  calibration_along_axis: SPECIAL_VALUES.X,
-  image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT
+  CAMERA_CALIBRATION_blur: 15,
+  CAMERA_CALIBRATION_calibration_along_axis: SPECIAL_VALUES.X,
+  CAMERA_CALIBRATION_calibration_object_separation: 0,
+  CAMERA_CALIBRATION_camera_offset_x: 0,
+  CAMERA_CALIBRATION_camera_offset_y: 0,
+  CAMERA_CALIBRATION_coord_scale: 0,
+  CAMERA_CALIBRATION_H_HI: 90,
+  CAMERA_CALIBRATION_H_LO: 30,
+  CAMERA_CALIBRATION_image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT,
+  CAMERA_CALIBRATION_invert_hue_selection: SPECIAL_VALUES.FALSE,
+  CAMERA_CALIBRATION_iteration: 4,
+  CAMERA_CALIBRATION_morph: 6,
+  CAMERA_CALIBRATION_S_HI: 255,
+  CAMERA_CALIBRATION_S_LO: 50,
+  CAMERA_CALIBRATION_total_rotation_angle: 0,
+  CAMERA_CALIBRATION_V_HI: 255,
+  CAMERA_CALIBRATION_V_LO: 50,
+  WEED_DETECTOR_blur: 15,
+  WEED_DETECTOR_H_HI: 90,
+  WEED_DETECTOR_H_LO: 30,
+  WEED_DETECTOR_iteration: 4,
+  WEED_DETECTOR_morph: 6,
+  WEED_DETECTOR_S_HI: 255,
+  WEED_DETECTOR_S_LO: 50,
+  WEED_DETECTOR_V_HI: 255,
+  WEED_DETECTOR_V_LO: 50,
 };
 
 export const DEFAULT_FORMATTER: Translation = {
   format: (key, val): number | string => {
     switch (key) {
-      case "invert_hue_selection":
-      case "calibration_along_axis":
-      case "image_bot_origin_location":
+      case "CAMERA_CALIBRATION_calibration_along_axis":
+      case "CAMERA_CALIBRATION_image_bot_origin_location":
+      case "CAMERA_CALIBRATION_invert_hue_selection":
         return ("" + (SPECIAL_VALUES[val] || val));
       default:
         return val;

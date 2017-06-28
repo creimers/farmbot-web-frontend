@@ -37,7 +37,10 @@ interface Props {
   onSliderChange(key: EnvKey, value: number): void;
 }
 
-type BMI = "blur" | "morph" | "iteration";
+type BMI =
+  | "CAMERA_CALIBRATION_blur"
+  | "CAMERA_CALIBRATION_morph"
+  | "CAMERA_CALIBRATION_iteration";
 
 let onCommit = (BMI: BMI) => (e: React.SyntheticEvent<HTMLInputElement>) => {
   console.log("WOW")
@@ -60,9 +63,9 @@ export function WeedDetectorBody({
 }: Props) {
   /** Mapping of HSV values to FBOS Env variables. */
   let CHANGE_MAP: Record<HSV, [EnvKey, EnvKey]> = {
-    H: ["H_LO", "H_HI"],
-    S: ["S_LO", "S_HI"],
-    V: ["V_LO", "V_HI"]
+    H: ["CAMERA_CALIBRATION_H_LO", "CAMERA_CALIBRATION_H_HI"],
+    S: ["CAMERA_CALIBRATION_S_LO", "CAMERA_CALIBRATION_S_HI"],
+    V: ["CAMERA_CALIBRATION_V_LO", "CAMERA_CALIBRATION_V_HI"]
   }
 
   let onChange = (key: HSV) => (values: [number, number]) => {
@@ -128,8 +131,8 @@ export function WeedDetectorBody({
         <BlurableInput type="number"
           min={RANGES.BLUR.LOWEST}
           max={RANGES.BLUR.HIGHEST}
-          onCommit={onCommit("blur")}
-          value={"" + envGet("blur", env)} />
+          onCommit={onCommit("CAMERA_CALIBRATION_blur")}
+          value={"" + envGet("CAMERA_CALIBRATION_blur", env)} />
       </div>
 
       <div className="col-md-4 col-sm-4">
@@ -137,16 +140,16 @@ export function WeedDetectorBody({
         <BlurableInput type="number"
           min={RANGES.MORPH.LOWEST}
           max={RANGES.MORPH.HIGHEST}
-          onCommit={onCommit("morph")}
-          value={"" + envGet("morph", env)} />
+          onCommit={onCommit("CAMERA_CALIBRATION_morph")}
+          value={"" + envGet("CAMERA_CALIBRATION_morph", env)} />
       </div>
       <div className="col-md-4 col-sm-4">
         <label>{t("ITERATION")}</label>
         <BlurableInput type="number"
           min={RANGES.ITERATION.LOWEST}
           max={RANGES.ITERATION.HIGHEST}
-          onCommit={onCommit("iteration")}
-          value={"" + envGet("iteration", env)} />
+          onCommit={onCommit("CAMERA_CALIBRATION_iteration")}
+          value={"" + envGet("CAMERA_CALIBRATION_iteration", env)} />
       </div>
     </div>
     <button className="green"

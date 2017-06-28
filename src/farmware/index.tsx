@@ -34,12 +34,12 @@ export class FarmwarePage extends React.Component<FarmwareProps, void> {
             currentImage={this.props.currentImage}
             images={this.props.images}
             env={this.props.env}
-            H_LO={envGet("H_LO", this.props.env)}
-            S_LO={envGet("S_LO", this.props.env)}
-            V_LO={envGet("V_LO", this.props.env)}
-            H_HI={envGet("H_HI", this.props.env)}
-            S_HI={envGet("S_HI", this.props.env)}
-            V_HI={envGet("V_HI", this.props.env)} />
+            H_LO={envGet("CAMERA_CALIBRATION_H_LO", this.props.env)}
+            S_LO={envGet("CAMERA_CALIBRATION_S_LO", this.props.env)}
+            V_LO={envGet("CAMERA_CALIBRATION_V_LO", this.props.env)}
+            H_HI={envGet("CAMERA_CALIBRATION_H_HI", this.props.env)}
+            S_HI={envGet("CAMERA_CALIBRATION_S_HI", this.props.env)}
+            V_HI={envGet("CAMERA_CALIBRATION_V_HI", this.props.env)} />
         </Col>
         <Col xs={12} sm={5} smOffset={1}>
           <WeedDetector {...this.props} />
