@@ -35,6 +35,9 @@ export interface CameraCalibrationProps {
   currentImage: TaggedImage | undefined;
   onProcessPhoto(id: number): void;
   env: Partial<WD_ENV>;
+  iteration: number;
+  morph: number;
+  blur: number;
   H_LO: number;
   S_LO: number;
   V_LO: number;

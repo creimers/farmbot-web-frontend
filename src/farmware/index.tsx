@@ -34,6 +34,9 @@ export class FarmwarePage extends React.Component<FarmwareProps, void> {
             currentImage={this.props.currentImage}
             images={this.props.images}
             env={this.props.env}
+            iteration={envGet("CAMERA_CALIBRATION_iteration", this.props.env)}
+            morph={envGet("CAMERA_CALIBRATION_morph", this.props.env)}
+            blur={envGet("CAMERA_CALIBRATION_blur", this.props.env)}
             H_LO={envGet("CAMERA_CALIBRATION_H_LO", this.props.env)}
             S_LO={envGet("CAMERA_CALIBRATION_S_LO", this.props.env)}
             V_LO={envGet("CAMERA_CALIBRATION_V_LO", this.props.env)}
