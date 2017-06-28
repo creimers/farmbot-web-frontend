@@ -55,7 +55,6 @@ describe("formatEnvKey()", () => {
 
 describe("parseEnvKey()", () => {
   it("makes stuff a number again", () => {
-    pending("getSpecialValue() might be broke");
     let ex = {
       CAMERA_CALIBRATION_calibration_along_axis: "\"Y\"",
       CAMERA_CALIBRATION_S_LO: "33",

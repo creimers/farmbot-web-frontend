@@ -19,7 +19,6 @@ describe("DEFAULT_FORMATTER", () => {
   });
 
   it("parses OK inputs (special)", () => {
-    pending("Why is this broke?");
     let result = DEFAULT_FORMATTER.parse("CAMERA_CALIBRATION_morph", "true");
     expect(result).toEqual(1);
   });
