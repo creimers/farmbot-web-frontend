@@ -1,6 +1,6 @@
 import * as React from "react";
 import { selectSequence } from "./actions";
-import { SequencesListProps } from "./interfaces";
+import { SequencesListProps, SequencesListState } from "./interfaces";
 import { isMobile, sortResourcesById } from "../util";
 import { Link } from "react-router";
 import { Row, Col, ToolTip } from "../ui/index";
@@ -38,7 +38,17 @@ let buttonList = (dispatch: Function) =>
     }
   };
 
-export class SequencesList extends React.Component<SequencesListProps, {}> {
+export class SequencesList extends
+  React.Component<SequencesListProps, SequencesListState> {
+
+  state: SequencesListState = {
+    searchTerm: ""
+  };
+
+  onChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    this.setState({ searchTerm: e.currentTarget.value });
+  }
+
   emptySequence = (): TaggedSequence => {
     return {
       kind: "sequences",
@@ -55,6 +65,8 @@ export class SequencesList extends React.Component<SequencesListProps, {}> {
 
   render() {
     let { sequences, dispatch } = this.props;
+    let searchTerm = this.state.searchTerm.toLowerCase();
+
     return <div className="sequence-list">
       <h3>
         <i>{t("Sequences")}</i>
@@ -64,9 +76,17 @@ export class SequencesList extends React.Component<SequencesListProps, {}> {
         onClick={() => dispatch(init(this.emptySequence()))}>
         <i className="fa fa-plus" />
       </button>
+      <input
+        onChange={this.onChange}
+        placeholder={t("Search Sequences...")}
+      />
       <Row>
         <Col xs={12}>
-          {sortResourcesById(sequences).map(buttonList(dispatch))}
+          {
+            sortResourcesById(sequences)
+              .filter(seq => seq.body.name.toLowerCase().includes(searchTerm))
+              .map(buttonList(dispatch))
+          }
         </Col>
       </Row>
     </div>;
