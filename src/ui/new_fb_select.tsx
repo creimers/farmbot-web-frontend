@@ -35,11 +35,13 @@ export class FBSelect extends React.Component<Props, {}> {
   render() {
     let placeholder = this.props.placeholder || "Search...";
 
-    return <FilterSearch
-      selectedItem={this.item}
-      items={this.items}
-      onChange={this.props.onChange}
-      placeholder={placeholder}
-    />;
+    return <div className="filter-search">
+      <FilterSearch
+        selectedItem={this.item}
+        items={this.items}
+        onChange={this.props.onChange}
+        placeholder={placeholder}
+      />
+    </div>;
   }
 }

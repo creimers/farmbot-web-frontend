@@ -156,8 +156,10 @@
   }
 }
 
-.add-farm-event-panel button,
-.edit-farm-event-panel button {
+.add-farm-event-panel button.red,
+.edit-farm-event-panel button.red,
+.add-farm-event-panel button.magenta,
+.edit-farm-event-panel button.magenta {
   margin-top: 1rem;
   margin-left: 1rem;
 }

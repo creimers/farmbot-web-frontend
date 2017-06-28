@@ -53,11 +53,11 @@ export class FilterSearch extends React.Component<Props, State> {
     );
   }
 
-  private renderItem({ handleClick, isActive, item }: ISelectItemRendererProps<DropDownItem>) {
+  private renderItem({ handleClick, item, index }: ISelectItemRendererProps<DropDownItem>) {
     return (
       <MenuItem
         className={"filter-search-item"}
-        key={item.value}
+        key={item.value || index}
         onClick={handleClick}
         text={`${item.label}`}
       />

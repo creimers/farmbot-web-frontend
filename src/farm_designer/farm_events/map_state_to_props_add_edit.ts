@@ -115,6 +115,7 @@ export function mapStateToPropsAddEdit(props: Everything): AddEditFarmEventProps
     value: 0,
     executable_type: "Regimen"
   });
+
   selectAllRegimens(props.resources.index).map(regimen => {
     // TODO: Remove executable_type from obj since it's
     // not declared in the interface.
@@ -133,6 +134,7 @@ export function mapStateToPropsAddEdit(props: Everything): AddEditFarmEventProps
     value: 0,
     executable_type: "Sequence"
   });
+
   selectAllSequences(props.resources.index).map(sequence => {
     // TODO: Remove executable_type from obj since it's
     // not declared in the interface.
