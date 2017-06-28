@@ -8,7 +8,7 @@ import { CameraCalibration } from "./camera_calibration";
 import { FarmwareProps } from "../devices/interfaces";
 import { detectWeeds } from "../images/actions";
 import { WeedDetector } from "../images/weed_detector/index";
-import { envGet } from "../images/weed_detector/remote_env";
+import { envGet } from "../images/weed_detector/remote_env/selectors";
 
 @connect(mapStateToProps)
 export class FarmwarePage extends React.Component<FarmwareProps, void> {

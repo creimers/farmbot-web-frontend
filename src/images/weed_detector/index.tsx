@@ -13,12 +13,9 @@ import { FarmwareProps } from "../../devices/interfaces";
 import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./body";
-import {
-  WD_ENV,
-  envSave,
-  WDENVKey as ENVKey,
-  envGet
-} from "./remote_env";
+import { WD_ENV, WDENVKey as ENVKey } from "./remote_env/interfaces";
+import { envGet } from "./remote_env/selectors";
+import { envSave } from "./remote_env/actions";
 
 @connect(mapStateToProps)
 export class WeedDetector

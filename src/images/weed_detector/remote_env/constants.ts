@@ -1,11 +1,6 @@
-import {
-  WD_ENV,
-  FormatTranslationMap,
-  WDENVKey,
-  Translation
-} from "../remote_env";
 import { box } from "boxed_value";
 import * as _ from "lodash";
+import { WDENVKey, WD_ENV, Translation, FormatTranslationMap } from "./interfaces";
 
 /** I would rather not deal with all the weird edge cases that come with
  * supporting strings and numbers right now. It adds too many edge cases for the

@@ -1,10 +1,6 @@
-import {
-  WDENVKey,
-  TRANSLATORS,
-  DEFAULT_FORMATTER,
-  SPECIAL_VALUES
-} from "../remote_env";
 import * as _ from "lodash";
+import { TRANSLATORS, DEFAULT_FORMATTER } from "./constants";
+import { WDENVKey } from "./interfaces";
 
 /** Translate values before sending to weed detector. FE => FBOS. */
 export function formatEnvKey(key: WDENVKey, value: number) {

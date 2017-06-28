@@ -4,11 +4,13 @@ import { DropDownItem } from "../../ui/fb_select";
 import { Row, Col, NULL_CHOICE } from "../../ui/index";
 import { FBSelect } from "../../ui/new_fb_select";
 import { SettingsMenuProps } from "./interfaces";
-import { WD_ENV, SPECIAL_VALUES, envGet } from "./remote_env";
 import * as _ from "lodash";
 import { BlurableInput } from "../../ui/blurable_input";
 import { fancyDebug } from "../../util";
 import { SPECIAL_VALUE_DDI, CALIBRATION_DROPDOWNS, ORIGIN_DROPDOWNS } from "./constants";
+import { WD_ENV } from "./remote_env/interfaces";
+import { envGet } from "./remote_env/selectors";
+import { SPECIAL_VALUES } from "./remote_env/constants";
 
 export function WeedDetectorConfig(props: SettingsMenuProps) {
   let NumberBox = ({ conf, label }: {

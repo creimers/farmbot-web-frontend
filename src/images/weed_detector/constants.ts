@@ -1,5 +1,5 @@
 import { DropDownItem } from "../../ui/index";
-import { SPECIAL_VALUES } from "./remote_env";
+import { SPECIAL_VALUES } from "./remote_env/constants";
 
 /** Translates SPECIAL_VALUEs into drop down items. */
 export const SPECIAL_VALUE_DDI = {

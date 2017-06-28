@@ -6,12 +6,9 @@ import { HSV } from "../interfaces";
 import { WeedDetectorSlider } from "./slider";
 import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
-import {
-  WDENVKey as EnvKey,
-  envSave,
-  WD_ENV,
-  envGet
-} from "./remote_env";
+import { WDENVKey as EnvKey, WD_ENV } from "./remote_env/interfaces";
+import { envSave } from "./remote_env/actions";
+import { envGet } from "./remote_env/selectors";
 
 const RANGES = {
   H: { LOWEST: 0, HIGHEST: 179 },

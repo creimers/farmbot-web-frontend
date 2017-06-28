@@ -1,6 +1,6 @@
-import { WD_ENV as ENV } from "./remote_env";
+import { WD_ENV } from "./remote_env/interfaces";
 
 export interface SettingsMenuProps {
-  values: Partial<ENV>;
-  onChange(key: keyof ENV, value: number): void;
+  values: Partial<WD_ENV>;
+  onChange(key: keyof WD_ENV, value: number): void;
 }

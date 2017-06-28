@@ -1,7 +1,7 @@
 import { BotState } from "../devices/interfaces";
 import { TaggedImage } from "../resources/tagged_resources";
 import { SyncStatus, Dictionary, FarmwareManifest } from "farmbot/dist";
-import { WD_ENV } from "../images/weed_detector/remote_env";
+import { WD_ENV } from "../images/weed_detector/remote_env/interfaces";
 
 export interface FWState {
   selectedFarmware: string | undefined;
