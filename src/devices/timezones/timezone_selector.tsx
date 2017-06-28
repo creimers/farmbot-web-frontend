@@ -2,8 +2,7 @@ import * as React from "react";
 import { DropDownItem } from "../../ui/fb_select";
 import { list } from "./tz_list";
 import { inferTimezone } from "./guess_timezone";
-import { FilterSearch } from "../../ui/index";
-import { FBSelect } from "../../ui/index";
+import { FBSelect } from "../../ui/new_fb_select";
 
 const CHOICES: DropDownItem[] = list.map(x => ({ label: x, value: x }));
 
