@@ -14,7 +14,7 @@ interface Props {
 }
 
 interface State {
-  item?: DropDownItem;
+  item?: DropDownItem | undefined;
   filterable?: boolean;
   minimal?: boolean;
   resetOnSelect?: boolean;
@@ -22,12 +22,8 @@ interface State {
 
 export class FilterSearch extends React.Component<Props, State> {
 
-  componentWillReceiveProps() {
-    this.setState({ item: this.props.selectedItem });
-  }
-
   public state: State = {
-    item: undefined,
+    item: this.props.selectedItem,
     filterable: true,
     minimal: false,
     resetOnSelect: false
@@ -53,15 +49,14 @@ export class FilterSearch extends React.Component<Props, State> {
     );
   }
 
-  private renderItem({ handleClick, item, index }: ISelectItemRendererProps<DropDownItem>) {
-    return (
-      <MenuItem
-        className={"filter-search-item"}
-        key={item.value || index}
-        onClick={handleClick}
-        text={`${item.label}`}
-      />
-    );
+  private renderItem(params: ISelectItemRendererProps<DropDownItem>) {
+    let { handleClick, item, index } = params;
+    return <MenuItem
+      className={"filter-search-item"}
+      key={item.label || index}
+      onClick={handleClick}
+      text={`${item.label}`}
+    />
   }
 
   private filter(query: string, item: DropDownItem, index: number) {
@@ -72,6 +67,6 @@ export class FilterSearch extends React.Component<Props, State> {
   private handleValueChange = (item: DropDownItem) => {
     this.props.onChange(item);
     this.setState({ item })
-  };
+  }
 
 }

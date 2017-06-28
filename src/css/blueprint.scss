@@ -49,7 +49,9 @@
   }
 }
 
-.pt-button {
+.pt-button:not(.pt-minimal) {
+  font-weight: normal;
+  text-transform: none;
   background: $white;
   border-radius: 0;
   font-size: 1.2rem !important;
@@ -66,4 +68,17 @@
   &:hover {
     background: $white !important;
   }
+}
+
+.pt-popover-target {
+  position: relative;
+  display: block;
+  * {
+    text-align: left;
+  }
+}
+
+.pt-icon-standard.pt-align-right {
+  float: right !important;
+  margin-top: 0.6rem !important;
 }

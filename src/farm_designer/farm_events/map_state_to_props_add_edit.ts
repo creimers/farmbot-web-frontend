@@ -22,8 +22,9 @@ import {
   TaggedRegimen
 } from "../../resources/tagged_resources";
 
-/** TODO: Not a fan of this one, but don't have time to refactor today.
- *  DropDownItem[]s should not know what a Regimen is. - RC Apr '17.
+/**
+ * TODO: Not a fan of this one, but don't have time to refactor today.
+ * DropDownItem[]s should not know what a Regimen is. - RC Apr '17.
  *
  * PROBLEM: Drop down item had an id of '6'. But that `id` could have been for a
  *          "regimen" or a "sequence". There's no way to diferentiate as a user
@@ -38,7 +39,8 @@ import {
  *                 would tell us which heading the DropDownItem came from. we
  *                 could infer the `executable_type` based on the heading it
  *                 was under. Then do a `groupBy` inside
- *                 of <FBSelect/>*/
+ *                 of <FBSelect/>
+ */
 export interface TightlyCoupledFarmEventDropDown {
   label: string;
   executable_type: "Regimen" | "Sequence";

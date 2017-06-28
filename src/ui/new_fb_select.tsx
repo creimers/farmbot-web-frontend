@@ -25,20 +25,13 @@ export class FBSelect extends React.Component<Props, {}> {
 
   get item() { return this.props.selectedItem || NULL_CHOICE; }
 
-  get items() {
-    return this.props.list.map((option: DropDownItem, i) => {
-      // let isHeading = option.heading ? "is-heading" : "";
-      return { label: option.label, value: option.value };
-    })
-  }
-
   render() {
     let placeholder = this.props.placeholder || "Search...";
 
     return <div className="filter-search">
       <FilterSearch
         selectedItem={this.item}
-        items={this.items}
+        items={this.props.list}
         onChange={this.props.onChange}
         placeholder={placeholder}
       />

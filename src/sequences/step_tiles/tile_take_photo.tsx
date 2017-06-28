@@ -4,7 +4,6 @@ import { StepTitleBar } from "./step_title_bar";
 import { Help } from "../../ui";
 import { splice, remove } from "./index";
 import { t } from "i18next";
-import { StepInputBox } from "../inputs/step_input_box";
 import { Link } from "react-router";
 import { ToolTips } from "../../constants";
 
@@ -34,10 +33,10 @@ export function TileTakePhoto({ dispatch, currentStep, index, currentSequence }:
         <div className="col-sm-12">
           <div className="step-content take-photo-step">
             <div className="row">
-              <div className="col-xs-6 col-md-3">
+              <div className="col-xs-12">
                 <p>
-                  Photos are viewable from the <Link to="/app/device"> &nbsp;
-                  devices page</Link>.
+                  Photos are viewable from the <Link to="/app/device">
+                    devices page</Link>.
                 </p>
               </div>
             </div>

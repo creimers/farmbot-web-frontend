@@ -34,7 +34,7 @@ export function TileExecuteScript({ dispatch, currentStep, index, currentSequenc
           <div className="col-sm-12">
             <div className="step-content execute-script-step">
               <div className="row">
-                <div className="col-xs-6 col-md-8">
+                <div className="col-xs-12">
                   <label>{t("Package Name")}</label>
                   <input type="text" value={currentStep.args.label} disabled={true} />
                   <small>NOTE: Support for customizable scripts is coming soon.</small>
