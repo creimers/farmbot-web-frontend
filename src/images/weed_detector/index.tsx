@@ -12,7 +12,7 @@ import { HSV } from "../index";
 import { FarmwareProps } from "../../devices/interfaces";
 import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
-import { WeedDetectorBody } from "./body";
+import { ImageWorkspace } from "./image_workspace";
 import { WD_ENV, WDENVKey as ENVKey } from "./remote_env/interfaces";
 import { envGet } from "./remote_env/selectors";
 import { envSave } from "./remote_env/actions";
@@ -67,13 +67,22 @@ export class WeedDetector
           />
           <Row>
             <Col sm={12}>
-              <WeedDetectorBody
+              onFlip
+              onProcessPhoto
+              currentImage
+              images
+              onChange
+              <ImageWorkspace
                 onProcessPhoto={(id) => { this.props.dispatch(detectWeeds(id)); }}
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}
                 images={this.props.images}
-                onSliderChange={envSave}
-                env={this.props.env}
+                onChange={() => {
+                  envSave;
+                }}
+                iteration={-123}
+                morph={-123}
+                blur={-123}
                 H_LO={envGet("CAMERA_CALIBRATION_H_LO", this.props.env)}
                 H_HI={envGet("CAMERA_CALIBRATION_H_HI", this.props.env)}
                 S_LO={envGet("CAMERA_CALIBRATION_S_LO", this.props.env)}
