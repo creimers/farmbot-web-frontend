@@ -2,26 +2,29 @@ import * as React from "react";
 
 import { Button, Classes, MenuItem } from "@blueprintjs/core";
 import { ISelectItemRendererProps, Select } from "@blueprintjs/labs";
+import { DropDownItem } from "./fb_select";
 
-const SelectComponent = Select.ofType<any>();
-
-interface Item {
-  label: string;
-  value: string | number;
-}
+const SelectComponent = Select.ofType<DropDownItem>();
 
 interface Props {
-  items: Item[];
+  items: DropDownItem[];
+  selectedItem: DropDownItem;
+  onChange: (item: DropDownItem) => void;
+  placeholder?: string;
 }
 
 interface State {
-  item?: Item;
+  item?: DropDownItem;
   filterable?: boolean;
   minimal?: boolean;
   resetOnSelect?: boolean;
 }
 
 export class FilterSearch extends React.Component<Props, State> {
+
+  componentWillReceiveProps() {
+    this.setState({ item: this.props.selectedItem });
+  }
 
   public state: State = {
     item: undefined,
@@ -50,10 +53,10 @@ export class FilterSearch extends React.Component<Props, State> {
     );
   }
 
-  private renderItem({ handleClick, isActive, item: item }: ISelectItemRendererProps<Item>) {
+  private renderItem({ handleClick, isActive, item }: ISelectItemRendererProps<DropDownItem>) {
     return (
       <MenuItem
-        className={"filter-search"}
+        className={"filter-search-item"}
         key={item.value}
         onClick={handleClick}
         text={`${item.label}`}
@@ -61,11 +64,14 @@ export class FilterSearch extends React.Component<Props, State> {
     );
   }
 
-  private filter(query: string, item: any, index: number) {
+  private filter(query: string, item: DropDownItem, index: number) {
     return `${index + 1}. ${item.label.toLowerCase()}`
       .indexOf(query.toLowerCase()) >= 0;
   }
 
-  private handleValueChange = (item: any) => this.setState({ item });
+  private handleValueChange = (item: DropDownItem) => {
+    this.props.onChange(item);
+    this.setState({ item })
+  };
 
 }

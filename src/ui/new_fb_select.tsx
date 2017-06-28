@@ -1,5 +1,6 @@
 import * as React from "react";
 import { DropDownItem } from "./fb_select";
+import { FilterSearch } from "./filter_search";
 
 interface Props {
   /** Value to show. */
@@ -14,68 +15,31 @@ interface Props {
   placeholder?: string | undefined;
 }
 
-type State = {
-  isOpen: boolean;
-}
-
-export interface SelectState {
-  isOpen: boolean;
-}
-
-type OptionComponent =
-  | React.ComponentClass<DropDownItem>
-  | React.StatelessComponent<DropDownItem>
-
 /** Used as a placeholder for a selection of "none" when allowEmpty is true. */
 export const NULL_CHOICE: DropDownItem = Object.freeze({
   label: "None",
   value: ""
 });
 
-export class FBSelect extends React.Component<Props, Partial<State>> {
-
-  state: State = { isOpen: false };
-
-  get list() {
-    let orig = this.props.list;
-    return (this.props.allowEmpty) ? orig.concat([NULL_CHOICE]) : orig;
-  }
+export class FBSelect extends React.Component<Props, {}> {
 
   get item() { return this.props.selectedItem || NULL_CHOICE; }
 
-  toggleDropdown = () => this.setState({ isOpen: !this.state.isOpen });
+  get items() {
+    return this.props.list.map((option: DropDownItem, i) => {
+      // let isHeading = option.heading ? "is-heading" : "";
+      return { label: option.label, value: option.value };
+    })
+  }
 
   render() {
-    let { isOpen } = this.state;
     let placeholder = this.props.placeholder || "Search...";
 
-    return <div className="select" onClick={this.toggleDropdown}>
-      <div className="select-search-container">
-        <input
-          type="text"
-          readOnly={true}
-          placeholder={placeholder}
-          value={this.item.label}
-        />
-      </div>
-      <div
-        className={"select-results-container is-open-" + !!isOpen}>
-        {this.list.map((option: DropDownItem, i) => {
-          let { label } = option;
-          let isHeading = option.heading ? "is-heading" : "";
-          return <div
-            key={i}
-            className={"select-result " + isHeading}
-            onMouseDown={() => {
-              this.setState({ isOpen: false });
-              this.props.onChange(option);
-            }}>
-            <label>
-              {label}
-            </label>
-          </div>;
-        })}
-      </div>
-    </div>;
+    return <FilterSearch
+      selectedItem={this.item}
+      items={this.items}
+      onChange={this.props.onChange}
+      placeholder={placeholder}
+    />;
   }
 }
