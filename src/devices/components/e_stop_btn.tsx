@@ -17,7 +17,7 @@ export class EStopButton extends React.Component<EStopButtonProps, {}> {
 
     if (this.props.user) {
       return <button
-        className={`red e-stop ${emergencyLockStatusColor}`}
+        className={`fb-button red e-stop ${emergencyLockStatusColor}`}
         onClick={toggleEmergencyLock}>
         {t(emergencyLockStatusText)}
       </button>;

@@ -9,7 +9,10 @@ export class Settings extends React.Component<SettingsPropTypes, {}> {
     return <Widget>
       <WidgetHeader title="Account Settings">
         <button
-          className="green" type="button" onClick={save}>
+          className="green fb-button"
+          type="button"
+          onClick={save}
+        >
           {t("SAVE")}
         </button>
       </WidgetHeader>

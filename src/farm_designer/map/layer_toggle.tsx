@@ -8,7 +8,7 @@ interface LayerTogleProps {
 
 /** A flipper type switch for showing/hiding the layers of the garden map. */
 export function LayerToggle({ label, value, onClick }: LayerTogleProps) {
-  let klassName = "toggle-button " + (value ? "green" : "red");
+  let klassName = "fb-button fb-toggle-button " + (value ? "green" : "red");
   return <fieldset>
     <label>
       <span>{label}</span>

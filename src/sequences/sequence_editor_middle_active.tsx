@@ -74,14 +74,22 @@ export class SequenceEditorMiddleActive
         isSaved={isSaved}
         onClick={() => { dispatch(save(sequence.uuid)); }}
       />
-      <button className="orange" onClick={performSeq(dispatch, sequence)}>
+      <button
+        className="fb-button orange"
+        onClick={performSeq(dispatch, sequence)}
+      >
         {t("Save & Run")}
       </button>
-      <button className="red"
-        onClick={() => dispatch(destroy(sequence.uuid))}>
+      <button
+        className="fb-button red"
+        onClick={() => dispatch(destroy(sequence.uuid))}
+      >
         {t("Delete")}
       </button>
-      <button className="yellow" onClick={copy(dispatch, sequence)}>
+      <button
+        className="fb-button yellow"
+        onClick={copy(dispatch, sequence)}
+      >
         {t("Copy")}
       </button>
       <Row>

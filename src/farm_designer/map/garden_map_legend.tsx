@@ -36,12 +36,12 @@ export function GardenMapLegend(props: GardenMapLegendProps) {
     <div className="content">
       <div className="zoom-buttons">
         <button
-          className={"plus-button green top " + plusBtnClass}
+          className={"fb-button plus-button green top " + plusBtnClass}
           onClick={zoom(0.1)}>
           <i className="fa fa-2x fa-plus" />
         </button>
         <button
-          className={"plus-button green bottom " + minusBtnClass}
+          className={"fb-button plus-button green bottom " + minusBtnClass}
           onClick={zoom(-0.1)}>
           <i className="fa fa-2x fa-minus" />
         </button>

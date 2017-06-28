@@ -9,9 +9,11 @@ interface Props {
 
 export function LockableButton({ onClick, disabled, children }: Props) {
   let className = disabled ? "gray" : "yellow";
-  return <button className={className}
+  return <button
+    className={"fb-button " + className}
     disabled={disabled}
-    onClick={() => disabled ? "" : onClick()}>
+    onClick={() => disabled ? "" : onClick()}
+  >
     {children}
   </button>;
 };

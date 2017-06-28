@@ -77,7 +77,7 @@ export class Peripherals extends React.Component<PeripheralsProps, PeripheralSta
     return <Widget className="peripherals-widget">
       <WidgetHeader title={"Peripherals"} helpText={ToolTips.PERIPHERALS}>
         <button
-          className="gray"
+          className="fb-button gray"
           onClick={this.toggle}
           hidden={!isSaved}>
           {!isEditing && t("Edit")}
@@ -92,7 +92,7 @@ export class Peripherals extends React.Component<PeripheralsProps, PeripheralSta
         />
         <button
           hidden={!isEditing}
-          className="green"
+          className="fb-button green"
           type="button"
           onClick={() => { dispatch(init(this.emptyPeripheral())) }}>
           <i className="fa fa-plus" />

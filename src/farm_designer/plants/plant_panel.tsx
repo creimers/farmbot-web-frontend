@@ -63,9 +63,10 @@ export function PlantPanel({ info, onDestroy }: PlantPanelProps) {
       </label>
     </div>
     <button
-      className="red"
+      className="fb-button red"
       hidden={!onDestroy}
-      onClick={destroy}>
+      onClick={destroy}
+    >
       {t("Delete")}
     </button>
   </div>;

@@ -11,7 +11,9 @@ import { t } from "i18next";
 
 let buttonList = (dispatch: Function) =>
   (ts: TaggedSequence, index: number) => {
-    let css = ["block-wrapper",
+    let css = [
+      "fb-button",
+      "block-wrapper",
       "block",
       "full-width",
       "text-left",
@@ -29,7 +31,8 @@ let buttonList = (dispatch: Function) =>
         {name}
       </Link>;
     } else {
-      return <button key={uuid}
+      return <button
+        key={uuid}
         onClick={click}
         className={css}>
         {name}
@@ -72,7 +75,7 @@ export class SequencesList extends
         <i>{t("Sequences")}</i>
       </h3>
       <ToolTip helpText={ToolTips.SEQUENCE_LIST} />
-      <button className="green"
+      <button className="fb-button green"
         onClick={() => dispatch(init(this.emptySequence()))}>
         <i className="fa fa-plus" />
       </button>

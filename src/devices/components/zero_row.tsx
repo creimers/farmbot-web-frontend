@@ -9,7 +9,10 @@ const zero = (axis: Axis) => devices.current.setZero(axis);
 const AXES: Axis[] = ["x", "y", "z"];
 
 export function ZeroButton({ axis }: { axis: Axis }) {
-  return <button className="yellow" onClick={() => zero(axis)}>
+  return <button
+    className="fb-button yellow"
+    onClick={() => zero(axis)}
+  >
     {t("zero {{axis}}", { axis })}
   </button>;
 }

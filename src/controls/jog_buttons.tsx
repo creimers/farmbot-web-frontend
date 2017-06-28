@@ -32,8 +32,10 @@ export class JogButtons extends React.Component<JogMovementControlsProps, {}> {
         </tr>
         <tr>
           <td>
-            <button className="i fa fa-home arrow-button"
-              onClick={() => homeAll(100)} />
+            <button
+              className="i fa fa-home arrow-button fb-button"
+              onClick={() => homeAll(100)}
+            />
           </td>
           <td />
           <td>

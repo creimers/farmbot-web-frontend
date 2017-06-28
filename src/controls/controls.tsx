@@ -47,7 +47,7 @@ export class Controls extends React.Component<Props, {}> {
                       {t("X Axis")}
                     </label>
                     <button
-                      className={"toggle-button " + xBtnColor}
+                      className={"fb-button toggle-button " + xBtnColor}
                       onClick={this.toggle("x")}
                     />
                   </fieldset>
@@ -56,7 +56,7 @@ export class Controls extends React.Component<Props, {}> {
                       {t("Y Axis")}
                     </label>
                     <button
-                      className={"toggle-button " + yBtnColor}
+                      className={"fb-button toggle-button " + yBtnColor}
                       onClick={this.toggle("y")}
                     />
                   </fieldset>
@@ -65,7 +65,7 @@ export class Controls extends React.Component<Props, {}> {
                       {t("Z Axis")}
                     </label>
                     <button
-                      className={"toggle-button " + zBtnColor}
+                      className={"fb-button toggle-button " + zBtnColor}
                       onClick={this.toggle("z")}
                     />
                   </fieldset>

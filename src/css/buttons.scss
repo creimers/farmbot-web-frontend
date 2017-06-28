@@ -1,4 +1,4 @@
-button {
+.fb-button {
   font-size: 1rem;
   float: right;
   text-transform: uppercase;
@@ -33,7 +33,7 @@ button {
     float: right;
     margin: 0.2rem 0px 0 0.6rem;
   }
-  &:active:not(.toggle-button) {
+  &:active:not(.fb-toggle-button) {
     box-shadow: none;
     transform: translateY(2px);
   }
@@ -103,7 +103,7 @@ button {
   }
 }
 
-.toggle-button {
+.fb-toggle-button {
   height: 1.8rem;
   position: relative;
   border-bottom: none !important;

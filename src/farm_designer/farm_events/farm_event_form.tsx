@@ -287,7 +287,7 @@ export class EditFEForm extends React.Component<Props, State> {
           isSaved={isSaved}
           onClick={this.commitViewModel}
         />
-        <button className="red"
+        <button className="fb-button red"
           onClick={() => {
             this.dispatch(destroy(fe.uuid)).then(() => {
               history.push("/app/designer/farm_events");

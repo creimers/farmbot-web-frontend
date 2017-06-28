@@ -171,7 +171,7 @@ export class Wow extends React.Component<Props, Partial<State>> {
                       </ul>
                       <div className="row">
                         <div className="col-xs-12">
-                          <button className="green">
+                          <button className="green fb-button">
                             {t("I Agree to the Terms of Service")}
                           </button>
                         </div>

@@ -66,7 +66,7 @@ export function RegimenEditorWidget({ current, dispatch, auth, calendar }:
       <CopyButton regimen={regimen} dispatch={dispatch} />
 
       {regimen && (
-        <button className="red"
+        <button className="fb-button red"
           onClick={remove({ dispatch, regimen, baseUrl })}>
           {t("Delete")}
         </button>

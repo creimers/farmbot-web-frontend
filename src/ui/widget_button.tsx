@@ -10,9 +10,12 @@ interface ButtonProps {
 }
 
 export function WidgetButton(props: ButtonProps) {
-  let classes = props.className;
+  let classes = props.className + " fb-button";
 
-  return <button className={classes} onClick={props.onClick}>
+  return <button
+    className={classes}
+    onClick={props.onClick}
+  >
     {t(props.text)}
   </button>;
 }

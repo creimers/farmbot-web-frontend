@@ -173,7 +173,11 @@ export class FarmbotOsSettings
                 </p>
               </Col>
               <Col xs={3}>
-                <button className="yellow" type="button" onClick={reboot}>
+                <button
+                  className="fb-button yellow"
+                  type="button"
+                  onClick={reboot}
+                >
                   {t("RESTART")}
                 </button>
               </Col>
@@ -191,7 +195,11 @@ export class FarmbotOsSettings
                 </p>
               </Col>
               <Col xs={3}>
-                <button className="red" type="button" onClick={powerOff}>
+                <button
+                  className="fb-button red"
+                  type="button"
+                  onClick={powerOff}
+                >
                   {t("SHUTDOWN")}
                 </button>
               </Col>
@@ -208,7 +216,11 @@ export class FarmbotOsSettings
                 </p>
               </Col>
               <Col xs={3}>
-                <button className="red" type="button" onClick={factoryReset} >
+                <button
+                  className="fb-button red"
+                  type="button"
+                  onClick={factoryReset}
+                >
                   {t("FACTORY RESET")}
                 </button>
               </Col>
