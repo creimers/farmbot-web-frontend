@@ -68,6 +68,13 @@
   &:hover {
     background: $white !important;
   }
+   :first-child {
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
 }
 
 .pt-popover-target {
