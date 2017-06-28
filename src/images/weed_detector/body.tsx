@@ -40,125 +40,115 @@ type BMI =
   | "CAMERA_CALIBRATION_iteration";
 
 let onCommit = (BMI: BMI) => (e: React.SyntheticEvent<HTMLInputElement>) => {
-  console.log("WOW")
   envSave(BMI, parseInt(e.currentTarget.value, 10) || 0);
 }
 
-export function WeedDetectorBody({
-  images,
-  env,
-  H_LO,
-  H_HI,
-  S_LO,
-  S_HI,
-  V_LO,
-  V_HI,
-  onSliderChange,
-  onProcessPhoto,
-  currentImage,
-  onFlip
-}: Props) {
-  /** Mapping of HSV values to FBOS Env variables. */
-  let CHANGE_MAP: Record<HSV, [EnvKey, EnvKey]> = {
-    H: ["CAMERA_CALIBRATION_H_LO", "CAMERA_CALIBRATION_H_HI"],
-    S: ["CAMERA_CALIBRATION_S_LO", "CAMERA_CALIBRATION_S_HI"],
-    V: ["CAMERA_CALIBRATION_V_LO", "CAMERA_CALIBRATION_V_HI"]
-  }
+const CHRIS_HALP = { "marginTop": 25 };
+/** Mapping of HSV values to FBOS Env variables. */
+let CHANGE_MAP: Record<HSV, [EnvKey, EnvKey]> = {
+  H: ["CAMERA_CALIBRATION_H_LO", "CAMERA_CALIBRATION_H_HI"],
+  S: ["CAMERA_CALIBRATION_S_LO", "CAMERA_CALIBRATION_S_HI"],
+  V: ["CAMERA_CALIBRATION_V_LO", "CAMERA_CALIBRATION_V_HI"]
+};
 
-  let onChange = (key: HSV) => (values: [number, number]) => {
-    let keys = CHANGE_MAP[key];
-    [0, 1].map(i => onSliderChange(keys[i], values[i]));
-  }
-
-  let processPhoto = () => {
-    let img = currentImage || images[0];
+export class WeedDetectorBody extends React.Component<Props, {}> {
+  maybeProcessPhoto = () => {
+    let img = this.props.currentImage || this.props.images[0];
     if (img && img.body.id) {
-      onProcessPhoto(img.body.id);
+      this.props.onProcessPhoto(img.body.id);
     }
+  };
+
+  onChange = (key: HSV) => (values: [number, number]) => {
+    let keys = CHANGE_MAP[key];
+    [0, 1].map(i => this.props.onSliderChange(keys[i], values[i]));
+  };
+
+  render() {
+    let { env, H_LO, H_HI, S_LO, S_HI, V_LO, V_HI } = this.props;
+
+    return <div className="widget-content">
+      <div className="row">
+        <div className="col-md-6 col-sm-12">
+          <h4>
+            <i>{t("Color Range")}</i>
+          </h4>
+          <label htmlFor="hue">{t("HUE")}</label>
+          <WeedDetectorSlider
+            onChange={this.onChange("H")}
+            onRelease={_.noop}
+            lowest={RANGES.H.LOWEST}
+            highest={RANGES.H.HIGHEST}
+            lowValue={H_LO}
+            highValue={H_HI} />
+          <label htmlFor="saturation">{t("SATURATION")}</label>
+          <WeedDetectorSlider
+            onChange={this.onChange("S")}
+            onRelease={_.noop}
+            lowest={RANGES.S.LOWEST}
+            highest={RANGES.S.HIGHEST}
+            lowValue={S_LO}
+            highValue={S_HI} />
+          <label htmlFor="value">{t("VALUE")}</label>
+          <WeedDetectorSlider
+            onChange={this.onChange("V")}
+            onRelease={_.noop}
+            lowest={RANGES.V.LOWEST}
+            highest={RANGES.V.HIGHEST}
+            lowValue={V_LO}
+            highValue={V_HI} />
+        </div>
+        <div className="col-md-6 col-sm-12">
+          <FarmbotColorPicker
+            h={[H_LO, H_HI]}
+            s={[S_LO, S_HI]}
+            v={[V_LO, V_HI]} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12 col-sm-12">
+          <h4>
+            <i>{t("Processing Parameters")}</i>
+          </h4>
+        </div>
+
+        <div className="col-md-4 col-sm-4">
+          <label>{t("BLUR")}</label>
+          <BlurableInput type="number"
+            min={RANGES.BLUR.LOWEST}
+            max={RANGES.BLUR.HIGHEST}
+            onCommit={onCommit("CAMERA_CALIBRATION_blur")}
+            value={"" + envGet("CAMERA_CALIBRATION_blur", env)} />
+        </div>
+
+        <div className="col-md-4 col-sm-4">
+          <label>{t("MORPH")}</label>
+          <BlurableInput type="number"
+            min={RANGES.MORPH.LOWEST}
+            max={RANGES.MORPH.HIGHEST}
+            onCommit={onCommit("CAMERA_CALIBRATION_morph")}
+            value={"" + envGet("CAMERA_CALIBRATION_morph", env)} />
+        </div>
+        <div className="col-md-4 col-sm-4">
+          <label>{t("ITERATION")}</label>
+          <BlurableInput type="number"
+            min={RANGES.ITERATION.LOWEST}
+            max={RANGES.ITERATION.HIGHEST}
+            onCommit={onCommit("CAMERA_CALIBRATION_iteration")}
+            value={"" + envGet("CAMERA_CALIBRATION_iteration", env)} />
+        </div>
+      </div>
+      <button className="green"
+        style={CHRIS_HALP}
+        title="Scan this image for Weeds"
+        onClick={this.maybeProcessPhoto}
+        hidden={!this.props.images.length}>
+        {t("Scan for Weeds")}
+      </button>
+      <ImageFlipper
+        onFlip={this.props.onFlip}
+        images={this.props.images}
+        currentImage={this.props.currentImage} />
+    </div>;
   }
-
-  const CHRIS_HALP = { "marginTop": 25 }
-  return <div className="widget-content">
-    <div className="row">
-      <div className="col-md-6 col-sm-12">
-        <h4>
-          <i>{t("Color Range")}</i>
-        </h4>
-        <label htmlFor="hue">{t("HUE")}</label>
-        <WeedDetectorSlider
-          onChange={onChange("H")}
-          onRelease={_.noop}
-          lowest={RANGES.H.LOWEST}
-          highest={RANGES.H.HIGHEST}
-          lowValue={H_LO}
-          highValue={H_HI} />
-        <label htmlFor="saturation">{t("SATURATION")}</label>
-        <WeedDetectorSlider
-          onChange={onChange("S")}
-          onRelease={_.noop}
-          lowest={RANGES.S.LOWEST}
-          highest={RANGES.S.HIGHEST}
-          lowValue={S_LO}
-          highValue={S_HI} />
-        <label htmlFor="value">{t("VALUE")}</label>
-        <WeedDetectorSlider
-          onChange={onChange("V")}
-          onRelease={_.noop}
-          lowest={RANGES.V.LOWEST}
-          highest={RANGES.V.HIGHEST}
-          lowValue={V_LO}
-          highValue={V_HI} />
-      </div>
-      <div className="col-md-6 col-sm-12">
-        <FarmbotColorPicker
-          h={[H_LO, H_HI]}
-          s={[S_LO, S_HI]}
-          v={[V_LO, V_HI]} />
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-md-12 col-sm-12">
-        <h4>
-          <i>{t("Processing Parameters")}</i>
-        </h4>
-      </div>
-
-      <div className="col-md-4 col-sm-4">
-        <label>{t("BLUR")}</label>
-        <BlurableInput type="number"
-          min={RANGES.BLUR.LOWEST}
-          max={RANGES.BLUR.HIGHEST}
-          onCommit={onCommit("CAMERA_CALIBRATION_blur")}
-          value={"" + envGet("CAMERA_CALIBRATION_blur", env)} />
-      </div>
-
-      <div className="col-md-4 col-sm-4">
-        <label>{t("MORPH")}</label>
-        <BlurableInput type="number"
-          min={RANGES.MORPH.LOWEST}
-          max={RANGES.MORPH.HIGHEST}
-          onCommit={onCommit("CAMERA_CALIBRATION_morph")}
-          value={"" + envGet("CAMERA_CALIBRATION_morph", env)} />
-      </div>
-      <div className="col-md-4 col-sm-4">
-        <label>{t("ITERATION")}</label>
-        <BlurableInput type="number"
-          min={RANGES.ITERATION.LOWEST}
-          max={RANGES.ITERATION.HIGHEST}
-          onCommit={onCommit("CAMERA_CALIBRATION_iteration")}
-          value={"" + envGet("CAMERA_CALIBRATION_iteration", env)} />
-      </div>
-    </div>
-    <button className="green"
-      style={CHRIS_HALP}
-      title="Scan this image for Weeds"
-      onClick={processPhoto}
-      hidden={!images.length}>
-      {t("Scan for Weeds")}
-    </button>
-    <ImageFlipper
-      onFlip={onFlip}
-      images={images}
-      currentImage={currentImage} />
-  </div>;
 }

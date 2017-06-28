@@ -30,7 +30,6 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
   };
 
   let setDDI = (k: keyof WD_ENV) => (d: DropDownItem) => {
-    console.log("Is this thing on?");
     if (_.isNumber(d.value)) {
       props.onChange(k, d.value);
     } else {
@@ -41,10 +40,6 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
   let find = (needle: keyof WD_ENV): DropDownItem => {
     let wow = envGet(needle, props.values);
     let ok = SPECIAL_VALUE_DDI[wow];
-    fancyDebug({ wow, ok, needle, SPECIAL_VALUE_DDI });
-    if (needle === "CAMERA_CALIBRATION_calibration_along_axis") {
-      debugger;
-    }
     return ok || NULL_CHOICE;
   }
   return <div className="additional-settings-menu"
