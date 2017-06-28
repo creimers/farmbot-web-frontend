@@ -53,16 +53,16 @@ export const EVERY_KEY: WDENVKey[] = [
 /** Sometimes, ENV var values are not available but rendering must still be
  * performed. This map provides a set of defaults for every ENV var. */
 export const DEFAULTS: WD_ENV = {
-  CAMERA_CALIBRATION_blur: 15,
   CAMERA_CALIBRATION_calibration_along_axis: SPECIAL_VALUES.X,
+  CAMERA_CALIBRATION_image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT,
+  CAMERA_CALIBRATION_invert_hue_selection: SPECIAL_VALUES.FALSE,
+  CAMERA_CALIBRATION_blur: 15,
   CAMERA_CALIBRATION_calibration_object_separation: 0,
   CAMERA_CALIBRATION_camera_offset_x: 0,
   CAMERA_CALIBRATION_camera_offset_y: 0,
   CAMERA_CALIBRATION_coord_scale: 0,
   CAMERA_CALIBRATION_H_HI: 90,
   CAMERA_CALIBRATION_H_LO: 30,
-  CAMERA_CALIBRATION_image_bot_origin_location: SPECIAL_VALUES.BOTTOM_LEFT,
-  CAMERA_CALIBRATION_invert_hue_selection: SPECIAL_VALUES.FALSE,
   CAMERA_CALIBRATION_iteration: 4,
   CAMERA_CALIBRATION_morph: 6,
   CAMERA_CALIBRATION_S_HI: 255,

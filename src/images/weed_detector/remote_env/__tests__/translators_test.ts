@@ -70,6 +70,7 @@ describe("getDropdownSelection()", () => {
     let fakeEnv = prepopulateEnv(stubs);
     expect(fakeEnv[key]).toEqual(SPECIAL_VALUES.Y);
     let finder = getDropdownSelection(fakeEnv);
-    expect(finder(key)).toEqual(SPECIAL_VALUES.Y);
+    let result = finder(key);
+    expect(result.value).toEqual(SPECIAL_VALUES.Y);
   });
 });
