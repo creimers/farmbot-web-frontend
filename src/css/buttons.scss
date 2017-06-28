@@ -10,7 +10,8 @@ button {
   position: relative;
   color: $off_white;
   transition: all 0.1s ease-in-out !important;
-  &.disabled {
+  &.disabled,
+  &:disabled {
     background: $gray !important;
     box-shadow: 0 2px 0px 0px lighten($gray, 5%) !important;
     pointer-events: none !important;
