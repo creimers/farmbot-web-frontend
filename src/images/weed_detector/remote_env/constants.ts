@@ -2,10 +2,10 @@ import {
   WD_ENV,
   FormatTranslationMap,
   WDENVKey,
-  getSpecialValue,
   Translation
 } from "../remote_env";
 import { box } from "boxed_value";
+import * as _ from "lodash";
 
 /** I would rather not deal with all the weird edge cases that come with
  * supporting strings and numbers right now. It adds too many edge cases for the
@@ -120,3 +120,20 @@ export const DEFAULT_FORMATTER: Translation = {
 };
 /** If we hit any "special cases", we can register them here. */
 export const TRANSLATORS: FormatTranslationMap = {};
+/** We only expect certain string values from the weed detector.
+ * Tokens like "BOTTOM_RIGHT" or "X" all have a numeric counterpart.
+ * This function converts such strings to their numeric equivalent.
+ * If a matching numeric code is not found, throws an exception.
+ */
+export function getSpecialValue(key: string | number):
+  SPECIAL_VALUES {
+
+  let k = _.snakeCase(("" + key).toUpperCase()).toUpperCase();
+  let v = _.get(SPECIAL_VALUES, k, NaN);
+
+  if (_.isUndefined(v) || _.isNaN(v)) {
+    throw new Error("Not a SPECIAL_VALUE: " + k);
+  } else {
+    return v;
+  }
+}

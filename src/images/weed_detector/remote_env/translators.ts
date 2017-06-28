@@ -17,20 +17,3 @@ export function parseEnvKey(key: WDENVKey, value: string) {
     .parse(key, value);
 }
 
-/** We only expect certain string values from the weed detector.
- * Tokens like "BOTTOM_RIGHT" or "X" all have a numeric counterpart.
- * This function converts such strings to their numeric equivalent.
- * If a matching numeric code is not found, throws an exception.
- */
-export function getSpecialValue(key: string | number):
-  SPECIAL_VALUES {
-
-  let k = _.snakeCase(("" + key).toUpperCase()).toUpperCase();
-  let v = _.get(SPECIAL_VALUES, k, NaN);
-
-  if (_.isUndefined(v) || _.isNaN(v)) {
-    throw new Error("Not a SPECIAL_VALUE: " + k);
-  } else {
-    return v;
-  }
-}

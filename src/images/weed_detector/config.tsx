@@ -7,45 +7,8 @@ import { SettingsMenuProps } from "./interfaces";
 import { WD_ENV, SPECIAL_VALUES, envGet } from "./remote_env";
 import * as _ from "lodash";
 import { BlurableInput } from "../../ui/blurable_input";
-
-let LOOKUP = {
-  [SPECIAL_VALUES.X]: {
-    label: "X",
-    value: SPECIAL_VALUES.X
-  },
-  [SPECIAL_VALUES.Y]: {
-    label: "Y",
-    value: SPECIAL_VALUES.Y
-  },
-  [SPECIAL_VALUES.TOP_LEFT]: {
-    label: "Top Left",
-    value: SPECIAL_VALUES.TOP_LEFT
-  },
-  [SPECIAL_VALUES.TOP_RIGHT]: {
-    label: "Top Right",
-    value: SPECIAL_VALUES.TOP_RIGHT
-  },
-  [SPECIAL_VALUES.BOTTOM_LEFT]: {
-    label: "Bottom Left",
-    value: SPECIAL_VALUES.BOTTOM_LEFT
-  },
-  [SPECIAL_VALUES.BOTTOM_RIGHT]: {
-    label: "Bottom Right",
-    value: SPECIAL_VALUES.BOTTOM_RIGHT
-  },
-}
-
-const calibrationAxes: DropDownItem[] = [
-  LOOKUP[SPECIAL_VALUES.X],
-  LOOKUP[SPECIAL_VALUES.Y]
-];
-
-const originLocations: DropDownItem[] = [
-  LOOKUP[SPECIAL_VALUES.TOP_LEFT],
-  LOOKUP[SPECIAL_VALUES.TOP_RIGHT],
-  LOOKUP[SPECIAL_VALUES.BOTTOM_LEFT],
-  LOOKUP[SPECIAL_VALUES.BOTTOM_RIGHT],
-];
+import { fancyDebug } from "../../util";
+import { SPECIAL_VALUE_DDI, CALIBRATION_DROPDOWNS, ORIGIN_DROPDOWNS } from "./constants";
 
 export function WeedDetectorConfig(props: SettingsMenuProps) {
   let NumberBox = ({ conf, label }: {
@@ -65,6 +28,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
   };
 
   let setDDI = (k: keyof WD_ENV) => (d: DropDownItem) => {
+    console.log("Is this thing on?");
     if (_.isNumber(d.value)) {
       props.onChange(k, d.value);
     } else {
@@ -73,7 +37,13 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
   }
 
   let find = (needle: keyof WD_ENV): DropDownItem => {
-    return LOOKUP[envGet(needle, props.values)] || NULL_CHOICE;
+    let wow = envGet(needle, props.values);
+    let ok = SPECIAL_VALUE_DDI[wow];
+    fancyDebug({ wow, ok, needle, SPECIAL_VALUE_DDI });
+    if (needle === "CAMERA_CALIBRATION_calibration_along_axis") {
+      debugger;
+    }
+    return ok || NULL_CHOICE;
   }
   return <div className="additional-settings-menu"
     onClick={(e) => e.stopPropagation()}>
@@ -96,7 +66,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     <FBSelect
       onChange={setDDI("CAMERA_CALIBRATION_calibration_along_axis")}
       selectedItem={find("CAMERA_CALIBRATION_calibration_along_axis")}
-      list={calibrationAxes}
+      list={CALIBRATION_DROPDOWNS}
       placeholder="Select..." />
     <Row>
       <Col xs={6}>
@@ -110,7 +80,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
       {t(`Origin Location in Image`)}
     </label>
     <FBSelect
-      list={originLocations}
+      list={ORIGIN_DROPDOWNS}
       onChange={setDDI("CAMERA_CALIBRATION_image_bot_origin_location")}
       selectedItem={find("CAMERA_CALIBRATION_image_bot_origin_location")}
       placeholder="Select..." />

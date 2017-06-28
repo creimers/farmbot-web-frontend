@@ -1,14 +1,20 @@
-import { getSpecialValue, formatEnvKey, parseEnvKey } from "../translators";
-import { SPECIAL_VALUES } from "../constants";
+import { formatEnvKey, parseEnvKey } from "../translators";
+import { SPECIAL_VALUES, getSpecialValue } from "../constants";
 import { WD_ENV, WDENVKey } from "../interfaces";
 
 describe("getSpecialValue()", () => {
   it("translates values", () => {
-    expect(getSpecialValue("true")).toEqual(SPECIAL_VALUES.TRUE);
-    expect(getSpecialValue("false")).toEqual(SPECIAL_VALUES.FALSE);
-    expect(getSpecialValue("Bottom_LEft"))
+    expect(getSpecialValue(JSON.stringify("TRUE")))
+      .toEqual(SPECIAL_VALUES.TRUE);
+
+    expect(getSpecialValue(JSON.stringify("FALSE")))
+      .toEqual(SPECIAL_VALUES.FALSE);
+
+    expect(getSpecialValue(JSON.stringify("Bottom_LEft")))
       .toEqual(SPECIAL_VALUES.BOTTOM_LEFT);
-    expect(getSpecialValue("ToP_LeFT")).toEqual(SPECIAL_VALUES.TOP_LEFT);
+
+    expect(getSpecialValue(JSON.stringify("ToP_LeFT")))
+      .toEqual(SPECIAL_VALUES.TOP_LEFT);
   });
 });
 
@@ -49,10 +55,22 @@ describe("formatEnvKey()", () => {
 
 describe("parseEnvKey()", () => {
   it("makes stuff a number again", () => {
-    // TODO: Figure out why this is broke.
-    pending("Y U NO WORK??");
-    let r = parseEnvKey("CAMERA_CALIBRATION_image_bot_origin_location",
-      JSON.stringify("TOP_lEFt"));
-    expect(r).toEqual(SPECIAL_VALUES.TOP_LEFT);
+    pending("getSpecialValue() might be broke");
+    let ex = {
+      CAMERA_CALIBRATION_calibration_along_axis: "\"Y\"",
+      CAMERA_CALIBRATION_S_LO: "33",
+      CAMERA_CALIBRATION_S_HI: "255",
+      CAMERA_CALIBRATION_H_LO: "16",
+      CAMERA_CALIBRATION_H_HI: "144"
+    };
+    let r = parseEnvKey("CAMERA_CALIBRATION_calibration_along_axis",
+      ex.CAMERA_CALIBRATION_calibration_along_axis);
+    expect(r).toEqual(SPECIAL_VALUES.Y);
+  });
+});
+
+describe("getSpecialValue()", () => {
+  it("unpacks special string values", () => {
+    expect(getSpecialValue("\"Y\"")).toEqual(SPECIAL_VALUES.Y);
   });
 });
