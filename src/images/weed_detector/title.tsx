@@ -2,7 +2,8 @@ import * as React from "react";
 import { t } from "i18next";
 import { WeedDetectorConfig } from "./config";
 import { WidgetHeader } from "../../ui/index";
-import { envSave, WD_ENV } from "./remote_env";
+import { WD_ENV } from "./remote_env/interfaces";
+import { envSave } from "./remote_env/actions";
 
 interface Props {
   onSave?(): void;

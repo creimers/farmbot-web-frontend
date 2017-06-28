@@ -1,5 +1,5 @@
 import { TaggedImage } from "../resources/tagged_resources";
-import { WD_ENV } from "./weed_detector/remote_env";
+import { WD_ENV } from "./weed_detector/remote_env/interfaces";
 
 export interface Image {
   id: number;

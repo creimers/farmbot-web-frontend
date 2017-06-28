@@ -13,12 +13,9 @@ import { FarmwareProps } from "../../devices/interfaces";
 import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./body";
-import {
-  WD_ENV,
-  envSave,
-  WDENVKey as ENVKey,
-  envGet
-} from "./remote_env";
+import { WD_ENV, WDENVKey as ENVKey } from "./remote_env/interfaces";
+import { envGet } from "./remote_env/selectors";
+import { envSave } from "./remote_env/actions";
 
 @connect(mapStateToProps)
 export class WeedDetector
@@ -39,9 +36,9 @@ export class WeedDetector
 
   /** Mapping of HSV values to FBOS Env variables. */
   CHANGE_MAP: Record<HSV, [ENVKey, ENVKey]> = {
-    H: ["H_LO", "H_HI"],
-    S: ["S_LO", "S_HI"],
-    V: ["V_LO", "V_LO"]
+    H: ["CAMERA_CALIBRATION_H_LO", "CAMERA_CALIBRATION_H_HI"],
+    S: ["CAMERA_CALIBRATION_S_LO", "CAMERA_CALIBRATION_S_HI"],
+    V: ["CAMERA_CALIBRATION_V_LO", "CAMERA_CALIBRATION_V_LO"]
   }
 
   test = () => {
@@ -77,12 +74,12 @@ export class WeedDetector
                 images={this.props.images}
                 onSliderChange={envSave}
                 env={this.props.env}
-                H_LO={envGet("H_LO", this.props.env)}
-                H_HI={envGet("H_HI", this.props.env)}
-                S_LO={envGet("S_LO", this.props.env)}
-                S_HI={envGet("S_HI", this.props.env)}
-                V_LO={envGet("V_LO", this.props.env)}
-                V_HI={envGet("V_HI", this.props.env)} />
+                H_LO={envGet("CAMERA_CALIBRATION_H_LO", this.props.env)}
+                H_HI={envGet("CAMERA_CALIBRATION_H_HI", this.props.env)}
+                S_LO={envGet("CAMERA_CALIBRATION_S_LO", this.props.env)}
+                S_HI={envGet("CAMERA_CALIBRATION_S_HI", this.props.env)}
+                V_LO={envGet("CAMERA_CALIBRATION_V_LO", this.props.env)}
+                V_HI={envGet("CAMERA_CALIBRATION_V_HI", this.props.env)} />
             </Col>
           </Row>
         </Col>

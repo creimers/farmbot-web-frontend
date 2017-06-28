@@ -15,7 +15,7 @@ import {
 } from "../resources/tagged_resources";
 import { RestResources } from "../resources/interfaces";
 import { TaggedUser } from "../resources/tagged_resources";
-import { WD_ENV } from "../images/weed_detector/remote_env";
+import { WD_ENV } from "../images/weed_detector/remote_env/interfaces";
 
 export interface Props {
   auth: AuthState | undefined;

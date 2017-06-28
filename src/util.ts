@@ -260,7 +260,7 @@ export function smoothScrollToBottom() {
 /** Fancy debug */
 var last = "";
 export function fancyDebug(t: any) {
-  return Object
+  console.log(Object
     .keys(t)
     .map(key => [key, t[key]])
     .map((x) => {
@@ -269,7 +269,7 @@ export function fancyDebug(t: any) {
 
       return `${key} => ${val}`;
     })
-    .join("\n");
+    .join("\n"));
 }
 
 export type CowardlyDictionary<T> = Dictionary<T | undefined>;

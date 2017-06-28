@@ -1,6 +1,6 @@
-
-import { WDENVKey, formatEnvKey } from "../remote_env";
 import { devices } from "../../../device";
+import { WDENVKey } from "./interfaces";
+import { formatEnvKey } from "./translators";
 
 /** Send a number to FBOS for storage on the device. */
 export function envSave(key: WDENVKey, value: number) {

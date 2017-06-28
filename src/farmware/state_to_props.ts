@@ -1,7 +1,7 @@
 import { Everything } from "../interfaces";
 import { selectAllImages } from "../resources/selectors";
 import { FarmwareProps } from "../devices/interfaces";
-import { prepopulateEnv } from "../images/weed_detector/remote_env";
+import { prepopulateEnv } from "../images/weed_detector/remote_env/selectors";
 
 export function mapStateToProps(props: Everything): FarmwareProps {
   let images = _(selectAllImages(props.resources.index))
