@@ -46,7 +46,7 @@ let CHANGE_MAP: Record<HSV, [NumericKeyName, NumericKeyName]> = {
   V: ["V_LO", "V_HI"]
 };
 
-export class WeedDetectorBody extends React.Component<Props, {}> {
+export class ImageWorkspace extends React.Component<Props, {}> {
   numericChange = (key: NumericKeyName) =>
     (e: React.SyntheticEvent<HTMLInputElement>) => {
       this.props.onChange(key, parseInt(e.currentTarget.value, 10) || 0);

@@ -12,7 +12,7 @@ import { HSV } from "../index";
 import { FarmwareProps } from "../../devices/interfaces";
 import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
-import { WeedDetectorBody } from "./body";
+import { ImageWorkspace } from "./image_workspace";
 import { WD_ENV, WDENVKey as ENVKey } from "./remote_env/interfaces";
 import { envGet } from "./remote_env/selectors";
 import { envSave } from "./remote_env/actions";
@@ -72,7 +72,7 @@ export class WeedDetector
               currentImage
               images
               onChange
-              <WeedDetectorBody
+              <ImageWorkspace
                 onProcessPhoto={(id) => { this.props.dispatch(detectWeeds(id)); }}
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}

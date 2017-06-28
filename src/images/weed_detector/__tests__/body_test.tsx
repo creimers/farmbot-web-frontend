@@ -1,9 +1,9 @@
 import * as React from "react";
-import { WeedDetectorBody } from "../body";
+import { ImageWorkspace } from "../image_workspace";
 
 describe("<Body/>", () => {
-  function FakeElement(): React.ReactElement<WeedDetectorBody> {
-    return <WeedDetectorBody
+  function FakeElement(): React.ReactElement<ImageWorkspace> {
+    return <ImageWorkspace
       onFlip={jest.fn()}
       onProcessPhoto={jest.fn()}
       onChange={jest.fn()}

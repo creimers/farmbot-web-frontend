@@ -3,7 +3,7 @@ import { t } from "i18next";
 import { Widget, Row, Col } from "../ui/index";
 import { CameraCalibrationState, CameraCalibrationProps } from "./interfaces";
 import { TitleBar } from "../images/weed_detector/title";
-import { WeedDetectorBody } from "../images/weed_detector/body";
+import { ImageWorkspace } from "../images/weed_detector/image_workspace";
 import { ToolTips } from "../constants";
 import { envSave } from "../images/weed_detector/remote_env/actions";
 
@@ -19,7 +19,7 @@ export class CameraCalibration
   }
 
   calibrate = () => {
-    console.log("calibrate()");
+    console.log("TODO: Send RPC / farmware activation message here.");
   }
 
   render() {
@@ -36,7 +36,7 @@ export class CameraCalibration
           />
           <Row>
             <Col sm={12}>
-              <WeedDetectorBody
+              <ImageWorkspace
                 onProcessPhoto={this.props.onProcessPhoto}
                 onFlip={(u) => { this.props }}
                 images={this.props.images}
