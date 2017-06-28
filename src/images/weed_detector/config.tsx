@@ -4,7 +4,7 @@ import { DropDownItem } from "../../ui/fb_select";
 import { Row, Col, NULL_CHOICE } from "../../ui/index";
 import { FBSelect } from "../../ui/new_fb_select";
 import { SettingsMenuProps } from "./interfaces";
-import { WeedDetectorENV, SPECIAL_VALUES, envGet } from "./remote_env";
+import { WD_ENV, SPECIAL_VALUES, envGet } from "./remote_env";
 import * as _ from "lodash";
 import { BlurableInput } from "../../ui/blurable_input";
 
@@ -49,7 +49,7 @@ const originLocations: DropDownItem[] = [
 
 export function WeedDetectorConfig(props: SettingsMenuProps) {
   let NumberBox = ({ conf, label }: {
-    conf: keyof WeedDetectorENV;
+    conf: keyof WD_ENV;
     label: string;
   }) => {
     return <div>
@@ -64,7 +64,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     </div>
   };
 
-  let setDDI = (k: keyof WeedDetectorENV) => (d: DropDownItem) => {
+  let setDDI = (k: keyof WD_ENV) => (d: DropDownItem) => {
     if (_.isNumber(d.value)) {
       props.onChange(k, d.value);
     } else {
@@ -72,7 +72,7 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     }
   }
 
-  let find = (needle: keyof WeedDetectorENV): DropDownItem => {
+  let find = (needle: keyof WD_ENV): DropDownItem => {
     return LOOKUP[envGet(needle, props.values)] || NULL_CHOICE;
   }
   return <div className="additional-settings-menu"

@@ -15,7 +15,7 @@ import {
 } from "../resources/tagged_resources";
 import { RestResources } from "../resources/interfaces";
 import { TaggedUser } from "../resources/tagged_resources";
-import { WeedDetectorENV } from "../images/weed_detector/remote_env";
+import { WD_ENV } from "../images/weed_detector/remote_env";
 
 export interface Props {
   auth: AuthState | undefined;
@@ -130,7 +130,7 @@ export interface PeripheralsProps {
 
 export interface FarmwareProps {
   dispatch: Function;
-  env: Partial<WeedDetectorENV>;
+  env: Partial<WD_ENV>;
   images: TaggedImage[];
   currentImage: TaggedImage | undefined;
   syncStatus: SyncStatus;

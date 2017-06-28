@@ -424,3 +424,6 @@ export function hardRefresh() {
     }
   };
 }
+
+/** We only allow FBOS to send us these types. */
+export type Primitive = string | number | boolean;

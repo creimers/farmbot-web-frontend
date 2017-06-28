@@ -1,6 +1,6 @@
 import { getSpecialValue, formatEnvKey, parseEnvKey } from "../translators";
 import { SPECIAL_VALUES } from "../constants";
-import { WeedDetectorENV, WeedDetectorENVKey } from "../interfaces";
+import { WD_ENV, WDENVKey } from "../interfaces";
 
 describe("getSpecialValue()", () => {
   it("translates values", () => {
@@ -41,7 +41,7 @@ describe("formatEnvKey()", () => {
         r: "TOP_LEFT"
       }
     ].map(t => {
-      expect(formatEnvKey(t.k as WeedDetectorENVKey, t.v)).toEqual(t.r);
+      expect(formatEnvKey(t.k as WDENVKey, t.v)).toEqual(t.r);
     });
   });
 });

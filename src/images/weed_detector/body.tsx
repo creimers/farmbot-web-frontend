@@ -7,9 +7,9 @@ import { WeedDetectorSlider } from "./slider";
 import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
 import {
-  WeedDetectorENVKey as EnvKey,
+  WDENVKey as EnvKey,
   envSave,
-  WeedDetectorENV,
+  WD_ENV,
   envGet
 } from "./remote_env";
 
@@ -27,7 +27,7 @@ interface Props {
   onProcessPhoto(image_id: number): void;
   currentImage: TaggedImage | undefined;
   images: TaggedImage[];
-  env: Partial<WeedDetectorENV>;
+  env: Partial<WD_ENV>;
   H_LO: number;
   H_HI: number;
   S_LO: number;

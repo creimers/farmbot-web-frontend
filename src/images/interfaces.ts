@@ -1,5 +1,5 @@
 import { TaggedImage } from "../resources/tagged_resources";
-import { WeedDetectorENV } from "./weed_detector/remote_env";
+import { WD_ENV } from "./weed_detector/remote_env";
 
 export interface Image {
   id: number;
@@ -29,7 +29,7 @@ export interface DetectorState {
   deletionProgress: string;
   settingsMenuOpen: boolean;
   /** Defined only if the bot is online AND its been setup */
-  remoteFarmwareSettings: Partial<WeedDetectorENV>;
+  remoteFarmwareSettings: Partial<WD_ENV>;
 }
 
 export interface FarmbotPickerProps {
@@ -40,7 +40,7 @@ export interface FarmbotPickerProps {
 
 export interface EnvSliderProps {
   name: HSV;
-  env: Partial<WeedDetectorENV>;
+  env: Partial<WD_ENV>;
   onChange?: (key: HSV, val: [number, number]) => void;
 }
 

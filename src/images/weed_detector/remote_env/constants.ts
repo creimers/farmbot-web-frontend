@@ -1,7 +1,7 @@
 import {
-  WeedDetectorENV,
+  WD_ENV,
   FormatTranslationMap,
-  WeedDetectorENVKey,
+  WDENVKey,
   getSpecialValue,
   Translation
 } from "../remote_env";
@@ -26,7 +26,7 @@ export enum SPECIAL_VALUES {
 
 /** The runtime equivalent for WeedDetectorENVKey.
  *  Good for iterating and whatnot. */
-export const EVERY_KEY: WeedDetectorENVKey[] = [
+export const EVERY_KEY: WDENVKey[] = [
   "H_HI",
   "H_LO",
   "V_HI",
@@ -48,7 +48,7 @@ export const EVERY_KEY: WeedDetectorENVKey[] = [
 
 /** Sometimes, ENV var values are not available but rendering must still be
  * performed. This map provides a set of defaults for every ENV var. */
-export const DEFAULTS: WeedDetectorENV = {
+export const DEFAULTS: WD_ENV = {
   H_LO: 30,
   S_LO: 50,
   V_LO: 50,
