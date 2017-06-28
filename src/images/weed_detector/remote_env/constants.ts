@@ -1,7 +1,7 @@
 import {
-  WeedDetectorENV,
+  WD_ENV,
   FormatTranslationMap,
-  WeedDetectorENVKey,
+  WDENVKey,
   getSpecialValue,
   Translation
 } from "../remote_env";
@@ -26,7 +26,7 @@ export enum SPECIAL_VALUES {
 
 /** The runtime equivalent for WeedDetectorENVKey.
  *  Good for iterating and whatnot. */
-export const EVERY_KEY: WeedDetectorENVKey[] = [
+export const EVERY_KEY: WDENVKey[] = [
   "H_HI",
   "H_LO",
   "V_HI",
@@ -48,7 +48,7 @@ export const EVERY_KEY: WeedDetectorENVKey[] = [
 
 /** Sometimes, ENV var values are not available but rendering must still be
  * performed. This map provides a set of defaults for every ENV var. */
-export const DEFAULTS: WeedDetectorENV = {
+export const DEFAULTS: WD_ENV = {
   H_LO: 30,
   S_LO: 50,
   V_LO: 50,
@@ -69,9 +69,17 @@ export const DEFAULTS: WeedDetectorENV = {
 };
 
 export const DEFAULT_FORMATTER: Translation = {
-  format: (key, val) => val,
+  format: (key, val): number | string => {
+    switch (key) {
+      case "invert_hue_selection":
+      case "calibration_along_axis":
+      case "image_bot_origin_location":
+        return ("" + (SPECIAL_VALUES[val] || val));
+      default:
+        return val;
+    }
+  },
   parse: (key, val) => {
-    const fallback = DEFAULTS[key];
     try {
       const b = box(JSON.parse(val));
       switch (b.kind) {
@@ -79,7 +87,7 @@ export const DEFAULT_FORMATTER: Translation = {
           return b.value;
         case "boolean":
         case "string":
-          return getSpecialValue(b.value);
+          return getSpecialValue(val);
         default:
           throw new Error("BAD DATA TYPE");
       }
@@ -92,5 +100,5 @@ export const DEFAULT_FORMATTER: Translation = {
     }
   }
 };
-/** If we hit any "special cases", we can register them here: */
+/** If we hit any "special cases", we can register them here. */
 export const TRANSLATORS: FormatTranslationMap = {};

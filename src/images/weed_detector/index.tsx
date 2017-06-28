@@ -14,9 +14,9 @@ import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
 import { WeedDetectorBody } from "./body";
 import {
-  WeedDetectorENV,
+  WD_ENV,
   envSave,
-  WeedDetectorENVKey as ENVKey,
+  WDENVKey as ENVKey,
   envGet
 } from "./remote_env";
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import { t } from "i18next";
 import { WeedDetectorConfig } from "./config";
 import { WidgetHeader } from "../../ui/index";
-import { envSave, WeedDetectorENV } from "./remote_env";
+import { envSave, WD_ENV } from "./remote_env";
 
 interface Props {
   onSave?(): void;
@@ -14,7 +14,7 @@ interface Props {
   settingsMenuOpen?: boolean;
   title: string;
   help: string;
-  env: Partial<WeedDetectorENV>;
+  env: Partial<WD_ENV>;
 }
 
 export function TitleBar({

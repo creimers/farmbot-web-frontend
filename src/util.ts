@@ -260,22 +260,16 @@ export function smoothScrollToBottom() {
 /** Fancy debug */
 var last = "";
 export function fancyDebug(t: any) {
-  if (Object.entries) { // Object.entries is an "experimental" API.
-    var next = Object
-      .entries(t)
-      .map((x: any) => {
-        let key = _.padRight(x[0], 20, " ");
-        let val = (JSON.stringify(x[1]) || "Nothing").slice(0, 52);
+  return Object
+    .keys(t)
+    .map(key => [key, t[key]])
+    .map((x) => {
+      let key = _.padRight(x[0], 20, " ");
+      let val = (JSON.stringify(x[1]) || "Nothing").slice(0, 52);
 
-        return `${key} => ${val}`;
-      })
-      .join("\n");
-    if (last === next) {
-    } else {
-      last = next;
-      console.log(next);
-    }
-  }
+      return `${key} => ${val}`;
+    })
+    .join("\n");
 }
 
 export type CowardlyDictionary<T> = Dictionary<T | undefined>;
@@ -430,3 +424,6 @@ export function hardRefresh() {
     }
   };
 }
+
+/** We only allow FBOS to send us these types. */
+export type Primitive = string | number | boolean;

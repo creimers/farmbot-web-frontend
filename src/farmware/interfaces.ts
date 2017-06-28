@@ -1,7 +1,7 @@
 import { BotState } from "../devices/interfaces";
 import { TaggedImage } from "../resources/tagged_resources";
 import { SyncStatus, Dictionary, FarmwareManifest } from "farmbot/dist";
-import { WeedDetectorENV } from "../images/weed_detector/remote_env";
+import { WD_ENV } from "../images/weed_detector/remote_env";
 
 export interface FWState {
   selectedFarmware: string | undefined;
@@ -34,7 +34,7 @@ export interface CameraCalibrationProps {
   images: TaggedImage[];
   currentImage: TaggedImage | undefined;
   onProcessPhoto(id: number): void;
-  env: Partial<WeedDetectorENV>;
+  env: Partial<WD_ENV>;
   H_LO: number;
   S_LO: number;
   V_LO: number;

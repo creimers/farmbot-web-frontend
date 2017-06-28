@@ -1,4 +1,4 @@
-import { WeedDetectorENV as ENV } from "./remote_env";
+import { WD_ENV as ENV } from "./remote_env";
 
 export interface SettingsMenuProps {
   values: Partial<ENV>;
