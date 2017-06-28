@@ -18,6 +18,12 @@ describe("getSpecialValue()", () => {
     expect(getSpecialValue(JSON.stringify("ToP_LeFT")))
       .toEqual(SPECIAL_VALUES.TOP_LEFT);
   });
+
+  it("crashes on malformed inputs", () => {
+    expect(() => {
+      getSpecialValue("FOo_bar!!")
+    }).toThrow();
+  });
 });
 
 describe("formatEnvKey()", () => {
