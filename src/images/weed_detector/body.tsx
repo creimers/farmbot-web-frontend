@@ -6,9 +6,6 @@ import { HSV } from "../interfaces";
 import { WeedDetectorSlider } from "./slider";
 import { TaggedImage } from "../../resources/tagged_resources";
 import { t } from "i18next";
-import { WDENVKey as EnvKey, WD_ENV } from "./remote_env/interfaces";
-import { envSave } from "./remote_env/actions";
-import { envGet } from "./remote_env/selectors";
 
 const RANGES = {
   H: { LOWEST: 0, HIGHEST: 179 },
@@ -19,39 +16,42 @@ const RANGES = {
   ITERATION: { LOWEST: 0, HIGHEST: 100 },
 };
 
-interface Props {
-  onFlip(uuid: string | undefined): void;
-  onProcessPhoto(image_id: number): void;
-  currentImage: TaggedImage | undefined;
-  images: TaggedImage[];
-  env: Partial<WD_ENV>;
+/** Number values that the panel deals with. */
+interface NumericValues {
+  iteration: number;
+  morph: number;
+  blur: number;
   H_LO: number;
   H_HI: number;
   S_LO: number;
   S_HI: number;
   V_LO: number;
   V_HI: number;
-  onSliderChange(key: EnvKey, value: number): void;
 }
 
-type BMI =
-  | "CAMERA_CALIBRATION_blur"
-  | "CAMERA_CALIBRATION_morph"
-  | "CAMERA_CALIBRATION_iteration";
+type NumericKeyName = keyof NumericValues;
 
-let onCommit = (BMI: BMI) => (e: React.SyntheticEvent<HTMLInputElement>) => {
-  envSave(BMI, parseInt(e.currentTarget.value, 10) || 0);
+interface Props extends NumericValues {
+  onFlip(uuid: string | undefined): void;
+  onProcessPhoto(image_id: number): void;
+  currentImage: TaggedImage | undefined;
+  images: TaggedImage[];
+  onChange(key: NumericKeyName, value: number): void;
 }
 
-const CHRIS_HALP = { "marginTop": 25 };
 /** Mapping of HSV values to FBOS Env variables. */
-let CHANGE_MAP: Record<HSV, [EnvKey, EnvKey]> = {
-  H: ["CAMERA_CALIBRATION_H_LO", "CAMERA_CALIBRATION_H_HI"],
-  S: ["CAMERA_CALIBRATION_S_LO", "CAMERA_CALIBRATION_S_HI"],
-  V: ["CAMERA_CALIBRATION_V_LO", "CAMERA_CALIBRATION_V_HI"]
+let CHANGE_MAP: Record<HSV, [NumericKeyName, NumericKeyName]> = {
+  H: ["H_LO", "H_HI"],
+  S: ["S_LO", "S_HI"],
+  V: ["V_LO", "V_HI"]
 };
 
 export class WeedDetectorBody extends React.Component<Props, {}> {
+  numericChange = (key: NumericKeyName) =>
+    (e: React.SyntheticEvent<HTMLInputElement>) => {
+      this.props.onChange(key, parseInt(e.currentTarget.value, 10) || 0);
+    };
+
   maybeProcessPhoto = () => {
     let img = this.props.currentImage || this.props.images[0];
     if (img && img.body.id) {
@@ -59,13 +59,14 @@ export class WeedDetectorBody extends React.Component<Props, {}> {
     }
   };
 
-  onChange = (key: HSV) => (values: [number, number]) => {
-    let keys = CHANGE_MAP[key];
-    [0, 1].map(i => this.props.onSliderChange(keys[i], values[i]));
-  };
+  onChange = (key: keyof typeof CHANGE_MAP) =>
+    (values: [number, number]) => {
+      let keys = CHANGE_MAP[key];
+      [0, 1].map(i => this.props.onChange(keys[i], values[i]));
+    };
 
   render() {
-    let { env, H_LO, H_HI, S_LO, S_HI, V_LO, V_HI } = this.props;
+    let { H_LO, H_HI, S_LO, S_HI, V_LO, V_HI } = this.props;
 
     return <div className="widget-content">
       <div className="row">
@@ -117,8 +118,8 @@ export class WeedDetectorBody extends React.Component<Props, {}> {
           <BlurableInput type="number"
             min={RANGES.BLUR.LOWEST}
             max={RANGES.BLUR.HIGHEST}
-            onCommit={onCommit("CAMERA_CALIBRATION_blur")}
-            value={"" + envGet("CAMERA_CALIBRATION_blur", env)} />
+            onCommit={this.numericChange("blur")}
+            value={"" + this.props.blur} />
         </div>
 
         <div className="col-md-4 col-sm-4">
@@ -126,20 +127,21 @@ export class WeedDetectorBody extends React.Component<Props, {}> {
           <BlurableInput type="number"
             min={RANGES.MORPH.LOWEST}
             max={RANGES.MORPH.HIGHEST}
-            onCommit={onCommit("CAMERA_CALIBRATION_morph")}
-            value={"" + envGet("CAMERA_CALIBRATION_morph", env)} />
+            onCommit={this.numericChange("morph")}
+            value={"" + this.props.morph} />
         </div>
         <div className="col-md-4 col-sm-4">
           <label>{t("ITERATION")}</label>
           <BlurableInput type="number"
             min={RANGES.ITERATION.LOWEST}
             max={RANGES.ITERATION.HIGHEST}
-            onCommit={onCommit("CAMERA_CALIBRATION_iteration")}
-            value={"" + envGet("CAMERA_CALIBRATION_iteration", env)} />
+            onCommit={this.numericChange("iteration")}
+            value={"" + this.props.iteration} />
         </div>
       </div>
+      {/** CHRIS HELP!!! */}
       <button className="green"
-        style={CHRIS_HALP}
+        style={{ "marginTop": 25 }}
         title="Scan this image for Weeds"
         onClick={this.maybeProcessPhoto}
         hidden={!this.props.images.length}>

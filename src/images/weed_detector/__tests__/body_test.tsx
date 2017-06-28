@@ -4,12 +4,14 @@ import { WeedDetectorBody } from "../body";
 describe("<Body/>", () => {
   function FakeElement(): React.ReactElement<WeedDetectorBody> {
     return <WeedDetectorBody
-      onProcessPhoto={jest.fn()}
       onFlip={jest.fn()}
-      images={[]}
+      onProcessPhoto={jest.fn()}
+      onChange={jest.fn()}
       currentImage={undefined}
-      onSliderChange={jest.fn()}
-      env={{}}
+      images={[]}
+      iteration={9}
+      morph={9}
+      blur={9}
       H_LO={2}
       S_LO={4}
       V_LO={6}

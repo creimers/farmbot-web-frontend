@@ -41,8 +41,12 @@ export class CameraCalibration
                 onFlip={(u) => { this.props }}
                 images={this.props.images}
                 currentImage={this.props.currentImage}
-                onSliderChange={envSave}
-                env={this.props.env}
+                onChange={() => {
+                  envSave;
+                }}
+                iteration={-123}
+                morph={-123}
+                blur={-123}
                 H_LO={this.props.H_LO}
                 S_LO={this.props.S_LO}
                 V_LO={this.props.V_LO}

@@ -67,13 +67,22 @@ export class WeedDetector
           />
           <Row>
             <Col sm={12}>
+              onFlip
+              onProcessPhoto
+              currentImage
+              images
+              onChange
               <WeedDetectorBody
                 onProcessPhoto={(id) => { this.props.dispatch(detectWeeds(id)); }}
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}
                 images={this.props.images}
-                onSliderChange={envSave}
-                env={this.props.env}
+                onChange={() => {
+                  envSave;
+                }}
+                iteration={-123}
+                morph={-123}
+                blur={-123}
                 H_LO={envGet("CAMERA_CALIBRATION_H_LO", this.props.env)}
                 H_HI={envGet("CAMERA_CALIBRATION_H_HI", this.props.env)}
                 S_LO={envGet("CAMERA_CALIBRATION_S_LO", this.props.env)}
