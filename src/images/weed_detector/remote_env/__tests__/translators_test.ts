@@ -13,30 +13,31 @@ describe("getSpecialValue()", () => {
 });
 
 describe("formatEnvKey()", () => {
+
   it("translates the things", () => {
     [
       {
-        k: "invert_hue_selection",
+        k: "CAMERA_CALIBRATION_invert_hue_selection",
         v: SPECIAL_VALUES.TRUE,
         r: "TRUE"
       },
       {
-        k: "invert_hue_selection",
+        k: "CAMERA_CALIBRATION_invert_hue_selection",
         v: SPECIAL_VALUES.FALSE,
         r: "FALSE"
       },
       {
-        k: "calibration_along_axis",
+        k: "CAMERA_CALIBRATION_calibration_along_axis",
         v: SPECIAL_VALUES.X,
         r: "X"
       },
       {
-        k: "calibration_along_axis",
+        k: "CAMERA_CALIBRATION_calibration_along_axis",
         v: SPECIAL_VALUES.Y,
         r: "Y"
       },
       {
-        k: "image_bot_origin_location",
+        k: "CAMERA_CALIBRATION_image_bot_origin_location",
         v: SPECIAL_VALUES.TOP_LEFT,
         r: "TOP_LEFT"
       }
