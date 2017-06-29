@@ -24,10 +24,12 @@ interface Props {
   onChange: (item: DropDownItem) => void;
   placeholder?: string;
   isASubMenu?: boolean;
+  isFilterable: boolean | undefined;
 }
 
 interface State {
   item?: DropDownItem | undefined;
+  isFilterable: boolean | undefined;
   filterable?: boolean;
   minimal?: boolean;
   resetOnSelect?: boolean;
@@ -43,7 +45,8 @@ export class FilterSearch extends React.Component<Props, Partial<State>> {
     minimal: false,
     resetOnSelect: false,
     parentMenus: [],
-    subMenus: []
+    subMenus: [],
+    isFilterable: this.props.isFilterable || true
   };
 
   render() {

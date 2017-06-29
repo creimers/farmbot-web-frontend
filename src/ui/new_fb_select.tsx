@@ -13,6 +13,7 @@ interface Props {
   allowEmpty?: boolean;
   /** Text shown before user selection. */
   placeholder?: string | undefined;
+  isFilterable?: boolean | undefined;
 }
 
 /** Used as a placeholder for a selection of "none" when allowEmpty is true. */
@@ -34,6 +35,7 @@ export class FBSelect extends React.Component<Props, {}> {
         items={this.props.list}
         onChange={this.props.onChange}
         placeholder={placeholder}
+        isFilterable={this.props.isFilterable}
       />
     </div>;
   }

@@ -247,11 +247,12 @@ export class EditFEForm extends React.Component<Props, State> {
           <Col xs={8}>
             <FBSelect
               list={this.props.repeatOptions}
-              onChange={(e) => this.setState(betterMerge(this.state, {
+              onChange={e => this.setState(betterMerge(this.state, {
                 fe: { time_unit: (e.value || "hourly").toString() },
                 localCopyDirty: true
               }))}
               selectedItem={options[this.fieldGet("time_unit")]}
+              isFilterable={false}
             />
           </Col>
         </Row>
