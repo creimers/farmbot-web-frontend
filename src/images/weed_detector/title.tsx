@@ -63,6 +63,5 @@ export function TitleBar({
         onChange={envSave}
       />
     </Popover>
-    }
   </WidgetHeader>;
 }
