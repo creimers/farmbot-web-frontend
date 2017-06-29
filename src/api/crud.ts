@@ -94,20 +94,23 @@ function update(uuid: string) {
 export function destroy(uuid: string) {
   return function (dispatch: Function, getState: GetState) {
     let resource = findByUuid(getState().resources.index, uuid);
-    if (resource.body.id) {
-      return Axios
-        .delete<typeof resource.body>(urlFor(resource.kind) + resource.body.id)
-        .then(function (resp) {
-          dispatch(destroyOK(resource));
-        })
-        .catch(function (err: UnsafeError) {
-          dispatch(destroyNO({ err, uuid }));
-          return Promise.reject(err);
-        });
-    } else {
-      dispatch(destroyOK(resource))
-      return Promise.resolve("");
-    }
+    let maybeProceed = confirmationChecker(resource);
+    return maybeProceed(() => {
+      if (resource.body.id) {
+        return Axios
+          .delete<typeof resource.body>(urlFor(resource.kind) + resource.body.id)
+          .then(function (resp) {
+            dispatch(destroyOK(resource));
+          })
+          .catch(function (err: UnsafeError) {
+            dispatch(destroyNO({ err, uuid }));
+            return Promise.reject(err);
+          });
+      } else {
+        dispatch(destroyOK(resource))
+        return Promise.resolve("");
+      }
+    }) || Promise.reject("User pressed cancel");
   }
 }
 
@@ -173,3 +176,17 @@ function updateViaAjax(index: ResourceIndex,
       return Promise.reject(err);
     });
 }
+
+
+let MUST_CONFIRM_LIST: ResourceName[] = ["farm_events", "points"];
+let confirmationChecker = (resource: TaggedResource) =>
+  <T>(proceed: () => T): T | undefined => {
+    if (MUST_CONFIRM_LIST.includes(resource.kind)) {
+      if (confirm("Are you sure you want to delete this item?")) {
+        return proceed();
+      } else {
+        return undefined;
+      }
+    }
+    return proceed();
+  }
