@@ -17,7 +17,7 @@ let buttonList = (dispatch: Function) =>
       "block",
       "full-width",
       "text-left",
-      `${ts.body.color || "purple"}-block`,
+      `${ts.body.color || "purple"}`,
       "block-header"].join(" ");
     let click = () => { dispatch(selectSequence(ts.uuid)); };
     let name = ts.body.name + (ts.dirty ? "*" : "");

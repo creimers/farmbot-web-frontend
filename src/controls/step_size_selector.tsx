@@ -5,7 +5,7 @@ import { StepSizeSelectorProps } from "./interfaces";
 export class StepSizeSelector extends Component<StepSizeSelectorProps, {}> {
   cssForIndex(num: number) {
     let choices = this.props.choices;
-    let css = "move-amount no-radius fb-button";
+    let css = "move-amount no-radius fb-button ";
     if (num === _.first(choices)) {
       css += "leftmost ";
     }

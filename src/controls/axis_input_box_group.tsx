@@ -56,7 +56,7 @@ export class AxisInputBoxGroup extends React.Component<AxisInputBoxGroupProps,
       <div className="col-xs-3">
         <button
           onClick={this.clicked}
-          className="full-width green go fb-button"
+          className="full-width green fb-button"
         >
           {t("GO")}
         </button>

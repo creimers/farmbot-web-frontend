@@ -8,7 +8,7 @@ import { TaggedRegimen, isTaggedRegimen } from "../../resources/tagged_resources
 export function RegimenListItem({ regimen, dispatch }: RegimenListItemProps) {
   let name = regimen.body.name || "-";
   let color = (regimen.body.color) || "gray";
-  let style = `block block-wrapper full-width text-left ${color}-block
+  let style = `block block-wrapper full-width text-left ${color}
         block-header fb-button`;
   let link = name ? name.replace(/ /g, "_").toLowerCase() : "-";
   if (isMobile()) {
