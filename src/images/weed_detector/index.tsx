@@ -13,7 +13,7 @@ import { FarmwareProps } from "../../devices/interfaces";
 import { mapStateToProps } from "../../farmware/state_to_props";
 import { ToolTips } from "../../constants";
 import { ImageWorkspace } from "./image_workspace";
-import { WD_ENV, WDENVKey as ENVKey } from "./remote_env/interfaces";
+import { WD_ENV, WDENVKey as ENVKey, WDENVKey } from "./remote_env/interfaces";
 import { envGet } from "./remote_env/selectors";
 import { envSave } from "./remote_env/actions";
 
@@ -53,7 +53,7 @@ export class WeedDetector
   }
 
   render() {
-    return <Widget className="weed-detector-widget coming-soon">
+    return <Widget className="weed-detector-widget">
       <Row>
         <Col>
           <TitleBar
@@ -77,18 +77,29 @@ export class WeedDetector
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}
                 images={this.props.images}
-                onChange={() => {
-                  envSave;
+                onChange={(key, value) => {
+                  let MAPPING: Record<typeof key, WDENVKey> = {
+                    "iteration": "WEED_DETECTOR_iteration",
+                    "morph": "WEED_DETECTOR_morph",
+                    "blur": "WEED_DETECTOR_blur",
+                    "H_HI": "WEED_DETECTOR_H_HI",
+                    "H_LO": "WEED_DETECTOR_H_LO",
+                    "S_HI": "WEED_DETECTOR_S_HI",
+                    "S_LO": "WEED_DETECTOR_S_LO",
+                    "V_HI": "WEED_DETECTOR_V_HI",
+                    "V_LO": "WEED_DETECTOR_V_LO"
+                  };
+                  envSave(MAPPING[key], value);
                 }}
-                iteration={-123}
-                morph={-123}
-                blur={-123}
-                H_LO={envGet("CAMERA_CALIBRATION_H_LO", this.props.env)}
-                H_HI={envGet("CAMERA_CALIBRATION_H_HI", this.props.env)}
-                S_LO={envGet("CAMERA_CALIBRATION_S_LO", this.props.env)}
-                S_HI={envGet("CAMERA_CALIBRATION_S_HI", this.props.env)}
-                V_LO={envGet("CAMERA_CALIBRATION_V_LO", this.props.env)}
-                V_HI={envGet("CAMERA_CALIBRATION_V_HI", this.props.env)} />
+                iteration={envGet("WEED_DETECTOR_iteration", this.props.env)}
+                morph={envGet("WEED_DETECTOR_morph", this.props.env)}
+                blur={envGet("WEED_DETECTOR_blur", this.props.env)}
+                H_LO={envGet("WEED_DETECTOR_H_LO", this.props.env)}
+                H_HI={envGet("WEED_DETECTOR_H_HI", this.props.env)}
+                S_LO={envGet("WEED_DETECTOR_S_LO", this.props.env)}
+                S_HI={envGet("WEED_DETECTOR_S_HI", this.props.env)}
+                V_LO={envGet("WEED_DETECTOR_V_LO", this.props.env)}
+                V_HI={envGet("WEED_DETECTOR_V_HI", this.props.env)} />
             </Col>
           </Row>
         </Col>
