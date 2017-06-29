@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DropDownItem } from "../ui/index";
-import { MenuItem, Menu, Popover, Position } from "@blueprintjs/core/dist";
+import { MenuItem, Menu, Popover, Position, Classes, MenuDivider } from "@blueprintjs/core/dist";
 
 let RECURSIVE_LIST: DropDownItem = {
   label: "Top Level",
@@ -20,14 +20,19 @@ let RECURSIVE_LIST: DropDownItem = {
   ]
 };
 
-let wow = <Menu>
-  <MenuItem text="Submenu">
-    <Menu>
-      <MenuItem text="Child one" />
-      <MenuItem text="Child two" />
-      <MenuItem text="Child three" />
-    </Menu>
+let wow = <Menu className={`docs-inline-example ${Classes.ELEVATION_1}`}>
+  <MenuItem iconName="new-text-box" text="New text box">
   </MenuItem>
+  <MenuItem iconName="new-object" text="New object">
+  </MenuItem>
+  <MenuItem iconName="new-link" text="New link">
+  </MenuItem>
+  <MenuDivider />
+  <MenuItem
+    iconName="cog"
+    label={<span className="pt-icon-standard pt-icon-share" />}
+    text="Settings..."
+  />
 </Menu>;
 
 export function DeleteMe(props: any) {
