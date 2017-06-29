@@ -7,6 +7,7 @@ import { error } from "farmbot-toastr";
 import { Color, UnsafeError } from "./interfaces";
 import { box } from "boxed_value";
 import { TaggedResource } from "./resources/tagged_resources";
+import { Session } from "./session";
 
 // http://stackoverflow.com/a/901144/1064917
 // Grab a query string param by name, because react-router-redux doesn't
@@ -413,17 +414,41 @@ export type JSXChildren = JSXChild[] | JSXChild;
 /** HACK: Server side caching (or webpack) is not doing something right.
  *        This is a work around until then. */
 export function hardRefresh() {
-  let HARD_RESET = "NEED_HARD_REFRESH2";
-  if (localStorage) {
+  // Change this string to trigger a force cache reset.
+  let HARD_RESET = "NEED_HARD_REFRESH4";
+  if (localStorage && sessionStorage) {
     if (!localStorage.getItem(HARD_RESET)) {
+      console.warn("Performing hard reset of localstorage and JS cookies.");
+      Object.keys(localStorage)
+        .concat(Object.keys(sessionStorage))
+        .filter(x => x !== "session") // Avoid endless logout loop.
+        .map(x => {
+          delete localStorage[x];
+          delete sessionStorage[x];
+        });
+      deleteAllCookies();
       localStorage.setItem(HARD_RESET, "DONE");
-      console.warn("[HARD RESET]");
       window.location.reload(true);
     } else {
-      console.warn("Not running hard reset because key already present: " + HARD_RESET);
+      console.warn("Not running hard reset. Key was present: " + HARD_RESET);
     }
+  } else {
+    console.log("Local storage not supported.");
   };
 }
 
-/** We only allow FBOS to send us these types. */
-export type Primitive = string | number | boolean;
+/** Tim reported some issues Chrome. I don't think it is cookie related,
+ *  but to be extra certain, we clear all client side cookies when busting
+ * cache.
+ * NOTE: We will need to remove this if we ever add google analytics.
+ *  -RC 23 jun 17 */
+function deleteAllCookies() {
+  var cookies = document.cookie.split(";");
+
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    var eqPos = cookie.indexOf("=");
+    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+}
