@@ -16,6 +16,7 @@ import { ImageWorkspace } from "./image_workspace";
 import { WD_ENV, WDENVKey as ENVKey, WDENVKey } from "./remote_env/interfaces";
 import { envGet } from "./remote_env/selectors";
 import { envSave } from "./remote_env/actions";
+import { translateImageWorkspaceAndSave } from "./actions";
 
 @connect(mapStateToProps)
 export class WeedDetector
@@ -52,6 +53,19 @@ export class WeedDetector
     devices.current.execScript("plant-detection", pairs);
   }
 
+  /** Maps <ImageWorkspace/> props to weed detector ENV vars. */
+  translateValueAndSave = translateImageWorkspaceAndSave({
+    "iteration": "WEED_DETECTOR_iteration",
+    "morph": "WEED_DETECTOR_morph",
+    "blur": "WEED_DETECTOR_blur",
+    "H_HI": "WEED_DETECTOR_H_HI",
+    "H_LO": "WEED_DETECTOR_H_LO",
+    "S_HI": "WEED_DETECTOR_S_HI",
+    "S_LO": "WEED_DETECTOR_S_LO",
+    "V_HI": "WEED_DETECTOR_V_HI",
+    "V_LO": "WEED_DETECTOR_V_LO"
+  });
+
   render() {
     return <Widget className="weed-detector-widget">
       <Row>
@@ -77,20 +91,7 @@ export class WeedDetector
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
                 currentImage={this.props.currentImage}
                 images={this.props.images}
-                onChange={(key, value) => {
-                  let MAPPING: Record<typeof key, WDENVKey> = {
-                    "iteration": "WEED_DETECTOR_iteration",
-                    "morph": "WEED_DETECTOR_morph",
-                    "blur": "WEED_DETECTOR_blur",
-                    "H_HI": "WEED_DETECTOR_H_HI",
-                    "H_LO": "WEED_DETECTOR_H_LO",
-                    "S_HI": "WEED_DETECTOR_S_HI",
-                    "S_LO": "WEED_DETECTOR_S_LO",
-                    "V_HI": "WEED_DETECTOR_V_HI",
-                    "V_LO": "WEED_DETECTOR_V_LO"
-                  };
-                  envSave(MAPPING[key], value);
-                }}
+                onChange={this.translateValueAndSave}
                 iteration={envGet("WEED_DETECTOR_iteration", this.props.env)}
                 morph={envGet("WEED_DETECTOR_morph", this.props.env)}
                 blur={envGet("WEED_DETECTOR_blur", this.props.env)}

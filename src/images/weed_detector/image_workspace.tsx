@@ -17,7 +17,7 @@ const RANGES = {
 };
 
 /** Number values that the panel deals with. */
-interface NumericValues {
+export interface NumericValues {
   iteration: number;
   morph: number;
   blur: number;
