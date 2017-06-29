@@ -87,10 +87,11 @@ export function emergencyLock() {
     .emergencyLock()
     .then(commandOK(noun), commandErr(noun));
 }
-
+const REBOOT_CONF = `Are you sure you want to unlock the device?
+Device will reboot.`;
 export function emergencyUnlock() {
   let noun = "Emergency unlock";
-  if (confirm("Are you sure you want to unlock the device?")) {
+  if (confirm(REBOOT_CONF)) {
     devices
       .current
       .reboot() // .emergencyUnlock is broke ATM RC 8 Jun 2017
