@@ -20,19 +20,23 @@ let RECURSIVE_LIST: DropDownItem = {
   ]
 };
 
-function recurseIntoDDI(parent: DropDownItem): JSX.Element {
+function renderDDI(parent: DropDownItem, key = "TOP_LEVEL"): JSX.Element {
   if (parent.children) {
-    return <MenuItem iconName="new-object" text={parent.label}>
-      {parent.children.map(x => recurseIntoDDI(x))}
-    </MenuItem>;
-  } else { // base case
-    return <MenuItem iconName="new-object" text={parent.label} />;
+    if (parent.children.length) {
+      return <MenuItem text={parent.label} key={key + `_RECURSION`}>
+        {parent.children.map((item, index) => renderDDI(item, key + `_CHILD_${index}`))}
+      </MenuItem>;
+    };
   }
+  // base case
+  return <MenuItem
+    text={parent.label}
+    key={key} />;
 }
 
 export function DeleteMe(props: any) {
   return <Popover
-    content={recurseIntoDDI(RECURSIVE_LIST)}
+    content={renderDDI(RECURSIVE_LIST)}
     position={Position.RIGHT_BOTTOM}>
     <button className="pt-button pt-icon-share" type="button">
       Hey.
