@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Page, Col, Row } from "../ui/index";
+import { Page, Col, Row, Widget, WidgetHeader, WidgetBody } from "../ui/index";
 import { FarmwarePanel } from "./farmware_panel";
 import { mapStateToProps } from "./state_to_props";
 import { Photos } from "./photos";
@@ -9,11 +9,23 @@ import { FarmwareProps } from "../devices/interfaces";
 import { detectWeeds } from "../images/actions";
 import { WeedDetector } from "../images/weed_detector/index";
 import { envGet } from "../images/weed_detector/remote_env/selectors";
+import { DeleteMe } from "./deletem";
 
 @connect(mapStateToProps)
 export class FarmwarePage extends React.Component<FarmwareProps, void> {
   render() {
     return <Page className="farmware">
+      <Row>
+        <Col xs={6}>
+          <Widget>
+            <WidgetHeader title="Test widget; please ignore." />
+            <WidgetBody>
+              <DeleteMe />
+            </WidgetBody>
+          </Widget>
+        </Col>
+        <Col xs={6} />
+      </Row>
       <Row>
         <Col xs={12} sm={7}>
           <Photos

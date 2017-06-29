@@ -13,6 +13,8 @@ export interface DropDownItem {
   heading?: boolean;
   /** A unique ID to group headings by. */
   headingId?: string | undefined;
+  /** This is just an idea. */
+  children?: DropDownItem[] | undefined
 }
 
 export interface SelectProps {
