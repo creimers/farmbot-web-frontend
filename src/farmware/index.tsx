@@ -9,23 +9,11 @@ import { FarmwareProps } from "../devices/interfaces";
 import { detectWeeds } from "../images/actions";
 import { WeedDetector } from "../images/weed_detector/index";
 import { envGet } from "../images/weed_detector/remote_env/selectors";
-import { DeleteMe } from "./deletem";
 
 @connect(mapStateToProps)
 export class FarmwarePage extends React.Component<FarmwareProps, void> {
   render() {
     return <Page className="farmware">
-      <Row>
-        <Col xs={6}>
-          <Widget>
-            <WidgetHeader title="Test widget; please ignore." />
-            <WidgetBody>
-              <DeleteMe />
-            </WidgetBody>
-          </Widget>
-        </Col>
-        <Col xs={6} />
-      </Row>
       <Row>
         <Col xs={12} sm={7}>
           <Photos
