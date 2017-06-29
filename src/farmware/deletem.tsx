@@ -20,23 +20,20 @@ let RECURSIVE_LIST: DropDownItem = {
   ]
 };
 
-let wow = <Menu className={`docs-inline-example ${Classes.ELEVATION_1}`}>
-  <MenuItem iconName="new-text-box" text="New text box">
-  </MenuItem>
-  <MenuItem iconName="new-object" text="New object">
-  </MenuItem>
-  <MenuItem iconName="new-link" text="New link">
-  </MenuItem>
-  <MenuDivider />
-  <MenuItem
-    iconName="cog"
-    label={<span className="pt-icon-standard pt-icon-share" />}
-    text="Settings..."
-  />
-</Menu>;
+function recurseIntoDDI(parent: DropDownItem): JSX.Element {
+  if (parent.children) {
+    return <MenuItem iconName="new-object" text={parent.label}>
+      {parent.children.map(x => recurseIntoDDI(x))}
+    </MenuItem>;
+  } else { // base case
+    return <MenuItem iconName="new-object" text={parent.label} />;
+  }
+}
 
 export function DeleteMe(props: any) {
-  return <Popover content={wow} position={Position.RIGHT_BOTTOM}>
+  return <Popover
+    content={recurseIntoDDI(RECURSIVE_LIST)}
+    position={Position.RIGHT_BOTTOM}>
     <button className="pt-button pt-icon-share" type="button">
       Hey.
     </button>
