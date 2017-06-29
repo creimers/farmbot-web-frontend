@@ -16,7 +16,7 @@ const RANGES = {
   ITERATION: { LOWEST: 0, HIGHEST: 100 },
 };
 
-/** Number values that the panel deals with. */
+/** Number values that the <ImageWorkspace/> panel deals with. */
 export interface NumericValues {
   iteration: number;
   morph: number;
@@ -47,6 +47,7 @@ let CHANGE_MAP: Record<HSV, [NumericKeyName, NumericKeyName]> = {
 };
 
 export class ImageWorkspace extends React.Component<Props, {}> {
+  /** Generates a function to handle changes to blur/morph/iteration. */
   numericChange = (key: NumericKeyName) =>
     (e: React.SyntheticEvent<HTMLInputElement>) => {
       this.props.onChange(key, parseInt(e.currentTarget.value, 10) || 0);
@@ -59,7 +60,9 @@ export class ImageWorkspace extends React.Component<Props, {}> {
     }
   };
 
-  onChange = (key: keyof typeof CHANGE_MAP) =>
+  /** This will trigger onChange callback twice. Once for (H|S|L)_HI and again
+   * for (H|S|L)_LO */
+  onHslChange = (key: keyof typeof CHANGE_MAP) =>
     (values: [number, number]) => {
       let keys = CHANGE_MAP[key];
       [0, 1].map(i => this.props.onChange(keys[i], values[i]));
@@ -76,7 +79,7 @@ export class ImageWorkspace extends React.Component<Props, {}> {
           </h4>
           <label htmlFor="hue">{t("HUE")}</label>
           <WeedDetectorSlider
-            onChange={this.onChange("H")}
+            onChange={this.onHslChange("H")}
             onRelease={_.noop}
             lowest={RANGES.H.LOWEST}
             highest={RANGES.H.HIGHEST}
@@ -84,7 +87,7 @@ export class ImageWorkspace extends React.Component<Props, {}> {
             highValue={H_HI} />
           <label htmlFor="saturation">{t("SATURATION")}</label>
           <WeedDetectorSlider
-            onChange={this.onChange("S")}
+            onChange={this.onHslChange("S")}
             onRelease={_.noop}
             lowest={RANGES.S.LOWEST}
             highest={RANGES.S.HIGHEST}
@@ -92,7 +95,7 @@ export class ImageWorkspace extends React.Component<Props, {}> {
             highValue={S_HI} />
           <label htmlFor="value">{t("VALUE")}</label>
           <WeedDetectorSlider
-            onChange={this.onChange("V")}
+            onChange={this.onHslChange("V")}
             onRelease={_.noop}
             lowest={RANGES.V.LOWEST}
             highest={RANGES.V.HIGHEST}

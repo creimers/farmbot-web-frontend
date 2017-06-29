@@ -6,7 +6,6 @@ import { FBSelect } from "../../ui/new_fb_select";
 import { SettingsMenuProps } from "./interfaces";
 import * as _ from "lodash";
 import { BlurableInput } from "../../ui/blurable_input";
-import { fancyDebug } from "../../util";
 import { SPECIAL_VALUE_DDI, CALIBRATION_DROPDOWNS, ORIGIN_DROPDOWNS } from "./constants";
 import { WD_ENV } from "./remote_env/interfaces";
 import { envGet } from "./remote_env/selectors";

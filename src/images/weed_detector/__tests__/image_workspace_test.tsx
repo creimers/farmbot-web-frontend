@@ -26,7 +26,7 @@ describe("<Body/>", () => {
     let props = fakeProps();
     let iw = new ImageWorkspace();
     iw.props = props;
-    iw.onChange("H")([4, 5]);
+    iw.onHslChange("H")([4, 5]);
     expect(props.onChange).toHaveBeenCalledTimes(2);
     expect(props.onChange).toHaveBeenCalledWith("H_HI", 5)
     expect(props.onChange).toHaveBeenCalledWith("H_LO", 4);

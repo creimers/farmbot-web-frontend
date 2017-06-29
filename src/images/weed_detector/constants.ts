@@ -1,7 +1,7 @@
 import { DropDownItem } from "../../ui/index";
 import { SPECIAL_VALUES } from "./remote_env/constants";
 
-/** Translates SPECIAL_VALUEs into drop down items. */
+/** Mapping of SPECIAL_VALUE numeric codes into corresponding drop down items. */
 export const SPECIAL_VALUE_DDI = {
   [SPECIAL_VALUES.X]: {
     label: "X",
