@@ -106,7 +106,7 @@ export class NavBar extends React.Component<NavBarProps, NavBarState> {
     return <div className="nav-wrapper">
       <nav role="navigation">
         <button
-          className="mobile-and-tablet-only"
+          className="mobile-and-tablet-only fb-button"
           onClick={toggleMobileNav}>
           <i className="fa fa-bars"></i>
         </button>

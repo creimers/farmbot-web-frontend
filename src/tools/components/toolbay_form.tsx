@@ -49,7 +49,7 @@ export class ToolBayForm extends React.Component<ToolBayFormProps, {}> {
       <Widget>
         <WidgetHeader helpText={ToolTips.TOOLBAY_LIST} title="Tool Slots">
           <button
-            className="gray"
+            className="gray fb-button"
             hidden={!isSaved}
             onClick={() => { toggle(); }}>
             {t("Back")}
@@ -63,7 +63,7 @@ export class ToolBayForm extends React.Component<ToolBayFormProps, {}> {
             }}
           />
           <button
-            className="green"
+            className="green fb-button"
             onClick={() => { dispatch(init(this.emptyToolSlot())); }}>
             <i className="fa fa-plus" />
           </button>
@@ -114,7 +114,7 @@ export class ToolBayForm extends React.Component<ToolBayFormProps, {}> {
                 </Col>
                 <Col xs={1}>
                   <button
-                    className="red"
+                    className="red fb-button"
                     onClick={() => dispatch(destroy(slot.uuid))}>
                     <i className="fa fa-times" />
                   </button>

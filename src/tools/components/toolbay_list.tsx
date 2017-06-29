@@ -14,7 +14,9 @@ export class ToolBayList extends React.Component<ToolBayListProps, {}> {
     return <Widget>
       <WidgetHeader helpText={ToolTips.TOOLBAY_LIST} title={"ToolBay 1"}>
         <button
-          className="gray" onClick={toggle}>
+          className="gray fb-button"
+          onClick={toggle}
+        >
           {t("Edit")}
         </button>
       </WidgetHeader>

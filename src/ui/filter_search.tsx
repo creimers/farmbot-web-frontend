@@ -1,96 +1,101 @@
 import * as React from "react";
-
-import { Button, Classes, MenuItem, Switch } from "@blueprintjs/core";
+import { t } from "i18next";
+import { Button, Classes, MenuItem } from "@blueprintjs/core";
 import { ISelectItemRendererProps, Select } from "@blueprintjs/labs";
 
-const Selekt = Select.ofType<any>();
+import { DropDownItem } from "./fb_select";
 
-export interface ISelectExampleState {
-  film?: any;
+const SelectComponent = Select.ofType<DropDownItem>();
+
+type PossibleReferences =
+  | "Sequences"
+  | "Regimens"
+
+interface ParentMenu {
+  title: string;
+  value: string | number;
+  subMenus: DropDownItem[];
+  reference: PossibleReferences;
+}
+
+interface Props {
+  items: DropDownItem[];
+  selectedItem: DropDownItem;
+  onChange: (item: DropDownItem) => void;
+  placeholder?: string;
+  isASubMenu?: boolean;
+  isFilterable: boolean | undefined;
+}
+
+interface State {
+  item?: DropDownItem | undefined;
+  isFilterable: boolean | undefined;
   filterable?: boolean;
   minimal?: boolean;
   resetOnSelect?: boolean;
+  parentMenus: ParentMenu[];
+  subMenus: DropDownItem[];
 }
 
-export class FilterSearch extends React.Component<any, any> {
+export class FilterSearch extends React.Component<Props, Partial<State>> {
 
-  public state: ISelectExampleState = {
-    film: undefined,
+  public state: State = {
+    item: this.props.selectedItem,
     filterable: true,
     minimal: false,
     resetOnSelect: false,
+    parentMenus: [],
+    subMenus: [],
+    isFilterable: this.props.isFilterable || true
   };
 
-  private handleFilterableChange = this.handleSwitchChange("filterable");
-  private handleMinimalChange = this.handleSwitchChange("minimal");
-  private handleResetChange = this.handleSwitchChange("resetOnSelect");
-
   render() {
-    const { film, minimal, ...flags } = this.state;
-    return (
-      <Selekt
-        {...flags}
-        items={this.props.items}
-        itemPredicate={this.filterFilm}
-        itemRenderer={this.renderItem}
-        noResults={<MenuItem disabled text="No results." />}
-        onItemSelect={this.handleValueChange}
-        popoverProps={{ popoverClassName: minimal ? Classes.MINIMAL : "" }}
-      >
-        <Button
-          rightIconName="double-caret-vertical"
-          text={film ? film.label : "(No selection)"}
-        />
-      </Selekt>
-    );
-  }
-
-  protected renderOptions() {
-    return [
-      [
-        <Switch
-          key="filterable"
-          label="Filterable"
-          checked={this.state.filterable}
-          onChange={this.handleFilterableChange}
-        />,
-        <Switch
-          key="reset"
-          label="Reset on select"
-          checked={this.state.resetOnSelect}
-          onChange={this.handleResetChange}
-        />,
-        <Switch
-          key="minimal"
-          label="Minimal popover style"
-          checked={this.state.minimal}
-          onChange={this.handleMinimalChange}
-        />,
-      ],
-    ];
-  }
-
-  private renderItem({ handleClick, isActive, item: film }: ISelectItemRendererProps<any>) {
-    return (
-      <MenuItem
-        className={"aclasslol"}
-        key={film.value}
-        onClick={handleClick}
-        text={`${film.label}`}
+    const { item, minimal, ...flags } = this.state;
+    let renderer = this.props.isASubMenu ? this.default : this.subMenu;
+    return <SelectComponent
+      {...flags}
+      items={this.props.items}
+      itemPredicate={this.filter}
+      itemRenderer={renderer}
+      noResults={<MenuItem disabled text="No results." />}
+      onItemSelect={this.handleValueChange}
+      popoverProps={{ popoverClassName: minimal ? Classes.MINIMAL : "" }}
+    >
+      <Button
+        rightIconName="double-caret-vertical"
+        text={item ? item.label : t("(No selection)")}
       />
-    );
+    </SelectComponent>
   }
 
-  private filterFilm(query: string, film: any, index: number) {
-    return "`${index + 1}. ${film.label.toLowerCase()}`"
+  private subMenu(params: ISelectItemRendererProps<DropDownItem>) {
+    let { handleClick, item, index } = params;
+    return <MenuItem
+      className={"filter-search-item"}
+      key={item.label || index}
+      onClick={handleClick}
+      text={`${item.label}`}
+    />
+  }
+
+  private default(params: ISelectItemRendererProps<DropDownItem>) {
+    let { handleClick, item, index } = params;
+    return <MenuItem
+      className={"filter-search-item"}
+      key={item.label || index}
+      onClick={handleClick}
+      text={`${item.label}`}
+    />
+  }
+
+  private filter(query: string, item: DropDownItem, index: number) {
+    return `${index + 1}. ${item.label.toLowerCase()}`
       .indexOf(query.toLowerCase()) >= 0;
   }
 
-  private handleValueChange = (film: any) => this.setState({ film });
-
-  private handleSwitchChange(prop: keyof ISelectExampleState) {
-    return (event: React.FormEvent<HTMLInputElement>) => {
-      this.setState({ [prop]: event.currentTarget.checked });
-    };
+  private handleValueChange = (item: DropDownItem) => {
+    this.props.onChange(item);
+    this.setState({ item })
   }
+
 }

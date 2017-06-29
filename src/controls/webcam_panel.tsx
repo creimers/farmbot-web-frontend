@@ -46,11 +46,17 @@ export class WebcamPanel
     return <Widget>
       <WidgetHeader title="Camera" helpText={ToolTips.WEBCAM_SAVE}>
         {isEditing ?
-          <button className="green" onClick={this.save}>
+          <button
+            className="fb-button green"
+            onClick={this.save}
+          >
             {t("Save")}{this.props.account.dirty ? "*" : ""}
           </button>
           :
-          <button className="gray" onClick={this.toggle}>
+          <button
+            className="fb-button gray"
+            onClick={this.toggle}
+          >
             {t("Edit")}
           </button>
         }
@@ -59,8 +65,9 @@ export class WebcamPanel
         <div>
           <label>{t("Set Webcam URL:")}</label>
           <button
-            className="clear-webcam-url-btn"
-            onClick={this.clearURL}>
+            className="fb-button clear-webcam-url-btn"
+            onClick={this.clearURL}
+          >
             <i className="fa fa-times"></i>
           </button>
           <input

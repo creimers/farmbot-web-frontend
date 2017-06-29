@@ -2,14 +2,6 @@ import { DropAreaProps, DropAreaState } from "./interfaces";
 import * as React from "react";
 import { STEP_DATATRANSFER_IDENTIFER } from "./actions";
 
-/** Style rules for the drop area when it is not dragged over. */
-const INVISIBLE_STYLE = {
-  width: "100%",
-  height: "3px",
-  zIndex: 10,
-  position: "relative"
-};
-
 export class DropArea extends React.Component<DropAreaProps, DropAreaState> {
   constructor() {
     super();
@@ -32,24 +24,18 @@ export class DropArea extends React.Component<DropAreaProps, DropAreaState> {
     this.setState({ isHovered: !this.state.isHovered });
   }
 
-  visible() {
-    return <div className="drag-drop-area padding"
-      onDragOver={this.dragOver}
-      onDrop={this.drop}>
-      {this.props.children}
-    </div>;
-  }
-
-  hidden() {
-    return <div style={INVISIBLE_STYLE}></div>;
-  }
-
   render() {
     let isVisible = this.props.isLocked || this.state.isHovered;
 
     return <div onDragLeave={this.toggle}
       onDragEnter={this.toggle}>
-      {isVisible ? this.visible() : this.hidden()}
+      {isVisible &&
+        <div className="drag-drop-area padding"
+          onDragOver={this.dragOver}
+          onDrop={this.drop}>
+          {this.props.children}
+        </div>
+      }
     </div>;
   }
 }

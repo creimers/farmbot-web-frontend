@@ -3,12 +3,8 @@ import { AuthState } from "../auth/interfaces";
 import {
   Sequence as CeleryScriptSequence,
   SequenceBodyItem,
-  MoveAbsolute,
-  Vector3,
-  CeleryNode,
   LegalArgString
 } from "farmbot";
-import { DropDownItem } from "../ui/index";
 import { StepMoveDataXfer, StepSpliceDataXfer } from "../draggable/interfaces";
 import {
   TaggedSequence,
@@ -63,6 +59,10 @@ export interface SequencesListProps {
   sequences: TaggedSequence[];
   dispatch: Function;
   auth: AuthState | undefined;
+}
+
+export interface SequencesListState {
+  searchTerm: string;
 }
 
 /** Used when dispatching an updated message type. */

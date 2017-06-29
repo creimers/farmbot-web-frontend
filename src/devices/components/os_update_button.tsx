@@ -38,7 +38,10 @@ export let OsUpdateButton = ({ bot }: BotProp) => {
         //       since it does not change redux state.
         updateConfig({ os_auto_update })(noop);
       }} />
-    <button className={buttonColor} onClick={() => checkControllerUpdates()}>
+    <button
+      className={"fb-button " + buttonColor}
+      onClick={() => checkControllerUpdates()}
+    >
       {buttonStr}
     </button>
   </div>;

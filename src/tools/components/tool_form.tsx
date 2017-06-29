@@ -34,7 +34,7 @@ export class ToolForm extends React.Component<ToolFormProps, {}> {
     return <Widget>
       <WidgetHeader helpText={ToolTips.TOOL_LIST} title="Tools">
         <button
-          className="gray"
+          className="fb-button gray"
           onClick={() => { toggle(); }}
           hidden={!isSaved}>
           {t("Back")}
@@ -46,7 +46,7 @@ export class ToolForm extends React.Component<ToolFormProps, {}> {
           onClick={() => { dispatch(saveAll(tools, () => { toggle(); })) }}
         />
         <button
-          className="green"
+          className="fb-button green"
           onClick={() => { dispatch(init(this.emptyTool())); }}>
           <i className="fa fa-plus" />
         </button>
@@ -70,7 +70,7 @@ export class ToolForm extends React.Component<ToolFormProps, {}> {
             </Col>
             <Col xs={2}>
               <button
-                className="red"
+                className="fb-button red"
                 onClick={() => { dispatch(destroy(tool.uuid)); }}>
                 <i className="fa fa-times"></i>
               </button>

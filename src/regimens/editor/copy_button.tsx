@@ -7,7 +7,9 @@ import { defensiveClone } from "../../util";
 
 export function CopyButton({ dispatch, regimen }: CopyButtnProps) {
   if (regimen) {
-    return <button className="yellow" onClick={() => dispatch(copy(regimen))}>
+    return <button
+      className="fb-button yellow"
+      onClick={() => dispatch(copy(regimen))}>
       {t("Copy")}
     </button>;
   } else {

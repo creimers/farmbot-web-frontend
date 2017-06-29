@@ -34,25 +34,29 @@ export function TitleBar({
     <button
       hidden={!onSave}
       onClick={onSave}
-      className="green">
+      className="fb-button green"
+    >
       {t("SAVE")}
     </button>
     <button
       hidden={!onTest}
       onClick={onTest}
-      className="yellow">
+      className="fb-button yellow"
+    >
       {t("TEST")}
     </button>
     <button
       hidden={!onDeletionClick}
       onClick={onDeletionClick}
-      className="red">
+      className="fb-button red"
+    >
       {deletionProgress || t("CLEAR WEEDS")}
     </button>
     <button
       hidden={!onCalibrate}
       onClick={() => { }}
-      className="green">
+      className="fb-button green"
+    >
       {t("Calibrate")}
     </button>
     {onSettingToggle &&

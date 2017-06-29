@@ -18,7 +18,7 @@ export function ActiveEditor(props: ActiveEditorProps) {
         {group.items.map(function (row, index2) {
           let { item, regimen } = row;
           let click = () => props.dispatch(removeRegimenItem(item, regimen));
-          let klass = `${row.color}-block block-header regimen-event`
+          let klass = `${row.color} block-header regimen-event`
           return <div className={klass} key={`${index1}.${index2}`}>
             <span className="regimen-event-title">{row.name}</span>
             <span className="regimen-event-time">{row.hhmm}</span>

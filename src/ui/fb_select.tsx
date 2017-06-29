@@ -9,8 +9,6 @@ export interface DropDownItem {
   label: string;
   /** Value passed to the onClick cb and also determines the "chosen" option. */
   value: number | string;
-  /** Component internal use only unless there's an edge case for it. */
-  hidden?: boolean;
   /** To determine group-by styling on rendered lists. */
   heading?: boolean;
   /** A unique ID to group headings by. */
@@ -130,9 +128,8 @@ export class DeprecatedFBSelect extends React.Component<Readonly<SelectProps>, P
 
   normlItemList = (items: DropDownItem[]) => {
     return items.map((option: DropDownItem, i) => {
-      let { hidden, heading, label } = option;
+      let { heading, label } = option;
       let classes = "select-result";
-      if (hidden) { classes += " is-hidden"; }
       if (heading) { classes += " is-header"; }
       // TODO: Put this in a shared function when we finish debugging callbacks.
       return <div key={option.value}

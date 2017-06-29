@@ -73,12 +73,14 @@ export class ImageFlipper
             {image}
             <button
               onClick={this.go(1)}
-              className="image-flipper-left">
+              className="image-flipper-left fb-button"
+            >
               {t("Prev")}
             </button>
             <button
               onClick={this.go(-1)}
-              className="image-flipper-right">
+              className="image-flipper-right fb-button"
+            >
               {t("Next")}
             </button>
           </div>

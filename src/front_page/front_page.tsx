@@ -211,8 +211,10 @@ export class FrontPage extends React.Component<{}, Partial<FrontPageState>> {
                           </div>
                           <div className="row">
                             <div className="col-xs-12">
-                              <button className="green"
-                                style={buttonStylesUniqueToOnlyThisPage}>
+                              <button
+                                className="fb-button green"
+                                style={buttonStylesUniqueToOnlyThisPage}
+                              >
                                 {t("Login")}
                               </button>
                             </div>
@@ -232,8 +234,9 @@ export class FrontPage extends React.Component<{}, Partial<FrontPageState>> {
                       <div className="widget-header">
                         <h5>{t("Forgot Password")}</h5>
                         <button
-                          className="gray"
-                          onClick={this.toggleForgotPassword.bind(this)}>
+                          className="fb-button gray"
+                          onClick={this.toggleForgotPassword.bind(this)}
+                        >
                           {t("BACK")}
                         </button>
                       </div>
@@ -251,8 +254,10 @@ export class FrontPage extends React.Component<{}, Partial<FrontPageState>> {
                           </div>
                           <div className="row">
                             <div className="col-xs-12">
-                              <button className="green"
-                                style={buttonStylesUniqueToOnlyThisPage}>
+                              <button
+                                className="fb-button green"
+                                style={buttonStylesUniqueToOnlyThisPage}
+                              >
                                 {t("Send Password reset")}
                               </button>
                             </div>
@@ -295,8 +300,10 @@ export class FrontPage extends React.Component<{}, Partial<FrontPageState>> {
                         </div>
                         <div className="row">
                           <div className="col-xs-12">
-                            <button className="green"
-                              style={buttonStylesUniqueToOnlyThisPage}>
+                            <button
+                              className="fb-button green"
+                              style={buttonStylesUniqueToOnlyThisPage}
+                            >
                               {t("Create Account")}
                             </button>
                           </div>

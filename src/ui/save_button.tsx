@@ -36,8 +36,11 @@ export function SaveBtn(props: SaveBtnProps) {
 
   let btnColor = props.color || "green";
 
-  return <button onClick={props.onClick} hidden={!!props.hidden}
-    className={`${btnColor} save-btn ${statusClass}`}>
+  return <button
+    onClick={props.onClick}
+    hidden={!!props.hidden}
+    className={`${btnColor} save-btn ${statusClass} fb-button`}
+  >
 
     {/** Dirty */}
     {isDirty && !isSaving && (t(dirtyText || "Save ") + " *")}

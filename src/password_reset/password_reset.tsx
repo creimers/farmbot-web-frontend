@@ -83,7 +83,7 @@ export class PasswordReset extends React.Component<Props, State> {
                     </div>
                     <div className="row">
                       <div className="col-xs-12">
-                        <button className="green">
+                        <button className="fb-button green">
                           {t("Reset")}
                         </button>
                       </div>

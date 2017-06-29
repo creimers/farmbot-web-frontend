@@ -35,7 +35,10 @@ export function DangerZone(props: DangerZoneProps) {
           </p>
         </Col>
         <Col xs={2}>
-          <button className="red" onClick={onReset}>
+          <button
+            className="fb-button red"
+            onClick={onReset}
+          >
             {t("RESET")}
           </button>
         </Col>

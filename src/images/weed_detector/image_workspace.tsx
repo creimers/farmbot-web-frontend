@@ -140,11 +140,13 @@ export class ImageWorkspace extends React.Component<Props, {}> {
         </div>
       </div>
       {/** CHRIS HELP!!! */}
-      <button className="green"
+      <button
+        className="green fb-button"
         style={{ "marginTop": 25 }}
         title="Scan this image for Weeds"
         onClick={this.maybeProcessPhoto}
-        hidden={!this.props.images.length}>
+        hidden={!this.props.images.length}
+      >
         {t("Scan for Weeds")}
       </button>
       <ImageFlipper

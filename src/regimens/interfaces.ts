@@ -1,11 +1,9 @@
-import { ReduxAction } from "../redux/interfaces";
 import { Color } from "../interfaces";
 import { Week } from "./bulk_scheduler/interfaces";
 import { AuthState } from "../auth/interfaces";
 import { BotState } from "../devices/interfaces";
 import { TaggedRegimen, TaggedSequence } from "../resources/tagged_resources";
 import { ResourceIndex } from "../resources/interfaces";
-import { RegimenState } from "./reducer";
 import { JSXChildren } from "../util";
 
 export interface MiddleSectionProps {
@@ -84,4 +82,8 @@ export interface AddRegimenProps {
 export interface RegimensListProps {
   dispatch: Function;
   regimens: TaggedRegimen[];
+}
+
+export interface RegimensListState {
+  searchTerm: string;
 }

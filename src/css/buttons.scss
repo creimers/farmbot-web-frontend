@@ -1,4 +1,4 @@
-button {
+.fb-button {
   font-size: 1rem;
   float: right;
   text-transform: uppercase;
@@ -10,7 +10,8 @@ button {
   position: relative;
   color: $off_white;
   transition: all 0.1s ease-in-out !important;
-  &.disabled {
+  &.disabled,
+  &:disabled {
     background: $gray !important;
     box-shadow: 0 2px 0px 0px lighten($gray, 5%) !important;
     pointer-events: none !important;
@@ -32,8 +33,8 @@ button {
     float: right;
     margin: 0.2rem 0px 0 0.6rem;
   }
-  &:active:not(.toggle-button) {
-    box-shadow: none;
+  &:active:not(.fb-toggle-button) {
+    box-shadow: none !important;
     transform: translateY(2px);
   }
   &.go {
@@ -44,66 +45,86 @@ button {
   }
   &.green {
     background-color: $green;
-    box-shadow: 0 2px 0px 0px $dark_green;
+    box-shadow: 0 2px 0px 0px darken($green, 12%);
     &:hover {
       background-color: darken($green, 5%) !important;
     }
   }
+  &.blue {
+    background-color: $blue;
+    box-shadow: 0 2px 0px 0px darken($blue, 12%);
+    &:hover {
+      background-color: darken($blue, 5%) !important;
+    }
+  }
   &.red {
     background-color: $red;
-    box-shadow: 0 2px 0px 0px $dark_red;
+    box-shadow: 0 2px 0px 0px darken($red, 12%);
     &:hover {
       background-color: darken($red, 5%) !important;
     }
   }
   &.gray {
     background-color: $medium_gray !important;
-    box-shadow: 0 2px 0px 0px $dark_gray;
+    box-shadow: 0 2px 0px 0px darken($medium_gray, 12%);
     &:hover {
       background-color: darken($medium_gray, 5%) !important;
     }
   }
   &.yellow {
-    background-color: $yellow;
     color: $dark_gray;
-    box-shadow: 0 2px 0px 0px $gold;
+    background-color: $yellow;
+    box-shadow: 0 2px 0px 0px darken($yellow, 12%);
     &:hover {
-      background-color: darken($yellow, 10%) !important;
+      background-color: darken($yellow, 5%) !important;
     }
   }
   &.orange {
     background-color: $orange;
-    color: $dark_gray;
-    box-shadow: 0 2px 0px 0px $dark_orange;
+    box-shadow: 0 2px 0px 0px darken($orange, 12%);
     &:hover {
-      background-color: darken($orange, 10%) !important;
-    }
-  }
-  &.cyan {
-    background-color: $cyan;
-    box-shadow: 0 2px 0px 0px darken($cyan, 10%);
-    &:hover {
-      background-color: darken($cyan, 3%) !important;
-    }
-  }
-  &.brown {
-    background-color: $dark_brown;
-    box-shadow: 0 2px 0px 0px darken($dark_brown, 10%);
-    &:hover {
-      background-color: darken($dark_brown, 3%) !important;
+      background-color: darken($orange, 5%) !important;
     }
   }
   &.magenta {
     background-color: $magenta;
-    box-shadow: 0 2px 0px 0px darken($magenta, 10%);
+    box-shadow: 0 2px 0px 0px darken($magenta, 12%);
     &:hover {
-      background-color: darken($magenta, 3%) !important;
+      background-color: darken($magenta, 5%) !important;
+    }
+  }
+  &.cyan {
+    background-color: $cyan;
+    box-shadow: 0 2px 0px 0px darken($cyan, 12%);
+    &:hover {
+      background-color: darken($cyan, 5%) !important;
+    }
+  }
+  &.brown {
+    background-color: $brown;
+    box-shadow: 0 2px 0px 0px darken($brown, 12%);
+    &:hover {
+      background-color: darken($brown, 5%) !important;
+    }
+  }
+  &.purple {
+    background-color: $purple;
+    box-shadow: 0 2px 0px 0px darken($purple, 12%);
+    &:hover {
+      background-color: darken($purple, 5%) !important;
+    }
+  }
+  &.pink {
+    background-color: $pink;
+    box-shadow: 0 2px 0px 0px darken($pink, 12%);
+    &:hover {
+      background-color: darken($pink, 5%) !important;
     }
   }
 }
 
-.toggle-button {
-  height: 1.8rem;
+.fb-toggle-button {
+  height: 1.8rem !important;
   position: relative;
   border-bottom: none !important;
   box-shadow: none !important;

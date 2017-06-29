@@ -1,65 +1,28 @@
 // Styles for the sequence and regimen BLOCKS
 .block-wrapper {
-    height: 3.5rem;
-    margin-bottom: 1.5rem;
-    button {
-        box-shadow: 0 0px 10px $light_gray;
+  height: 3.5rem;
+  margin-bottom: 1.5rem;
+  button {
+    transition: all 0.2s ease-out;
+    &:hover {
+      transition: all 0.2s ease-out;
+      .block-control {
         transition: all 0.2s ease-out;
-        &:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px $translucent;
-            transition: all 0.2s ease-out;
-            .block-control {
-                transition: all 0.2s ease-out;
-                opacity: 1;
-            }
-        }
+        opacity: 1;
+      }
     }
+  }
 }
 
 .block-control {
-    transition: all 0.2s ease-out;
-    color: $dark_gray;
-    opacity: 0;
-    float: right;
-    font-size: 1.4rem !important;
-    padding-left: 1rem;
+  transition: all 0.2s ease-out;
+  opacity: 0;
+  float: right;
+  font-size: 1.4rem !important;
+  padding-left: 1rem;
 }
 
 .block-header {
-    height: 3.5rem;
-    font-size: 1.2rem!important;
-    color: $dark_gray;
-    &:hover {
-        .block-control {
-            display: inherit!important;
-        }
-    }
-    &.blue-block {
-        background-color: $blue;
-    }
-    &.green-block {
-        background-color: $green;
-    }
-    &.yellow-block {
-        background-color: $yellow;
-    }
-    &.orange-block {
-        background-color: $orange;
-    }
-    &.purple-block {
-        background-color: $purple;
-    }
-    &.brown-block {
-        background-color: $brown;
-    }
-    &.gray-block {
-        background-color: $medium_light_gray;
-    }
-    &.red-block {
-        background-color: $red;
-    }
-    &.pink-block {
-        background-color: $pink;
-    }
+  height: 3.5rem;
+  font-size: 1.2rem !important;
 }

@@ -13,7 +13,9 @@ export class ToolList extends React.Component<ToolListProps, {}> {
     return <Widget>
       <WidgetHeader helpText={ToolTips.TOOL_LIST} title="Tools">
         <button
-          className="gray" onClick={toggle}>
+          className="fb-button gray"
+          onClick={toggle}
+        >
           {t("Edit")}
         </button>
       </WidgetHeader>
