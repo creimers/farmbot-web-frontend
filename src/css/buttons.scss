@@ -37,6 +37,12 @@
     box-shadow: none !important;
     transform: translateY(2px);
   }
+  &.go {
+    background-color: $green;
+    margin-top: 2.4rem;
+    padding: .4rem .8rem;
+    font-size: 1.2rem;
+  }
   &.green {
     background-color: $green;
     box-shadow: 0 2px 0px 0px darken($green, 12%);
@@ -59,10 +65,10 @@
     }
   }
   &.gray {
-    background-color: $medium_light_gray !important;
-    box-shadow: 0 2px 0px 0px darken($medium_light_gray, 12%);
+    background-color: $medium_gray !important;
+    box-shadow: 0 2px 0px 0px darken($medium_gray, 12%);
     &:hover {
-      background-color: darken($medium_light_gray, 5%) !important;
+      background-color: darken($medium_gray, 5%) !important;
     }
   }
   &.yellow {
