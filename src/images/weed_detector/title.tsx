@@ -4,15 +4,14 @@ import { WeedDetectorConfig } from "./config";
 import { WidgetHeader } from "../../ui/index";
 import { WD_ENV } from "./remote_env/interfaces";
 import { envSave } from "./remote_env/actions";
+import { Popover } from "@blueprintjs/core";
 
 interface Props {
   onSave?(): void;
   onTest?(): void;
-  onSettingToggle?(): void;
   onDeletionClick?(): void;
   onCalibrate?(): void;
   deletionProgress?: string | undefined;
-  settingsMenuOpen?: boolean;
   title: string;
   help: string;
   env: Partial<WD_ENV>;
@@ -21,8 +20,6 @@ interface Props {
 export function TitleBar({
   onSave,
   onTest,
-  settingsMenuOpen,
-  onSettingToggle,
   deletionProgress,
   onDeletionClick,
   onCalibrate,
@@ -59,14 +56,13 @@ export function TitleBar({
     >
       {t("Calibrate")}
     </button>
-    {onSettingToggle &&
-      <i
-        onClick={onSettingToggle}
-        className="fa fa-cog" >
-        {settingsMenuOpen && <WeedDetectorConfig
-          values={env}
-          onChange={envSave} />}
-      </i>
+    <Popover>
+      <i className="fa fa-cog" />
+      <WeedDetectorConfig
+        values={env}
+        onChange={envSave}
+      />
+    </Popover>
     }
   </WidgetHeader>;
 }

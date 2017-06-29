@@ -8,16 +8,8 @@ import { ToolTips } from "../constants";
 import { envSave } from "../images/weed_detector/remote_env/actions";
 import { WDENVKey } from "../images/weed_detector/remote_env/interfaces";
 
-export class CameraCalibration
-  extends React.Component<CameraCalibrationProps, CameraCalibrationState> {
-  constructor() {
-    super();
-    this.state = { settingsMenuOpen: false };
-  }
-
-  toggleSettingsMenu = () => {
-    this.setState({ settingsMenuOpen: !this.state.settingsMenuOpen });
-  }
+export class CameraCalibration extends
+  React.Component<CameraCalibrationProps, CameraCalibrationState> {
 
   calibrate = () => {
     console.log("TODO: Send RPC / farmware activation message here.");
@@ -30,8 +22,6 @@ export class CameraCalibration
           <TitleBar
             title={"Camera Calibration"}
             help={t(ToolTips.CAMERA_CALIBRATION)}
-            settingsMenuOpen={!!this.state.settingsMenuOpen}
-            onSettingToggle={this.toggleSettingsMenu}
             onCalibrate={this.calibrate}
             env={this.props.env}
           />

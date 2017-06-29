@@ -7,6 +7,9 @@ input:not([role="combobox"]) {
   border: 0;
   padding: 6px 8px;
   box-shadow: 0px 0px 10px $light_gray;
+  &[type="checkbox"] {
+    width: inherit;
+  }
   &:focus {
     background-color: $white;
     box-shadow: 0px 0px 10px $translucent;

@@ -41,21 +41,25 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
     let ok = SPECIAL_VALUE_DDI[wow];
     return ok || NULL_CHOICE;
   }
-  return <div className="additional-settings-menu"
-    onClick={(e) => e.stopPropagation()}>
-    {/* This menu needs to be nested in the <i> for css purposes. However,
-        * we do not want events in here to bubble up to the toggle method. */}
+
+  return <div>
     <label htmlFor="invert_hue_selection">
-      {t(`Invert Hue Range Selection`)}
+      {t("Invert Hue Range Selection")}
     </label>
-    <input
-      type="checkbox"
-      id="invert_hue_selection"
-      value={envGet("CAMERA_CALIBRATION_invert_hue_selection", props.values)}
-      onChange={e => props.onChange("CAMERA_CALIBRATION_invert_hue_selection", e.currentTarget.checked ?
-        SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE)} />
-    <NumberBox conf={"CAMERA_CALIBRATION_calibration_object_separation"}
-      label={t(`Calibration Object Separation`)} />
+    <div>
+      <input
+        type="checkbox"
+        id="invert_hue_selection"
+        value={envGet("CAMERA_CALIBRATION_invert_hue_selection", props.values)}
+        onChange={e => props.onChange("CAMERA_CALIBRATION_invert_hue_selection",
+          e.currentTarget.checked ?
+            SPECIAL_VALUES.TRUE : SPECIAL_VALUES.FALSE)}
+      />
+    </div>
+    <NumberBox
+      conf={"CAMERA_CALIBRATION_calibration_object_separation"}
+      label={t(`Calibration Object Separation`)}
+    />
     <label>
       {t(`Calibration Object Separation along axis`)}
     </label>
@@ -63,13 +67,20 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
       onChange={setDDI("CAMERA_CALIBRATION_calibration_along_axis")}
       selectedItem={find("CAMERA_CALIBRATION_calibration_along_axis")}
       list={CALIBRATION_DROPDOWNS}
-      placeholder="Select..." />
+      placeholder="Select..."
+    />
     <Row>
       <Col xs={6}>
-        <NumberBox conf={"CAMERA_CALIBRATION_camera_offset_x"} label={t(`Camera Offset X`)} />
+        <NumberBox
+          conf={"CAMERA_CALIBRATION_camera_offset_x"}
+          label={t(`Camera Offset X`)}
+        />
       </Col>
       <Col xs={6}>
-        <NumberBox conf={"CAMERA_CALIBRATION_camera_offset_y"} label={t(`Camera Offset Y`)} />
+        <NumberBox
+          conf={"CAMERA_CALIBRATION_camera_offset_y"}
+          label={t(`Camera Offset Y`)}
+        />
       </Col>
     </Row>
     <label htmlFor="image_bot_origin_location">
@@ -79,13 +90,20 @@ export function WeedDetectorConfig(props: SettingsMenuProps) {
       list={ORIGIN_DROPDOWNS}
       onChange={setDDI("CAMERA_CALIBRATION_image_bot_origin_location")}
       selectedItem={find("CAMERA_CALIBRATION_image_bot_origin_location")}
-      placeholder="Select..." />
+      placeholder="Select..."
+    />
     <Row>
       <Col xs={6}>
-        <NumberBox conf={"CAMERA_CALIBRATION_coord_scale"} label={t(`Pixel coordinate scale`)} />
+        <NumberBox
+          conf={"CAMERA_CALIBRATION_coord_scale"}
+          label={t(`Pixel coordinate scale`)}
+        />
       </Col>
       <Col xs={6}>
-        <NumberBox conf={"CAMERA_CALIBRATION_total_rotation_angle"} label={t(`Camera rotation`)} />
+        <NumberBox
+          conf={"CAMERA_CALIBRATION_total_rotation_angle"}
+          label={t(`Camera rotation`)}
+        />
       </Col>
     </Row>
   </div>;
