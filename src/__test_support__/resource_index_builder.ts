@@ -186,7 +186,7 @@ let FAKE_RESOURCES: TaggedResource[] = [
       },
       "name": "Slot One.",
       "pointer_type": "ToolSlot",
-      "radius": 50,
+      "radius": 25,
       "x": 10,
       "y": 10,
       "z": 10,

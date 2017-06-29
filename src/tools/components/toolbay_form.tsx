@@ -26,7 +26,7 @@ export class ToolBayForm extends React.Component<ToolBayFormProps, {}> {
         x: 0,
         y: 0,
         z: 0,
-        radius: 50,
+        radius: 25,
         pointer_type: "ToolSlot",
         meta: {},
         tool_id: undefined,
