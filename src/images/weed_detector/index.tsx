@@ -81,11 +81,6 @@ export class WeedDetector
           />
           <Row>
             <Col sm={12}>
-              onFlip
-              onProcessPhoto
-              currentImage
-              images
-              onChange
               <ImageWorkspace
                 onProcessPhoto={(id) => { this.props.dispatch(detectWeeds(id)); }}
                 onFlip={(uuid) => this.props.dispatch(selectImage(uuid))}
