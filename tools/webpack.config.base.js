@@ -4,16 +4,16 @@ var exec = require("child_process").exec;
 var execSync = require("child_process").execSync;
 var webpack = require("webpack");
 var fs = require("fs");
+
 var FarmBotRenderer = require("./farmBotRenderer");
 
-// Bootstrapping
-// Ensure index.html is built for dev
-/** WEBPACK BASE CONFIG */
+// WEBPACK BASE CONFIG
 exec("mkdir -p public/app");
 exec("echo -n > public/app/index.html");
 exec("touch public/app/index.html");
 exec("touch public/app/index.html");
-exec("rm -rf public/dist/*.js");
+exec("rm -rf public/dist");
+exec("rm -rf public/*.eot");
 
 var isProd = !!(global.WEBPACK_ENV === "production");
 
@@ -33,12 +33,13 @@ module.exports = function() {
             devtoolLineToLine: true
         },
         devtool: "eval",
-        /** Allows imports without file extensions. */
+
+        // Allows imports without file extensions.
         resolve: {
             extensions: [".js", ".ts", ".tsx", ".css", ".scss", ".json", ".hbs"]
         },
 
-        /** Shared loaders for prod and dev. */
+        // Shared loaders for prod and dev.
         module: {
             rules: [
                 { test: /\.tsx?$/, use: "ts-loader" },
@@ -53,15 +54,15 @@ module.exports = function() {
             ]
         },
 
-        /** Shared plugins for prod and dev. */
+        // Shared plugins for prod and dev.
         plugins: [
             new webpack.DefinePlugin({
                 "process.env.REVISION": JSON.stringify(execSync(
-                    'git log --pretty=format:"%h%n%ad%n%f" -1').toString())
+                    "git log --pretty=format:'%h%n%ad%n%f' -1").toString())
             }),
             new webpack.DefinePlugin({
                 "process.env.SHORT_REVISION": JSON.stringify(execSync(
-                    'git log --pretty=format:"%h" -1').toString())
+                    "git log --pretty=format:'%h' -1").toString())
             }),
             // FarmBot Inc related.
             new webpack.DefinePlugin({
@@ -116,7 +117,7 @@ module.exports = function() {
             })
         ],
 
-        /** Webpack Dev Server. */
+        // Webpack Dev Server.
         devServer: {
             historyApiFallback: {
                 rewrites: [

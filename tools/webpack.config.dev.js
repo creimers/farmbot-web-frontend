@@ -1,11 +1,13 @@
 var webpack = require("webpack");
-var generateConfig = require("./webpack.config.base");
-var exec = require("child_process").execSync;
 var fs = require("fs");
 var path = require("path");
+
+var WebpackNotifierPlugin = require("webpack-notifier");
+
+var generateConfig = require("./webpack.config.base");
+var exec = require("child_process").execSync;
 var configPath = path.resolve(__dirname, "../src/config.json");
 var FarmBotRenderer = require("./farmBotRenderer");
-var WebpackNotifierPlugin = require('webpack-notifier');
 
 global.WEBPACK_ENV = "development";
 
@@ -27,13 +29,13 @@ c = function() {
         .push(new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify("development"),
             "process.env.REVISION": JSON.stringify(
-                exec('git log --pretty=format:"%h%n%ad%n%f" -1').toString())
+                exec("git log --pretty=format:'%h%n%ad%n%f' -1").toString())
         }));
 
     conf
         .plugins
         .push(new WebpackNotifierPlugin({
-            title: 'Webpack',
+            title: "Webpack",
             excludeWarnings: false
         }));
 

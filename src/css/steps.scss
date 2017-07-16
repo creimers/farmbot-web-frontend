@@ -67,11 +67,11 @@
         font-size: 1rem;
         font-style: italic;
     }
-    &.move-relative-step {
-        background: $green;
-    }
     &.move-absolute-step {
         background: $blue;
+    }
+    &.move-relative-step {
+        background: $green;
     }
     &.write-pin-step {
         background: $orange;
@@ -85,11 +85,20 @@
     &.send-message-step {
         background: $red;
     }
-    &.execute-step {
-        background: $gray;
+    &.find-home-step {
+        background: $blue;
     }
     &.if-step {
         background: $purple;
+    }
+    &.execute-step {
+        background: $gray;
+    }
+    &.execute-script-step {
+        background: $pink;
+    }
+    &.take-photo-step {
+        background: $brown;
     }
     .help {
         float: right;
@@ -108,11 +117,11 @@
     padding: 1.25rem 1.25rem;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    &.move-relative-step {
-        background: $light_green;
-    }
     &.move-absolute-step {
         background: $light_blue;
+    }
+    &.move-relative-step {
+        background: $light_green;
     }
     &.write-pin-step {
         background: $light_orange;
@@ -126,13 +135,8 @@
     &.send-message-step {
         background: $light_red;
     }
-    &.execute-step {
-        background: $light_gray;
-        padding-bottom: 1rem;
-    }
-    &.execute-script-step {
-        background: $light_red;
-        padding-bottom: 1rem;
+    &.find-home-step {
+        background: $light_blue;
     }
     &.if-step {
         background: $light_purple;
@@ -143,19 +147,36 @@
                 margin: 1.4rem 0 0.4rem;
             }
         }
+
+        // CHRIS HALP!
+        // Modifications for check box on "if" block.
+        // -RC 7 June 17
+        input[type=checkbox] {
+          width: inherit;
+          box-shadow: none;
+          vertical-align: middle;
+        }
+
         input {
             height: 34px;
         }
     }
-    input,
-    select {
-        width: 100%;
+    &.execute-step {
+        background: $light_gray;
+        padding-bottom: 1rem;
+    }
+    &.execute-script-step {
+        background: $light_magenta;
+        padding-bottom: 1rem;
     }
     &.take-photo-step {
         background: $light_brown;
-        color: $black
     }
     &.take-photo-step a {
-        color: $red;
+        color: $dark_brown;
+    }
+    input,
+    select {
+        width: 100%;
     }
 }

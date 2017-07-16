@@ -9,11 +9,9 @@ dist
 jest
 .nvmrc
 node_modules
-npm-debug.log
 bundle.*.js*
 front_page.*.js*
 verify.*.js*
-tsd-debug.log
 public/app-index.js
 public/app-resources/*.css*
 public/app-resources/*.js*
@@ -25,3 +23,5 @@ public/password_reset.html
 public/tos_update.html
 public/verify.html
 public/*.eot
+*.log
+*.log.*
